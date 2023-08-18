@@ -1,0 +1,60 @@
+<!doctype html>
+{% load static %}
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <title>Магистраль</title>
+</head>
+<body>
+<header class="header">
+  <div class="container">
+    <div class="header-wrapper">
+      <a href="#" class="logo"><img src="{% static 'img/logo.png' %}" alt="logo magistral" class="logo-img"></a>
+      <nav class="header-nav">
+        <ul class="header-nav__list">
+          <li class="header-nav__item"><a href="#" class="header-nav__link">Главная страница</a></li>
+          <li class="header-nav__item"><a href="#" class="header-nav__link">Объявления и новости</a></li>
+          <li class="header-nav__item"><a href="#" class="header-nav__link">Руководящие документы</a></li>
+          <li class="header-nav__item"><a href="#" class="header-nav__link">Календарь мероприятий</a></li>
+          <li class="header-nav__item"><a href="#" class="header-nav__link">Отчетные документы</a></li>
+          <li class="header-nav__item"><a href="#" class="header-nav__link">Обращение к правлению СНТ</a></li>
+        </ul>
+        <button class="btn">Войти</button>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main class="main">
+  {% block main %}
+
+  {% endblock %}
+</main>
+
+<footer class="footer">
+  <div class="footer-wrapper">
+    <script type="text/javascript" charset="utf-8" async
+            src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A007c2b27b171cfd53cb3a9a9c8155c56e3973d56d3e0fed1e7aec4741707fb3a&amp;width=100%25&amp;height=240&amp;lang=ru_RU&amp;scroll=true"></script>
+    <div class="descriptions">
+      <h1 class="main-title">Cадовое некоммерческое товарищество «Магистраль»</h1>
+      <address class="footer__addr">
+        187300, Ленинградская область,<br> Кировский район, массив Славянка, СНТ&nbsp;&laquo;Магистраль&raquo;
+      </address>
+      <h2 class="title">Режим работы правления:</h2>
+      <ul>
+        <li>Среда: с 16 до 18 часов (с 01.05 по 01.11)</li>
+        <li>Суббота: с 13 до 15 часов (Круглогодично)</li>
+      </ul>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
