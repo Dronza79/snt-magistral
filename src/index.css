@@ -51,3 +51,6 @@ a {
 input {
 	outline: none;
 }
+.active {
+	display: none !important;
+}

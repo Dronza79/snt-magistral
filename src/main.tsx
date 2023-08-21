@@ -11,15 +11,17 @@ import {
 import './index.css'
 import { Layout } from './Layout';
 import { Notfoundpage } from "./Pages/Notfoundpage";
+import { Home } from './Pages/Home';
+import { News } from './Pages/News';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
    <Route path="/"
    element={<Layout />} 
 	errorElement={<Notfoundpage />}>
-      {/* <Route index element={<Home />} /> */}
-      {/* <Route path="authorization" element={<Authorization />} />
-      <Route path="registration" element={<Registration />} /> */}
+      <Route index element={<Home />} />
+      <Route path="News" element={<News />} />
+      {/* <Route path="registration" element={<Registration />} /> */}
       {/* <Route path="account" element={<Account />}>
         <Route path="Profile" element={<Profile />} />
         <Route path="Orders" element={<Orders />} />

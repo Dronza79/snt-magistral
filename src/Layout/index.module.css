@@ -7,7 +7,7 @@
 	 min-height: 100vh; 
 	/* gap: 40px 30px; */
 	grid-template-areas:
-	"header header header "
+	". header . "
 	". body ."
 	"footer footer footer ";
 	/* padding: 0 10px; */
