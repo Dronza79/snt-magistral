@@ -1,27 +1,44 @@
-# React + TypeScript + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+# snt-magistral
+сайт СНТ Магистраль
+# Установка
+## Для работы сайта потребуется:
+* [x] Установить **LTS версию NODE.js** по ссылке: `https://nodejs.org/ru/download/`
+* [x] Устанавить **Python 3.10** по ссылке: `https://www.python.org/downloads/release/python-31010/`
+## Настройка работы бекэнда
+* [x] В папке проекта создаем виртуальное окружение и активируем его:
 ```
+cd snt-magistral
+python -m venv .venv
+.venv\Scripts\activate.bat
+```
+* [x] После команды активации в начале командной строки должна быть надпись `(.venv)...` 
+* [x] Устанавливаем связи согласно файлу req.txt
+```
+python.exe -m pip install -r req.txt
+```
+* [x] Запускаем сервер:
+```
+python snt-magistral/manage.py runserver
+```
+## Для комфортной работы
+* [x] Открываем терминал VS code(или другого аналогичного редактора, но это не точно))  
+Запуск виртуальной среды разработки VITE(фронтенд приложения):
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+```
+npm run dev
+```
+* [x] Запуск виртуальной среды разработки (бекэнд приложения):
+
+```
+npm run server
+```
+* [x]  Запустить две виртуальные среды одной командой(использован пакет concurrently):
+```
+npm run all
+```
+## Доступ к документации API Shop
+* [x] Дополнительно установить модуль `drf-yasg`:
+```
+pip install drf-yasg
+```
+* [x] Доступ к документации `http://127.0.0.1:8000/swagger/`
