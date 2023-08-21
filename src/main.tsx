@@ -13,6 +13,10 @@ import { Layout } from './Layout';
 import { Notfoundpage } from "./Pages/Notfoundpage";
 import { Home } from './Pages/Home';
 import { News } from './Pages/News';
+import { Documents } from './Pages/Documents';
+import { Celender } from './Pages/Celender';
+import { Reports } from './Pages/Reports';
+import { Appeal } from './Pages/Appeal';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -21,6 +25,10 @@ const router = createBrowserRouter(
 	errorElement={<Notfoundpage />}>
       <Route index element={<Home />} />
       <Route path="News" element={<News />} />
+      <Route path="Documents" element={<Documents />} />
+      <Route path="Celender" element={<Celender />} />
+      <Route path="Reports" element={<Reports />} />
+      <Route path="Appeal" element={<Appeal />} />
       {/* <Route path="registration" element={<Registration />} /> */}
       {/* <Route path="account" element={<Account />}>
         <Route path="Profile" element={<Profile />} />

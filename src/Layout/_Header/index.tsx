@@ -5,14 +5,14 @@
 
 import { indexProps } from "./index.props"
 import  logo  from './img/logoM.png'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 
 
 // eslint-disable-next-line no-empty-pattern
 export const _Header = ({ className }:indexProps): JSX.Element => {
 
-	const setActive = ({isActive}) => isActive ? 'active-link' : ''
+	//const setActive = ({isActive}) => isActive ? 'active-link' : ''
 	
 
 	return (
@@ -22,9 +22,9 @@ export const _Header = ({ className }:indexProps): JSX.Element => {
 		<header className={className}>
       <div className= {s["container"]}>
         <div className={s["header-wrapper"]}>
-          <a href="#" className={s['logo']}>
+          <Link to="/" className={s['logo']}>
             <img src={logo} alt="logo magistral" className="logo-img" />
-          </a>
+          </Link>
           <nav className={s["header-nav"]}>
             <ul className={s["header-nav__list"]} >
               <li className={s["header-nav__item"]}>
@@ -38,24 +38,24 @@ export const _Header = ({ className }:indexProps): JSX.Element => {
                 </NavLink>
               </li>
               <li className="header-nav__item">
-                <a href="#" className={s["header-nav__link"]}>
+                <NavLink to="Documents" className={s["header-nav__link"]}>
                   Руководящие документы
-                </a>
+                </NavLink>
               </li>
               <li className="header-nav__item">
-                <a href="#" className={s["header-nav__link"]}>
+                <NavLink to="Celender" className={s["header-nav__link"]}>
                   Календарь мероприятий
-                </a>
+                </NavLink>
               </li>
               <li className="header-nav__item">
-                <a href="#" className={s["header-nav__link"]}>
+                <NavLink to="Reports" className={s["header-nav__link"]}>
                   Отчетные документы
-                </a>
+                </NavLink>
               </li>
               <li className="header-nav__item">
-                <a href="#" className={s["header-nav__link"]}>
+                <NavLink to="Appeal" className={s["header-nav__link"]}>
                   Обращение к правлению СНТ
-                </a>
+                </NavLink>
               </li>
             </ul>
             <button className={s["btn"]}>Войти</button>
