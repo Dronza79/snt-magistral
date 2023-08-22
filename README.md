@@ -18,7 +18,7 @@ python.exe -m pip install -r req.txt
 ```
 * [x] Запускаем сервер:
 ```
-python snt-magistral/manage.py runserver
+python magistral_server/manage.py runserver
 ```
 ## Для комфортной работы
 * [x] Открываем терминал VS code(или другого аналогичного редактора, но это не точно))  
