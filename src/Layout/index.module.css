@@ -9,7 +9,7 @@
 	grid-template-areas:
 	". header . "
 	". body ."
-	"footer footer footer ";
+	". footer . ";
 	/* padding: 0 10px; */
 
 }
@@ -22,7 +22,7 @@
 	outline: none;
 }
 .footer{
-	height: 100px;
-	background: #4c5353;
+	
+	background: #aeb3ae;
 	grid-area: footer;
 }

@@ -3,6 +3,7 @@
 // import cn from 'classnames'
 // import ArrowIcon from './arrow.svg';
 
+import { Ymap } from "../../components/Ymap"
 import { indexProps } from "./index.props"
 
 // export const Button = ({ appearance, arrow = 'none',  children, className, ...props }: ButtonProps): JSX.Element => {
@@ -28,6 +29,7 @@ export const Footer = ({ className }:indexProps): JSX.Element => {
 	return (
 		<div className={className}>
 			<div>Footer</div>
+			<Ymap/>
 		</div>
 	)
 }

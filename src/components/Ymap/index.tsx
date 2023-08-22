@@ -23,14 +23,26 @@ import { indexProps } from "./index.props"
 			
 // 	</button>)
 // }
+import { YMaps, Map, Placemark } from '@pbe/react-yandex-maps';
 
 
-
-export const шаблон = ({  }:indexProps): JSX.Element => {
+export const Ymap = ({  }:indexProps): JSX.Element => {
+	const defaultState = {
+		center: [59.772315, 31.234063],
+		
+		zoom: 13.5,
+ };
 	return (
 		<>
-			
+			<YMaps>
+      <Map defaultState={defaultState}>
+        <Placemark geometry={[59.772315, 31.234063]} />
+      </Map>
+    </YMaps>
 		</>
 	)
 }
+
+
+
 
