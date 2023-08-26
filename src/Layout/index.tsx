@@ -10,6 +10,7 @@ import { _Main } from "./_Main"
 import { _Header } from "./_Header"
 import { indexProps } from "./index.props"
 import { Outlet } from 'react-router-dom'
+import { SideBar } from './SideBar'
 // import { useZustand } from '../store'
 
 
@@ -30,6 +31,7 @@ export const Layout = ({  }:indexProps): JSX.Element => {
 			<_Header
 			className={s.header}
 			/>
+			<SideBar className={s.bar}/>
 			<_Main
 			className={s.main}>
 				<Outlet/>
