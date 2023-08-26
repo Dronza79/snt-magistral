@@ -24,11 +24,14 @@ import { indexProps } from "./index.props"
 // }
 
 
+// eslint-disable-next-line no-empty-pattern
 export const шаблон = ({  }:indexProps): JSX.Element => {
 	return (
-		<>
-			
-		</>
+	
+				<div style={{fontSize: '40px', textAlign: "center"}}>
+			.....
+		</div>
+	
 	)
 }
 

@@ -20,9 +20,11 @@
 .main{
 	grid-area: body;
 	outline: none;
+	background: #b1e3f0;
 }
 .bar{
 	grid-area: bar;
+	background: rgb(216, 247, 216);
 }
 .footer{
 	

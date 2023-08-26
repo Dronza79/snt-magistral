@@ -25,13 +25,13 @@ import { indexProps } from "./index.props"
 
 
 // eslint-disable-next-line no-empty-pattern
-export const Celender = ({  }:indexProps): JSX.Element => {
+export const Company = ({  }:indexProps): JSX.Element => {
 	return (
-		<>
+		
 			<div style={{fontSize: '40px', textAlign: "center"}}>
-			Celender
+			Company
 		</div>
-		</>
+		
 	)
 }
 

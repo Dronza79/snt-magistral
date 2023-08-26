@@ -6,6 +6,7 @@
 
 import { useState } from "react";
 import { indexProps } from "./index.props"
+import { Link } from 'react-router-dom';
 
 
 
@@ -71,9 +72,10 @@ function timerId2() {
           Правление 
         </div>
           <ul className={cn(s.dropdownMenuList,{ [s.active]: isActive1 })}  onMouseEnter={handleActive1} onMouseLeave={handleDisActive1} >
-            <li>О компании</li>
-            <li>Новости</li>
-            <li>Контакты</li>
+            <li> <Link to={'Company'}>О компании</Link> </li>
+            <li><Link to={'News'}>Новости</Link></li>
+            <li><Link to={'Contacts'}>Контакты</Link></li>
+            
           </ul>
         
       </div>
@@ -84,7 +86,7 @@ function timerId2() {
         
           <ul className={cn(s.dropdownMenuList,{ [s.active]: isActive2 })}  onMouseEnter={handleActive2} onMouseLeave={handleDisActive2}>
             <li>Общая информация</li>
-            <li>Основные показатели финансово-хозяйственной деятельности</li>
+            <li>Основные показатели <br /> финансово-хозяйственной деятельности</li>
             <li>Сведения о выполняемых работах</li>
             <li>Порядок и условия оказания услуг</li>
             <li>Сведения о стоимости работ</li>
