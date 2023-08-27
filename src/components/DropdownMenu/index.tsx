@@ -1,105 +1,96 @@
-/* eslint-disable no-empty-pattern */
- import s from './index.module.css'
-// import { ButtonProps } from './Button.props'
- import cn from 'classnames'
-// import ArrowIcon from './arrow.svg';
 
 import { useState } from "react";
-import { indexProps } from "./index.props"
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import cn from "classnames";
+import s from "./index.module.css";
+import { indexProps } from "./index.props";
 
 
+// eslint-disable-next-line no-empty-pattern
+export const DropdownMenu = ({  }:indexProps): JSX.Element=> {
+  const data = [
+    {
+      id: 1,
+      title: "Правление",
+      items: [
+        { link: "Company", name: "О компании" },
+        { link: "News", name: "Новости" },
+        { link: "Contacts", name: "Контакты" },
+      ],
+    },
+    {
+      id: 2,
+      title: "Документы и отчетность",
+      items: [
+        { link: "", name: "Общая информация" },
+        { link: "", name: "Основные показатели финансово-хозяйственной деятельности" },
+        { link: "", name: "Сведения о выполняемых работах" },
+        { link: "", name: "Порядок и условия оказания услуг" },
+        { link: "", name: "Сведения о стоимости работ" },
+        { link: "", name: "Тарифы на коммунальные ресурсы" },
+      ],
+    },
+    {
+      id: 3,
+      title: "Вопрос-ответ",
+      items: [],
+    },
+    {
+      id: 4,
+      title: "Контакты",
+      items: [],
+    },
+    {
+      id: 5,
+      title: "Авторизация",
+      items: [],
+    },
+  ];
 
- export const DropdownMenu = ({  }:indexProps): JSX.Element=> {
-//   const [isOpen1, setIsOpen1] = useState(false);
-//   const [isOpen2, setIsOpen2] = useState(false);
-  const [isActive1, setIsSActive1] = useState(false);
-  const [isActive2, setIsSActive2] = useState(false);
+  const [activeId, setActiveId] = useState<number | undefined>();
 
-//   const handleToggle1 = () => {
-//     setIsOpen1(!isOpen1);
-//   };
+  let timerId: ReturnType<typeof setTimeout> | null = null;
+console.log(timerId);
 
-//   const handleToggle2 = () => {
-//     setIsOpen2(!isOpen2);
-//   };
-let timerIdRef:number
-let timerIdRef2:number
+  const handleActive = (id: number | undefined) => () => {
+    setActiveId(id);
+    clearTimeout(timerId!);
+	console.log('clearTimeout(timerId!)');
+	
+  };
 
-function timerId() {
-  return setTimeout(() => {
-	setIsSActive1(false);
-	console.log('Время вышло!');
-  }, 1000);
-}
+  const handleDisActive = () => {
+    timerId = setTimeout(() => {
+      setActiveId(undefined);
+		console.log('setTimeout');
+		
+    }, 1000);
+  };
 
-const handleActive1 = () => {
-  setIsSActive1(true);
-  clearTimeout(timerIdRef);
-  console.log('навел');
-};
-
-const handleDisActive1 = () => {
-  timerIdRef = timerId();
-};
-
-
-
-function timerId2() {
-	return setTimeout(() => {
-	setIsSActive2(false);
-	console.log('Время вышло!');
-	}, 1000);
- }
- 
- const handleActive2 = () => {
-	setIsSActive2(true);
-	clearTimeout(timerIdRef2);
-	console.log('навел');
- };
- 
- const handleDisActive2 = () => {
-	timerIdRef2 = timerId2();
- };
- 
-  
-
- 
   return (
     <div className={s.dropdownMenu}>
-      <div className={s.menuItem}>
-        <div className={s.menuItemHeader} >
-          Правление 
-        </div>
-          <ul className={cn(s.dropdownMenuList,{ [s.active]: isActive1 })}  onMouseEnter={handleActive1} onMouseLeave={handleDisActive1} >
-            <li> <Link to={'Company'}>О компании</Link> </li>
-            <li><Link to={'News'}>Новости</Link></li>
-            <li><Link to={'Contacts'}>Контакты</Link></li>
-            
+      {data.map(({ id, title, items }) => (
+        <div className={s.menuItem} key={id}>
+          <div className={s.menuItemHeader}>{title}</div>
+          <ul
+            className={cn(s.dropdownMenuList, {
+              [s.active]: activeId === id,
+            })}
+            onMouseEnter={handleActive(id)}
+            onMouseLeave={handleDisActive}
+          >
+            {items.map((item, i) => (
+              <li key={i}>
+                {item.link ? (
+                  <Link to={item.link}>{item.name}</Link>
+                ) : (
+                  <span>{item.name}</span>
+                )}
+              </li>
+            ))}
           </ul>
-        
-      </div>
-      <div className={s.menuItem}>
-        <div className={s.menuItemHeader} >
-		Документы и отчетность 
         </div>
-        
-          <ul className={cn(s.dropdownMenuList,{ [s.active]: isActive2 })}  onMouseEnter={handleActive2} onMouseLeave={handleDisActive2}>
-            <li>Общая информация</li>
-            <li>Основные показатели <br /> финансово-хозяйственной деятельности</li>
-            <li>Сведения о выполняемых работах</li>
-            <li>Порядок и условия оказания услуг</li>
-            <li>Сведения о стоимости работ</li>
-            <li>Тарифы на коммунальные ресурсы</li>
-          </ul>
-       
-      </div>
-      <div className={s.menuItem}>Вопрос-ответ</div>
-      <div className={s.menuItem}>Контакты</div>
-      <div className={s.menuItem}>Авторизация</div>
+      ))}
     </div>
   );
 };
-
-
-
