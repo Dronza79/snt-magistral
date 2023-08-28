@@ -47,12 +47,12 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
       title: "Контакты",
       items: [],
     },
-    {
-      id: 5,
-		link: '',
-      title: "Авторизация",
-      items: [],
-    },
+   //  {
+   //    id: 5,
+	// 	link: '',
+   //    title: "Авторизация",
+   //    items: [],
+   //  },
   ];
   const [activeId, setActiveId] = useState<number | undefined>();
 

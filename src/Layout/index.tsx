@@ -11,6 +11,8 @@ import { _Header } from "./_Header"
 import { indexProps } from "./index.props"
 import { Outlet } from 'react-router-dom'
 import { SideBar } from './SideBar'
+import { Modal } from '../components/Modal/Modal'
+import { useState } from 'react'
 // import { useZustand } from '../store'
 
 
@@ -18,17 +20,17 @@ import { SideBar } from './SideBar'
 
 // eslint-disable-next-line no-empty-pattern
 export const Layout = ({  }:indexProps): JSX.Element => {
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	//const isAuthActive = useZustand((state:any) => state.isAuthActive)
 	
 	
+	const [modalActive, setModalActive] = useState<boolean>(false)
 	
-
+	//console.log(setModalActive);
 	
 
 	return (
 		<div className={s.wrapper}>	
 			<_Header
+			setModalActive={setModalActive}
 			className={s.header}
 			/>
 			<SideBar className={s.bar}/>
@@ -39,7 +41,10 @@ export const Layout = ({  }:indexProps): JSX.Element => {
 			<Footer
 			className={s.footer}
 			/>
+			<Modal modalActive={modalActive} setModalActive={setModalActive}> Авторизация</Modal>
 		</div>
+		
 	)
 }
+
 

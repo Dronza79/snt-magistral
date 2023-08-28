@@ -1,10 +1,12 @@
- //import s from './index.module.css'
+ import s from './index.module.css'
 // import { ButtonProps } from './Button.props'
 // import cn from 'classnames'
 // import ArrowIcon from './arrow.svg';
 
 //import Accordion from "../../components/Accordion"
+
 import {DropdownMenu} from "../../components/DropdownMenu"
+
 import { indexProps } from "./index.props"
 //import  logo  from './img/logoM.png'
 //import { Link, NavLink } from 'react-router-dom'
@@ -12,15 +14,20 @@ import { indexProps } from "./index.props"
 
 
 // eslint-disable-next-line no-empty-pattern
-export const _Header = ({ className }:indexProps): JSX.Element => {
-
-	//const setActive = ({isActive}) => isActive ? 'active-link' : ''
+export const _Header = ({ className, setModalActive }:indexProps): JSX.Element => {
 	
+	const handleClick = () =>{
+		setModalActive(true)
+	}
 
 	return (
 		<header className={className}>
 			{/* <Accordion title= 'писец'></Accordion> */}
-			<DropdownMenu></DropdownMenu>
+			<div className={s['header-menu']}>
+				<DropdownMenu></DropdownMenu>
+				<div className={s['auth']} onClick={handleClick}>Авторизация</div>
+			</div>
+			
     </header>
 	)
 }
