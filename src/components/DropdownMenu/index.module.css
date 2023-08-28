@@ -26,6 +26,7 @@
 	position: absolute;
 	z-index: 1;
 	background: white;
+	max-width: 350px;
 	min-width: 150px;
 	padding: 10px;
 	border-radius: 4px;

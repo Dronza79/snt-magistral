@@ -24,13 +24,14 @@ import { indexProps } from "./index.props"
 // }
 
 
-export const Appeal = ({  }:indexProps): JSX.Element => {
+// eslint-disable-next-line no-empty-pattern
+export const Finance = ({  }:indexProps): JSX.Element => {
 	return (
-		<>
-			<div style={{fontSize: '40px', textAlign: "center"}}>
-			Appeal
+	
+				<div style={{fontSize: '40px', textAlign: "center"}}>
+			Finance
 		</div>
-		</>
+	
 	)
 }
 
