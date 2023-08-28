@@ -10,7 +10,7 @@ import { _Main } from "./_Main"
 import { _Header } from "./_Header"
 import { indexProps } from "./index.props"
 import { Outlet } from 'react-router-dom'
-import { SideBar } from './SideBar'
+//import { SideBar } from './SideBar'
 import { Modal } from '../components/Modal/Modal'
 import { useState } from 'react'
 // import { useZustand } from '../store'
@@ -33,7 +33,7 @@ export const Layout = ({  }:indexProps): JSX.Element => {
 			setModalActive={setModalActive}
 			className={s.header}
 			/>
-			<SideBar className={s.bar}/>
+			{/* <SideBar className={s.bar}/> */}
 			<_Main
 			className={s.main}>
 				<Outlet/>

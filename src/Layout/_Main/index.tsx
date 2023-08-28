@@ -9,7 +9,7 @@ import { indexProps } from "./index.props";
 export const _Main = ({ className, children }: indexProps): JSX.Element => {
   return (
     <div className={className}>
-      <div> {children}</div>
+       {children}
     </div>
   );
 };

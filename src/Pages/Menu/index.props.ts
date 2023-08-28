@@ -1,6 +1,6 @@
 // example
 
-import { DetailedHTMLProps, Dispatch, HtmlHTMLAttributes, SetStateAction,  } from 'react';
+import { DetailedHTMLProps, HtmlHTMLAttributes, } from 'react';
 
 export interface indexProps extends DetailedHTMLProps<HtmlHTMLAttributes<HTMLDivElement>, HTMLDivElement> {
 	// children: ReactNode;
