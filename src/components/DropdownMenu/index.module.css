@@ -61,3 +61,8 @@
 	pointer-events: all;
  }
 
+.disActive{
+	opacity: 0 !important;
+	pointer-events: none !important;
+	transition: all 0s ease-in-out !important;
+}

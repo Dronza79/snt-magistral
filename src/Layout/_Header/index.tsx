@@ -8,6 +8,7 @@
 import {DropdownMenu} from "../../components/DropdownMenu"
 
 import { indexProps } from "./index.props"
+import { Link } from 'react-router-dom'
 //import  logo  from './img/logoM.png'
 //import { Link, NavLink } from 'react-router-dom'
 
@@ -23,6 +24,7 @@ export const _Header = ({ className, setModalActive }:indexProps): JSX.Element =
 	return (
 		<header className={className}>
 			{/* <Accordion title= 'писец'></Accordion> */}
+			<Link to={'/'} className={s['logo']}>Logo</Link>
 			<div className={s['header-menu']}>
 				<DropdownMenu></DropdownMenu>
 				<div className={s['auth']} onClick={handleClick}>Авторизация</div>

@@ -12,7 +12,7 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
     {
       id: 1,
       title: "Правление",
-		link: 'Menu/Management',
+      link: "Menu/Management",
       items: [
         { link: "Menu/Company", name: "О компании" },
         { link: "Menu/News", name: "Новости" },
@@ -21,7 +21,7 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
     },
     {
       id: 2,
-		link: 'Menu/Documents',
+      link: "Menu/Documents",
       title: "Документы и отчетность",
       items: [
         { link: "Menu/info", name: "Общая информация" },
@@ -37,24 +37,25 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
     },
     {
       id: 3,
-		link: 'Menu/Question',
+      link: "Menu/Question",
       title: "Вопрос-ответ",
       items: [],
     },
     {
       id: 4,
-		link: 'Menu/Contacts',
+      link: "Menu/Contacts",
       title: "Контакты",
       items: [],
     },
-   //  {
-   //    id: 5,
-	// 	link: '',
-   //    title: "Авторизация",
-   //    items: [],
-   //  },
+    //  {
+    //    id: 5,
+    // 	link: '',
+    //    title: "Авторизация",
+    //    items: [],
+    //  },
   ];
   const [activeId, setActiveId] = useState<number | undefined>();
+  const [show, setShow] = useState<boolean>(false);
 
   let timerId: ReturnType<typeof setTimeout> | null = null;
   console.log(timerId);
@@ -71,22 +72,37 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
       console.log("setTimeout");
     }, 1000);
   };
+  const handleClickDisActive = () => {
+    setShow((e) => !e);
+    setTimeout(() => {
+      setShow((e) => !e);
+		setActiveId(undefined)
+    }, 100);
+  };
 
   return (
     <div className={s.dropdownMenu}>
       {data.map(({ id, title, items, link }) => (
         <div className={s.menuItem} key={id}>
-          <Link to={link}><div className={s.menuItemHeader}>{title}</div></Link>
+          <Link to={link}>
+            <div className={s.menuItemHeader}>{title}</div>
+          </Link>
           {items.length > 0 ? (
             <ul
-              className={cn(s.dropdownMenuList, {
-                [s.active]: activeId === id,
-              })}
+              className={cn(
+                s.dropdownMenuList,
+                {
+                  [s.active]: activeId === id,
+                },
+                {
+                  [s.disActive]: show,
+                }
+              )}
               onMouseEnter={handleActive(id)}
               onMouseLeave={handleDisActive}
             >
               {items.map((item, i) => (
-                <li key={i}>
+                <li key={i} onClick={handleClickDisActive}>
                   {item.link ? (
                     <Link to={item.link}>{item.name}</Link>
                   ) : (
