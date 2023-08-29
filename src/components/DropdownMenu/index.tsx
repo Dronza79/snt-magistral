@@ -58,18 +58,18 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
   const [show, setShow] = useState<boolean>(false);
 
   let timerId: ReturnType<typeof setTimeout> | null = null;
-  console.log(timerId);
+ // console.log(timerId);
 
   const handleActive = (id: number | undefined) => () => {
     setActiveId(id);
     clearTimeout(timerId!);
-    console.log("clearTimeout(timerId!)");
+    //console.log("clearTimeout(timerId!)");
   };
 
   const handleDisActive = () => {
     timerId = setTimeout(() => {
       setActiveId(undefined);
-      console.log("setTimeout");
+     // console.log("setTimeout");
     }, 1000);
   };
   const handleClickDisActive = () => {

@@ -1,0 +1,60 @@
+/* stylelint-disable-next-line no-empty-source */
+.slider {
+	position: relative;
+	overflow: hidden;
+ }
+ 
+ .slidesWrapper {
+	display: flex;
+	transition: transform 0.5s ease-out;
+ }
+ 
+ .slide {
+	flex-shrink: 0;
+	width: 100%;
+ }
+ 
+ .controls {
+	position: absolute;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	bottom: 10px;
+	left: 50%;
+	transform: translateX(-50%);
+ }
+ 
+ .control {
+	background-color: #fff;
+	border: none;
+	font-size: 2rem;
+	padding: 10px 20px;
+	border-radius: 5px;
+	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+	cursor: pointer;
+	transition: all 0.2s ease-out;
+	&:hover {
+	  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+	  transform: translateY(-2px);
+	}
+ }
+ 
+ .dots {
+	display: flex;
+ }
+ 
+ .dot {
+	width: 10px;
+	height: 10px;
+	margin: 0 5px;
+	border-radius: 50%;
+	border: 2px solid #fff;
+	background-color: transparent;
+	cursor: pointer;
+	transition: all 0.2s ease-out;
+ }
+ 
+ .dot.active {
+	background-color: #fff;
+ }
+ 
