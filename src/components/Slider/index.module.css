@@ -5,15 +5,28 @@
  }
  
  .slidesWrapper {
+	height: 600px;
 	display: flex;
 	transition: transform 0.5s ease-out;
  }
  
  .slide {
-	flex-shrink: 0;
+	 flex-shrink: 0; 
 	width: 100%;
+	display: flex;
  }
- 
+ .slide__text{
+	width: 50%;
+	background: #c7c1c1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 30px;
+ }
+ .image{
+	width: 50%;
+ }
+
  .controls {
 	position: absolute;
 	display: flex;

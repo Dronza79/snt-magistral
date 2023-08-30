@@ -15,25 +15,27 @@ interface SliderProps {
 	slideDuration?: number;
  }
  
- const Slider: React.FC<SliderProps> = ({ slides }) => {
+ const Slider: React.FC<SliderProps> = ({ slides, slideDuration = 7000  }) => {
    const [currentSlide, setCurrentSlide] = useState(0);
    const [sliderWidth, setSliderWidth] = useState(0);
    const sliderRef = React.createRef<HTMLDivElement>();
-
+	console.log('sliderRef', sliderRef);
+	console.log('sliderWidth', sliderWidth);
+	
    useEffect(() => {
      if (sliderRef.current) {
        setSliderWidth(sliderRef.current.offsetWidth);
      }
    }, []);
 
-   // useEffect(() => {
-   //   const timerId = setTimeout(() => {
-   //     setCurrentSlide(
-   //       currentSlide === slides.length - 1 ? 0 : currentSlide + 1
-   //     );
-   //   }, slideDuration);
-   //   return () => clearTimeout(timerId);
-   // }, [currentSlide, slideDuration, slides.length]);
+   useEffect(() => {
+     const timerId = setTimeout(() => {
+       setCurrentSlide(
+         currentSlide === slides.length - 1 ? 0 : currentSlide + 1
+       );
+     }, slideDuration);
+     return () => clearTimeout(timerId);
+   }, [currentSlide, slideDuration, slides.length]);
 
    const handlePrevSlide = (): void => {
      setCurrentSlide(currentSlide === 0 ? slides.length - 1 : currentSlide - 1);
@@ -51,9 +53,10 @@ interface SliderProps {
          className={s.slidesWrapper}
          style={{ transform: `translateX(-${currentSlide * sliderWidth}px)` }}
        >
-         {slides.map((e, i) => (
-           <div key={i} className={s.slide}>
-             {e}
+         {slides.map((slide, index) => (
+           <div key={index} className={s.slide}>
+				<div className={s['slide__text']}>Текст</div>
+             <div className={s['image']}>{slide}</div>
            </div>
          ))}
        </div>
