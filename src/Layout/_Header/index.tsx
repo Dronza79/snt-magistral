@@ -24,7 +24,7 @@ export const _Header = ({ className, setModalActive }:indexProps): JSX.Element =
 	return (
 		<header className={className}>
 			{/* <Accordion title= 'писец'></Accordion> */}
-			<Link to={'/'} className={s['logo']}>Logo</Link>
+			<Link to={'/'} className={s['logo']}>Logo переход на главную</Link>
 			<div className={s['header-menu']}>
 				<DropdownMenu></DropdownMenu>
 				<div className={s['auth']} onClick={handleClick}>Авторизация</div>
