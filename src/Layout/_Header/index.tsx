@@ -28,10 +28,6 @@ export const _Header = ({
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-
-	
- 
-
   const handleClick = () => {
     setModalActive(true);
   };
