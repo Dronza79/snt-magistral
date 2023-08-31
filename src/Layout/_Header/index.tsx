@@ -1,40 +1,59 @@
- import s from './index.module.css'
+import s from "./index.module.css";
 // import { ButtonProps } from './Button.props'
-// import cn from 'classnames'
+import cn from 'classnames'
 // import ArrowIcon from './arrow.svg';
 
 //import Accordion from "../../components/Accordion"
 
-import {DropdownMenu} from "../../components/DropdownMenu"
+import { DropdownMenu } from "../../components/DropdownMenu";
 
-import { indexProps } from "./index.props"
-import { Link } from 'react-router-dom'
+import { indexProps } from "./index.props";
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+
 //import  logo  from './img/logoM.png'
 //import { Link, NavLink } from 'react-router-dom'
 
-
-
 // eslint-disable-next-line no-empty-pattern
-export const _Header = ({ className, setModalActive }:indexProps): JSX.Element => {
+export const _Header = ({
+  className,
+  setModalActive,
+}: indexProps): JSX.Element => {
+ 
+	const [isScrolled, setIsScrolled] = useState<boolean>(false);
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 0);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+
 	
-	const handleClick = () =>{
-		setModalActive(true)
-	}
+ 
 
-	return (
-		<header className={className}>
-			{/* <Accordion title= 'писец'></Accordion> */}
-			<Link to={'/'} className={s['logo']}>Logo переход на главную</Link>
-			<div className={s['header-menu']}>
-				<DropdownMenu></DropdownMenu>
-				<div className={s['auth']} onClick={handleClick}>Авторизация</div>
-			</div>
-			
+  const handleClick = () => {
+    setModalActive(true);
+  };
+
+  return (
+    <header className={className}>
+      {/* <Accordion title= 'писец'></Accordion> */}
+      <Link to={"/"} className={s["logo"]}>
+        Logo переход на главную
+      </Link>
+      <div  className={cn(s["header-menu"], { [s.menuScrolled]: isScrolled })}>
+        <DropdownMenu></DropdownMenu>
+        <div className={s["auth"]} onClick={handleClick}>
+          Авторизация
+        </div>
+      </div>
     </header>
-	)
-}
+  );
+};
 
-{/* <div className= {s["container"]}>
+{
+  /* <div className= {s["container"]}>
 <div className={s["header-wrapper"]}>
   <Link to="/" className={s['logo']}>
 	 <img src={logo} alt="logo magistral" className="logo-img" />
@@ -75,4 +94,5 @@ export const _Header = ({ className, setModalActive }:indexProps): JSX.Element =
 	 <button className={s["btn"]}>Войти</button>
   </nav>
 </div>
-</div> */}
+</div> */
+}

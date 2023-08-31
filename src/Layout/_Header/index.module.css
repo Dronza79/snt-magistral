@@ -52,3 +52,11 @@ color: red;
 .logo{
  font-size: 30px;
 }
+.menuScrolled{
+	background: #59F5ED;
+	 position: fixed;
+	 top: 0;
+	right: 0;
+	left: 0;
+	z-index: 100;
+}

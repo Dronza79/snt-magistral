@@ -19,8 +19,8 @@ interface SliderProps {
    const [currentSlide, setCurrentSlide] = useState(0);
    const [sliderWidth, setSliderWidth] = useState(0);
    const sliderRef = React.createRef<HTMLDivElement>();
-	console.log('sliderRef', sliderRef);
-	console.log('sliderWidth', sliderWidth);
+	// console.log('sliderRef', sliderRef);
+	// console.log('sliderWidth', sliderWidth);
 	
    useEffect(() => {
      if (sliderRef.current) {
