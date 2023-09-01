@@ -2,14 +2,14 @@ import s from "./index.module.css";
 // import { ButtonProps } from './Button.props'
 import cn from 'classnames'
 // import ArrowIcon from './arrow.svg';
-import magistarl from './img/magistral2.jpg'
+import logo from './img/logoM.png'
 //import Accordion from "../../components/Accordion"
 
 import { DropdownMenu } from "../../components/DropdownMenu";
 import { indexProps } from "./index.props";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-
+import telegram from "./img/telegram.svg"
 //import  logo  from './img/logoM.png'
 //import { Link, NavLink } from 'react-router-dom'
 
@@ -35,20 +35,26 @@ export const _Header = ({
     <header className={className}>
       {/* <Accordion title= 'писец'></Accordion> */}
       <div>
-        <div className={s['HeaderTop']}>
+        <div className={s["HeaderTop"]}>
           <Link to={"/"} className={s["logo"]}>
-            <img className={s['img']} src={magistarl} alt="magistarl" />
+            <img className={s["img"]} src={logo} alt="magistarl" />
           </Link>
-          <div>
-				<div className={s['tel']}>
-					<a href={`tel:+78008888888`}> +78008888888</a>{" "}
-					<span>телефон правления</span>
-				</div>
-				<div>
-					<a href={`tel:+78008888888`}> +78008888888</a>{" "}
-					<span>телефон правления</span>
-				</div>
-			</div>
+          <div className={s["contact"]}>
+            <div>
+              <a href={`tel:+78008888888`}> +78008888888</a>{" "}
+              <span>телефон правления</span>
+            </div>
+            <div>
+              <a href={`tel:+78008888888`}> +78008888888</a>{" "}
+              <span>телефон правления</span>
+            </div>
+            <div >
+              <a className={s['boxLink']} href="https://t.me/telegram">
+                <div className={s['boxTelegramIcon']}><img className={s["telegramIcon"]} src={telegram} alt="" /></div>
+                Чат в Telegram
+              </a>
+            </div>
+          </div>
         </div>
       </div>
       <div className={cn(s["header-menu"], { [s.menuScrolled]: isScrolled })}>

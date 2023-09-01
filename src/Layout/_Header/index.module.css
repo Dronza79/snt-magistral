@@ -50,8 +50,8 @@ color: red;
 	cursor: pointer;
 }
 .logo{
- width: 100px;
- height: 100px;
+ width: 350px;
+
 }
 .img{
 	width: 100%;
@@ -67,12 +67,37 @@ color: red;
 
 .HeaderTop{
 	background: #BAC2C5;
-	padding-top: 30px;
+	padding: 20px;
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
 }
 
-.tel{
+.contact{
 	line-height: 2;
+}
+
+.telegramIcon{
+	width: 20px;
+	border-radius: 50%;
+}
+
+.boxTelegramIcon{
+	padding: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 40px;
+	background: #2cc4eb;
+	border-radius: 50%;
+}
+.boxLink{
+	
+	gap: 5px;
+	display: flex;
+	align-items: center;
+}
+
+.boxLink:hover{
+	color: #2cc4eb;
 }
