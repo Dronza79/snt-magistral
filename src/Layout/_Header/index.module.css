@@ -50,6 +50,7 @@ color: red;
 	cursor: pointer;
 }
 .logo{
+	display: flex;
  width: 350px;
 color: #3af0f0;
 }
@@ -104,4 +105,10 @@ color: #3af0f0;
 
 .boxLink:hover{
 	color: #2cc4eb;
+}
+
+.lenin{
+	border-radius: 50%;
+	width: 100px;
+	height: 100px;
 }
