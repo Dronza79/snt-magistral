@@ -50,7 +50,11 @@ color: red;
 	cursor: pointer;
 }
 .logo{
- font-size: 30px;
+ width: 100px;
+ height: 100px;
+}
+.img{
+	width: 100%;
 }
 .menuScrolled{
 	background: #59F5ED;
@@ -59,4 +63,16 @@ color: red;
 	right: 0;
 	left: 0;
 	z-index: 100;
+}
+
+.HeaderTop{
+	background: #BAC2C5;
+	padding-top: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.tel{
+	line-height: 2;
 }
