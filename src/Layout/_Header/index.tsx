@@ -2,7 +2,7 @@ import s from "./index.module.css";
 // import { ButtonProps } from './Button.props'
 import cn from 'classnames'
 // import ArrowIcon from './arrow.svg';
-import logo from './img/logoM.png'
+import logo from './img/logoMS.svg'
 //import Accordion from "../../components/Accordion"
 
 import { DropdownMenu } from "../../components/DropdownMenu";
