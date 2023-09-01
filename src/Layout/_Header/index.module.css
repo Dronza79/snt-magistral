@@ -55,6 +55,7 @@ color: red;
 }
 .img{
 	width: 100%;
+	
 }
 .menuScrolled{
 	background: #59F5ED;
@@ -75,6 +76,9 @@ color: red;
 
 .contact{
 	line-height: 2;
+}
+.contact a:hover {
+	color: #2cc4eb;
 }
 
 .telegramIcon{
