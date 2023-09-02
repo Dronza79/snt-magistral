@@ -16,3 +16,5 @@ class News(models.Model):
     content_news = models.TextField()
 
 
+# class Government(SingletonModel):
+#     pass
