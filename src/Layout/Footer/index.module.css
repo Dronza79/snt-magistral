@@ -1,1 +1,7 @@
 /* stylelint-disable-next-line no-empty-source */
+.footerWrapper{
+	padding: 20px 0px;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+}
