@@ -32,7 +32,7 @@ export const Footer = ({ className }:indexProps): JSX.Element => {
 		<div className={className}>
 			<div className={s['footerWrapper']}>
 				<iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Ac065749e88ff9b0bffa12601006ecf84ae8466a3e52c6bc98203cd545ad5fdca&amp;source=constructor" width="360" height="289" ></iframe>
-				<Contact/>
+				<Contact dop/>
 			</div>
 		</div>
 	)

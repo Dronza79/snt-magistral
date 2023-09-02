@@ -9,7 +9,8 @@ import { DropdownMenu } from "../../components/DropdownMenu";
 import { indexProps } from "./index.props";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import telegram from "./img/telegram.svg"
+import { Contact } from "../../components/Contact";
+
 //import  logo  from './img/logoM.png'
 //import { Link, NavLink } from 'react-router-dom'
 
@@ -38,25 +39,10 @@ export const _Header = ({
         <div className={s["HeaderTop"]}>
 			
           <Link to={"/"} className={s["logo"]}>
-		<img  className={s['lenin']}src="https://i.pinimg.com/originals/a9/45/54/a94554b66f888b53f58872f4a15706ad.jpg" alt="" />
-            <img className={s["img"]} src={logo} alt="magistarl" />
+             <img className={s["img"]} src={logo} alt="magistarl"/> 
+			
           </Link>
-          <div className={s["contact"]}>
-            <div>
-              <a href={`tel:+78008888888`}> +78008888888</a>{" "}
-              <span>телефон правления</span>
-            </div>
-            <div>
-              <a href={`tel:+78008888888`}> +78008888888</a>{" "}
-              <span>телефон правления</span>
-            </div>
-            <div >
-              <a className={s['boxLink']} href="https://t.me/telegram">
-                <div className={s['boxTelegramIcon']}><img className={s["telegramIcon"]} src={telegram} alt="" /></div>
-                Чат в Telegram
-              </a>
-            </div>
-          </div>
+          <Contact/>
         </div>
       </div>
       <div className={cn(s["header-menu"], { [s.menuScrolled]: isScrolled })}>
