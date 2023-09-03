@@ -14,7 +14,3 @@ class News(models.Model):
     tag_news = models.CharField(max_length=12, choices=TAG_CHO, verbose_name="Пометка", blank=True, default="")
     title_news = models.CharField('Заголовок новости', max_length=255)
     content_news = models.TextField()
-
-
-# class Government(SingletonModel):
-#     pass
