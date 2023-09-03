@@ -1,10 +1,12 @@
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import RetrieveAPIView
 
 from .models import SiteSettings
 from .serializer import SiteSettingsSerializer
 
 
-class SettingsView(ListAPIView):
-    queryset = SiteSettings.objects.all()
+class SettingsView(RetrieveAPIView):
     serializer_class = SiteSettingsSerializer
+
+    def get_object(self):
+        return SiteSettings.objects.first()
 
