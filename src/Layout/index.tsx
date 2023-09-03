@@ -12,7 +12,8 @@ import { indexProps } from "./index.props"
 import { Outlet } from 'react-router-dom'
 //import { SideBar } from './SideBar'
 import { Modal } from '../components/Modal/Modal'
-import { useState } from 'react'
+import {  useState } from 'react'
+
 // import { useZustand } from '../store'
 
 
@@ -26,6 +27,7 @@ export const Layout = ({  }:indexProps): JSX.Element => {
 	
 	//console.log(setModalActive);
 	
+
 
 	return (
 		<div className={s.wrapper}>	

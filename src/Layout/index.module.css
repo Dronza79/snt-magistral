@@ -1,6 +1,6 @@
 /* stylelint-disable-next-line no-empty-source */
 .wrapper{
-	background: #F1F2F4;
+	background: #fff;
 	display: grid;
 	grid-template-columns: auto   minmax(320px, 1240px) auto;
 	/* grid-template-columns: auto minmax(100px, 400px)  minmax(320px, 800px) auto; */
@@ -21,7 +21,7 @@
 .main{
 	grid-area: body;
 	outline: none;
-	background: #b1e3f0;
+	background:var(--main-color);
 }
 .bar{
 	grid-area: bar;
@@ -29,6 +29,6 @@
 }
 .footer{
 	
-	background: #aeb3ae;
+	background:var(--main-color);
 	grid-area: footer;
 }

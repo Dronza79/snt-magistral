@@ -69,7 +69,7 @@ export const Contact = ({ dop  }:indexProps): JSX.Element => {
           </a>
           {dop && (
             <a className={s["email-link"]} href="mailto:pochta@magistral-snt.ru">
-              <span>Написать нам</span>
+              <span>pochta@magistral-snt.ru</span>
               <svg
                 width="20px"
                 height="20px"

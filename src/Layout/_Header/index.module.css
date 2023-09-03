@@ -42,6 +42,7 @@ color: red;
 }
 
 .header-menu{
+	background-color: var(--second-color);
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -59,8 +60,9 @@ color: #3af0f0;
 	
 }
 .menuScrolled{
-	background: #9BFC1B;
-	 position: fixed;
+	background-color: var(--second-color);
+	color: #fff;
+	position: fixed;
 	 top: 0;
 	right: 0;
 	left: 0;
@@ -68,7 +70,7 @@ color: #3af0f0;
 }
 
 .HeaderTop{
-	background: #BAC2C5;
+	background: var(--main-color);
 	padding: 20px;
 	display: flex;
 	align-items: center;

@@ -9,32 +9,25 @@ import { indexProps } from "./index.props"
 
 
 
-// export const NewsFeed = ({  }:indexProps): JSX.Element => {
-// 	return (
-// 		<>
-// 			NewsFeed
-// 		</>
-// 	)
-// }
 
-// type Card = {
-//   id: number;
-//   title: string;
-//   description: string;
-// };
 
-// type Props = {
-//   cards: Card[];
-// };
+
 export const NewsFeed = ({ cards }: indexProps): JSX.Element => {
+
+	console.log(cards)
+	
   return (
+	
+	
     <div className={s.cardContainer}>
       <h1>Новости</h1>
       <div className={s['cardWrapper']}>
-        {cards.map((card, inx) => (
+        {cards?.map((card, inx) => (
+			
+			
           <div key={inx} className={s.card}>
-            <h2>Новость</h2>
-            <p className={s.cardNumber}> номер{inx + 1}</p>
+             <h2>{card?.title.slice(0, 5) + '...'}</h2> 
+             <p className={s.cardNumber}> {card?.body}</p> 
           </div>
         ))}
       </div>
