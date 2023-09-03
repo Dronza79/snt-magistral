@@ -17,8 +17,26 @@ def register_hidden_models(*model_names):
 register_hidden_models(FileNews)
 
 
+class FileNewsInline(admin.StackedInline):
+    model = FileNews
+    verbose_name = "Файл новости"
+    verbose_name_plural = "Файлы новости"
+    extra = 0
+    # formfield_overrides = {
+    #     models.TextField: {'widget': Textarea(attrs={'cols': '100', 'rows': '2'})}}
+    show_change_link = True
+
+
 @admin.register(Advertisement)
 class AdvertisementAdmin(admin.ModelAdmin):
-    ordering = ['pub_date']
+    ordering = ['-pub_date']
     list_filter = ['tag_news']
-    list_display = []
+    list_display = [
+        'id', 'get_small_title', 'tag_news',
+        'create_at', 'edit_at', 'published',
+    ]
+    list_display_links = ['get_small_title']
+    list_editable = ['published']
+    readonly_fields = ['pub_date', 'editor']
+    inlines = [FileNewsInline]
+
