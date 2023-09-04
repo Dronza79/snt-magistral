@@ -21,10 +21,7 @@ class FileNewsInline(admin.StackedInline):
     model = FileNews
     verbose_name = "Файл новости"
     verbose_name_plural = "Файлы новости"
-    extra = 0
-    # formfield_overrides = {
-    #     models.TextField: {'widget': Textarea(attrs={'cols': '100', 'rows': '2'})}}
-    show_change_link = True
+    extra = 1
 
 
 @admin.register(Advertisement)
@@ -32,11 +29,11 @@ class AdvertisementAdmin(admin.ModelAdmin):
     ordering = ['-pub_date']
     list_filter = ['tag_news']
     list_display = [
-        'id', 'get_small_title', 'tag_news',
-        'create_at', 'edit_at', 'published',
+        'get_small_title', 'tag_news', 'get_files_count',
+        'create_at', 'pub_date', 'state_news',
     ]
     list_display_links = ['get_small_title']
-    list_editable = ['published']
-    readonly_fields = ['pub_date', 'editor']
+    list_editable = ['state_news']
+    readonly_fields = ['pub_date']
     inlines = [FileNewsInline]
 

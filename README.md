@@ -36,9 +36,11 @@ npm run server
 ```
 npm run all
 ```
-## Доступ к документации API Shop
+## Доступ к документации API Magistral
 * [x] Дополнительно установить модуль `drf-yasg`:
 ```
 pip install drf-yasg
 ```
-* [x] Доступ к документации `http://127.0.0.1:8000/swagger/`
+* [x] Доступ к документации 
+* [swagger](http://127.0.0.1:8000/swagger/)
+* [redoc](http://127.0.0.1:8000/redoc/)
