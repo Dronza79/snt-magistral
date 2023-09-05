@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'drf_yasg',
     # 'government_app',
+    'advertisement_app',
     'site_settings',
 ]
 
