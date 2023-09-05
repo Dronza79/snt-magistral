@@ -32,14 +32,14 @@ export const Contact = ({ dop  }:indexProps): JSX.Element => {
     <>
    <>
       <div className={s["contact"]}>
-        <div>
+        {/* <div>
           <a href={`tel:+78008888888`}> +78008888888</a>{" "}
           <span>телефон правления</span>
         </div>
         <div>
           <a href={`tel:+78008888888`}> +78008888888</a>{" "}
           <span>телефон правления</span>
-        </div>
+        </div> */}
         <div>
           <a
             className={s["boxLink"]}
