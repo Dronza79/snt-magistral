@@ -14,7 +14,7 @@ import { indexProps } from "./index.props"
 
 export const NewsFeed = ({ cards }: indexProps): JSX.Element => {
 
-	console.log(cards)
+
 	
   return (
 	

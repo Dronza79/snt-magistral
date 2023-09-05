@@ -37,7 +37,7 @@ export const Home = ({  }:indexProps): JSX.Element => {
   useEffect(() => {
     async function fetchData() {
       const result = await axios.get(
-        "https://jsonplaceholder.typicode.com/posts"
+        "http://127.0.0.1:8000/api/conf/"
       );
       setData(result.data);
     }
