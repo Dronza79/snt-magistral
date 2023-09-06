@@ -8,15 +8,24 @@ class Person:
     def __str__(self):
         return self.name
 
-    def to_dist(self):
-        self.stop_req += 1
-        if self.stop_req > 2:
-            # self.stop_req = False
+    # def to_dist(self):
+    #     self.stop_req += 1
+    #     if self.stop_req > 2:
+    #         # self.stop_req = False
+    #         return f'сам {self}'
+    #     return {
+    #         'name': self.name,
+    #         'age': self.age,
+    #         'friends': [person.to_dist() for person in self.friends]
+    #     }
+
+    def to_dist(self, obj=None):
+        if obj == self:
             return f'сам {self}'
         return {
             'name': self.name,
             'age': self.age,
-            'friends': [person.to_dist() for person in self.friends]
+            'friends': [person.to_dist(self) for person in self.friends]
         }
 
     def add_friend(self, obj):
