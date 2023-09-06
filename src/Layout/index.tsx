@@ -12,26 +12,52 @@ import { indexProps } from "./index.props"
 import { Outlet } from 'react-router-dom'
 //import { SideBar } from './SideBar'
 import { Modal } from '../components/Modal/Modal'
-import {  useState } from 'react'
+import {  useEffect, useState } from 'react'
+import axios from 'axios'
 
 // import { useZustand } from '../store'
 
 
-
+interface SiteInfo {
+	site_url: string;
+	site_title: string;
+	site_email: string;
+	site_social: string;
+	site_telegram: string;
+	site_postal: string;
+ }
 
 // eslint-disable-next-line no-empty-pattern
 export const Layout = ({  }:indexProps): JSX.Element => {
-	
-	
 	const [modalActive, setModalActive] = useState<boolean>(false)
+	const [dataContact, setDataContac] = useState<SiteInfo | null>(null)
 	
-	//console.log(setModalActive);
+	
+	
+	
+	
+	
+	
+	
+
+  useEffect(() => {
+    async function fetchData() {
+      const result = await axios.get(
+        "http://127.0.0.1:8000/api/conf/"
+      );
+      setDataContac(result.data);
+    }
+
+    fetchData();
+
+  }, []);
 	
 
 
 	return (
 		<div className={s.wrapper}>	
 			<_Header
+			dataContact={dataContact}
 			setModalActive={setModalActive}
 			className={s.header}
 			/>

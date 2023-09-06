@@ -21,7 +21,7 @@ export const _Header = ({
 }: indexProps): JSX.Element => {
  
 	const [isScrolled, setIsScrolled] = useState<boolean>(false);
-
+	
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 0);
     window.addEventListener("scroll", handleScroll);
@@ -42,7 +42,7 @@ export const _Header = ({
              <img className={s["img"]} src={logo} alt="magistarl"/> 
 			
           </Link>
-          <Contact/>
+          <Contact />
         </div>
       </div>
       <div className={cn(s["header-menu"], { [s.menuScrolled]: isScrolled })}>

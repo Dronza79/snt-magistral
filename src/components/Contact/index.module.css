@@ -6,12 +6,12 @@
 	color: #0077FE;
 }
 
-.telegramIcon{
+.icon{
 	width: 20px;
 	border-radius: 50%;
 }
 
-.boxTelegramIcon{
+.boxIcons{
 	padding: 10px;
 	display: flex;
 	justify-content: center;

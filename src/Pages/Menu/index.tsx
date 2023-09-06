@@ -21,23 +21,6 @@ import { Reports } from "../Reports"
 import { Celender } from "../Celender"
 
 
-// export const Button = ({ appearance, arrow = 'none',  children, className, ...props }: ButtonProps): JSX.Element => {
-// 	return (
-// 	<button  className={cn(s.button, className, {
-// 		[s.primary]: appearance == 'primary',
-// 		[s.ghost]: appearance == 'ghost',
-// 	})}
-// 	{...props}
-// 	>
-// 		{children}
-// 		{arrow != 'none' && <span className={cn(s.arrow, {
-// 				[s.down]: arrow == 'down'
-// 			})}>
-// 				<ArrowIcon />
-// 			</span>}
-			
-// 	</button>)
-// }
 
 
 // eslint-disable-next-line no-empty-pattern
@@ -49,7 +32,7 @@ export const Menu = ({  }:indexProps): JSX.Element => {
 					<div className={s['two-thirds']} >
 								Menu
 								<Routes>
-								<Route path="News" element={<News />} />
+								<Route  path="News" element={<News />} />
 								<Route path="Company" element={<Company />} />
 								<Route path="Info" element={<Info />} />
 								<Route path="Finance" element={<Finance />} />
