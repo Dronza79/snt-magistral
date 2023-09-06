@@ -55,3 +55,47 @@
 	height: 1em;
 	vertical-align: middle;
  }
+
+ .title {
+	font-size: 1.5rem;
+	font-weight: bold;
+	color: #333;
+	margin-bottom: 0.5rem;
+ }
+ 
+ .postal {
+	font-size: 1.1rem;
+	color: #222;
+ }
+ 
+ /* .title span,
+ .postal span {
+	display: inline-block;
+	color: #555;
+	font-weight: normal;
+ } */
+
+
+
+ /* .box {
+	display: inline;
+	font-style: italic; 
+	position: relative;
+	color: #333; 
+ }
+ 
+ .box::before {
+	content: '«'; 
+	position: absolute;
+	left: 0;
+	transform: translateX(-100%); 
+	color: #333; 
+ }
+ 
+ .box::after {
+	content: '»'; 
+	position: absolute;
+	right: 0;
+	transform: translateX(100%); 
+	color: #333; 
+ } */
