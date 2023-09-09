@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import React from "react";
 
+
 // export const Button = ({ appearance, arrow = 'none',  children, className, ...props }: ButtonProps): JSX.Element => {
 // 	return (
 // 	<button  className={cn(s.button, className, {
@@ -39,15 +40,7 @@ interface SiteInfo {
 
 export const Contact = ({ dop }: indexProps): JSX.Element => {
   const [dataContact, setDataContac] = useState<SiteInfo | null>(null);
-//   const pattern = /\b(Магистраль)\b/g;
-//   const test = dataContact?.site_title
-//   const replacedStr = test?.replace(pattern, '<span>$1</span>');
-//   console.log(replacedStr);
-// const str = 'Это строка, в которой нужно найти слово Магистраль';
-// const pattern = /\b(Магистраль)\b/g;
-// const replacedStr = str.replace(pattern, '<span>$1</span>');
-// console.log(replacedStr);
-// const dataContact?.site_title = "Это строка, в которой есть слово Магистраль";
+	//const [first, setfirst] = useState(null)
 
 const words = dataContact?.site_title.split(" ");
 //console.log(words);
@@ -73,9 +66,11 @@ const renderedText = highlightedText?.map((item, i) =>
       const result = await axios.get("http://127.0.0.1:8000/api/conf/");
       setDataContac(result.data);
     }
-
+	//const res = ff()
+	//setfirst(res)
     fetchData();
   }, []);
+
 
   return (
     <>

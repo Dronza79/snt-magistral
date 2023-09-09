@@ -2,14 +2,14 @@
 
  import { DetailedHTMLProps,  HtmlHTMLAttributes } from 'react';
 // Dispatch SetStateAction
-interface Card {
-	body: string;
-	id: number;
-	title: string;
-	userId: number;
- }
+// interface Card {
+// 	body: string;
+// 	id: number;
+// 	title: string;
+// 	userId: number;
+//  }
  export interface indexProps extends DetailedHTMLProps<HtmlHTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-	cards:  Card[];
+	// cards:  Card[];
 	
 	// children: ReactNode;
 	// appearance: 'primary' | 'ghost';
