@@ -11,37 +11,39 @@ import { Outlet } from "react-router-dom";
 //import { SideBar } from './SideBar'
 import { Modal } from "../components/Modal/Modal";
 import { useEffect, useState } from "react";
-import axios from "axios";
 
-// import { useZustand } from '../store'
+import { useZustand } from "../store";
+import { fetchContacts } from "../Api/Api";
 
-interface SiteInfo {
-  site_url: string;
-  site_title: string;
-  site_email: string;
-  site_social: string;
-  site_telegram: string;
-  site_postal: string;
-}
+
 
 // eslint-disable-next-line no-empty-pattern
 export const Layout = ({}: indexProps): JSX.Element => {
   const [modalActive, setModalActive] = useState<boolean>(false);
-  const [dataContact, setDataContac] = useState<SiteInfo | null>(null);
+
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const dataConfig = useZustand((state: any) => state.data);
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const setConfig = useZustand((state:any) => state.isUpdateContacts)
+	
+
+console.log(dataConfig);
+//console.log(setConfig);
+
 
   useEffect(() => {
     async function fetchData() {
-      const result = await axios.get("http://127.0.0.1:8000/api/conf/");
-      setDataContac(result.data);
+      const result = await fetchContacts();
+      setConfig(result);
     }
-
     fetchData();
   }, []);
 
   return (
     <div className={s.wrapper}>
       <_Header
-        dataContact={dataContact}
+      //   dataContact={dataContact}
         setModalActive={setModalActive}
         className={s.header}
       />
