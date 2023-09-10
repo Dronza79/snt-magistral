@@ -23,12 +23,12 @@ export const Layout = ({}: indexProps): JSX.Element => {
 
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const dataConfig = useZustand((state: any) => state.data);
+	//const dataConfig = useZustand((state: any) => state.data);
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const setConfig = useZustand((state:any) => state.isUpdateContacts)
 	
 
-console.log(dataConfig);
+//console.log(dataConfig);
 //console.log(setConfig);
 
 
