@@ -12,8 +12,8 @@ import { Outlet } from "react-router-dom";
 import { Modal } from "../components/Modal/Modal";
 import { useEffect, useState } from "react";
 
-import { useZustand } from "../store";
-import { fetchContacts } from "../Api/Api";
+import {  useZustandContact, useZustandNews } from "../store";
+import { fetchContacts, fetchNews } from "../Api/Api";
 
 
 
@@ -25,7 +25,9 @@ export const Layout = ({}: indexProps): JSX.Element => {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	//const dataConfig = useZustand((state: any) => state.data);
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const setConfig = useZustand((state:any) => state.isUpdateContacts)
+	const setConfig = useZustandContact((state:any) => state.isUpdateContacts)
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const setNews = useZustandNews((state:any) => state.isUpdateNews)
 	
 
 //console.log(dataConfig);
@@ -34,8 +36,13 @@ export const Layout = ({}: indexProps): JSX.Element => {
 
   useEffect(() => {
     async function fetchData() {
-      const result = await fetchContacts();
-      setConfig(result);
+      const contacts = await fetchContacts();
+      const news = await fetchNews();
+
+
+      setConfig(contacts);
+      setNews(news);
+
     }
     fetchData();
   }, []);

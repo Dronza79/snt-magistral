@@ -7,7 +7,7 @@ import vk from "./img/vk.svg";
 
 import { indexProps } from "./index.props";
 
-import { useZustand } from "../../store";
+import { useZustandContact } from "../../store";
 
 
 
@@ -16,7 +16,7 @@ import { useZustand } from "../../store";
 
 export const Contact = ({ dop }: indexProps): JSX.Element => {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const dataContact = useZustand((state: any) => state.data);
+const dataContact = useZustandContact((state: any) => state.data);
 
 
   return (

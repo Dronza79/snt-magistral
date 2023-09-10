@@ -6,8 +6,9 @@ import s from './index.module.css'
 // import ArrowIcon from './arrow.svg';
 
 import { indexProps } from "./index.props"
-import { useEffect, useState } from 'react';
+import { useEffect,useState } from 'react';
 import axios from 'axios';
+import { useZustandNews } from '../../store';
 
 
 interface News {
@@ -27,8 +28,10 @@ interface News {
 
 
 export const NewsFeed = ({}: indexProps): JSX.Element => {
-  const [dataNews, setDataNews] = useState<News[] | []>([]);
-//console.log(dataNews);
+   const [dataNews, setDataNews] = useState<News[] | []>([]);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const dataNew = useZustandNews((state: any) => state.data);
+ console.log(dataNew);
 
   function extractDate(s:string) {
 	// Создание объекта Date из строки.
@@ -50,7 +53,7 @@ export const NewsFeed = ({}: indexProps): JSX.Element => {
 
     fetchData();
   }, []);
-// console.log(dataNews);
+//console.log(dataNews);
 
   return (
     <div className={s.cardContainer}>
