@@ -1,77 +1,56 @@
 /* eslint-disable no-empty-pattern */
- import { Link } from 'react-router-dom';
-import s from './index.module.css'
+import { Link } from "react-router-dom";
+import s from "./index.module.css";
 // import { ButtonProps } from './Button.props'
 // import cn from 'classnames'
 // import ArrowIcon from './arrow.svg';
 
-import { indexProps } from "./index.props"
-import { useEffect,useState } from 'react';
-import axios from 'axios';
-import { useZustandNews } from '../../store';
-
-
-interface News {
-	pub_date: string;
-	autor: string;
-	tag_news: string;
-	title_news: string;
-	content_news: string;
-	file_news?: Array<{
-		file: string;
-		file_descr: string;
-		file_name: string;
-	}>;
-
- }
-
-
+import { indexProps } from "./index.props";
+import { fileNewsType, useZustandNews } from "../../store";
 
 export const NewsFeed = ({}: indexProps): JSX.Element => {
-   const [dataNews, setDataNews] = useState<News[] | []>([]);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const dataNew = useZustandNews((state: any) => state.data);
- console.log(dataNew);
+  const dataNews = useZustandNews((state: any) => state.data);
+  console.log(dataNews);
 
-  function extractDate(s:string) {
-	// Создание объекта Date из строки.
-	const dt = new Date(s);
-	// Получение даты из объекта Date.
-	const date = dt.toISOString().substr(0, 10);
-	return date;
- }
+  function extractDate(s: string) {
+    const timestamp = Date.parse(s);
 
-  useEffect(() => {
-    async function fetchData() {
-      const result = await axios.get("http://127.0.0.1:8000/api/news/");
-		const newResult = []
-		newResult.push(result.data[0],result.data[1],result.data[2])
-		setDataNews(newResult);
+    if (!isNaN(timestamp)) {
+      const dt = new Date(timestamp);
+      const date = dt.toISOString().substring(0, 10);
+      return date;
     }
+    //else {
+    //    // Обработка некорректного формата даты
+    //    console.error("Некорректный формат даты:", s);
+    //    return "Некорректная дата";
+    //  }
+  }
 
-   
-
-    fetchData();
-  }, []);
-//console.log(dataNews);
+  const newDataNews = [];
+  newDataNews.push(dataNews[0], dataNews[1], dataNews[2]);
 
   return (
     <div className={s.cardContainer}>
       <h1>Новости</h1>
       <div className={s["cardWrapper"]}>
-		{dataNews?.map((el, inx) => (
+        {newDataNews?.map((el, inx) => (
           <div key={inx} className={s.card}>
-				
-				<p >Опубликовано {extractDate(el?.pub_date)}</p>
-            <Link className={s['title']} to={''}>{el?.title_news}</Link>
-				{el?.file_news
-              ? el.file_news.map((element, idx) => {
+            {/* <p >Опубликовано </p> */}
+            <p>Опубликовано {extractDate(el?.pub_date)}</p>
+            <Link className={s["title"]} to={""}>
+              {el?.title_news}
+            </Link>
+            {el?.file_news
+              ? el.file_news.map((element:fileNewsType, idx:number) => {
                   // вместо console.log(element), отобразите содержимое массива file_news соответствующим образом
                   return (
-                    <div className={s['file']} key={idx}>
-							<p>{element.file_name}</p>
-							<a href={element.file} target='blank'>ссылка на файл</a>
-                      
+                    <div className={s["file"]} key={idx}>
+                      <p>{element.file_name}</p>
+                      <a href={element.file} target="blank">
+                        ссылка на файл
+                      </a>
                     </div>
                   );
                 })
@@ -79,7 +58,7 @@ export const NewsFeed = ({}: indexProps): JSX.Element => {
             {/* <p className={s.cardNumber}> {el?.content_news}</p> */}
           </div>
         ))}
-         {/* {dataNews?.map((el, inx) => (
+        {/* {dataNews?.map((el, inx) => (
           <div key={inx} className={s.card}>
             <h2>{el?.title_news.slice(0, 5) + "..."}</h2>
             <p className={s.cardNumber}> {el?.body}</p>
@@ -92,5 +71,3 @@ export const NewsFeed = ({}: indexProps): JSX.Element => {
     </div>
   );
 };
-
-

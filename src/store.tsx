@@ -27,11 +27,16 @@ export const useZustandContact = create<State>((set) => ({
     }),
 }));
 
+export interface fileNewsType {
+	file_name: string; 
+	file_descr: string; 
+	file: string
+}
 
 interface News {
 	autor: string;
 	content_news: string;
-	file_news: { file_name: string; file_descr: string; file: string }[];
+	file_news?: fileNewsType[];
 	pub_date: string;
 	tag_news: string;
 	title_news: string;
