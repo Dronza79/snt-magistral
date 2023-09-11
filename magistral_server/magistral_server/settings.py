@@ -123,14 +123,15 @@ REST_FRAMEWORK = {
     ],
     # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     # 'PAGE_SIZE': 5,
-    # 'DATE_FORMAT': '%d-%m-%Y',
-    # 'DATE_INPUT_FORMATS': [
-    #     '%d-%m-%Y',  # '25-10-2006'
+    'DATE_FORMAT': '%d-%m-%Y',
+    'DATETIME_FORMAT': '%d-%m-%Y %H:%M',
+    'DATE_INPUT_FORMATS': [
+        '%d-%m-%Y',  # '25-10-2006'
     #     '%d/%m/%Y',  # '25/10/2006'
     #     '%d/%m/%y',  # '25/10/06'
     #     '%d.%m.%y',  # '25/10/06'
     #     '%d/%m/%Y',  # '25/10/06'
-    # ]
+    ]
 }
 
 SIMPLE_JWT = {
@@ -177,3 +178,9 @@ MEDIA_URL = 'media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 FIXTURE_DIRS = [BASE_DIR / 'fixtures']
+
+DATE_INPUT_FORMATS = [
+    '%d-%m-%Y',  # '25-10-2006'
+    '%d/%m/%Y',  # '25/10/2006'
+    '%d/%m/%y',  # '25/10/06'
+]
