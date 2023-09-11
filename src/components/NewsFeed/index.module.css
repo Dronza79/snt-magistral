@@ -16,6 +16,9 @@ gap:20px ;
 	justify-content: space-evenly;
  }
  .card {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
 	line-height: 1;
 	background-color: #f0f0f0;
 	border: 1px solid #ccc;
@@ -25,18 +28,24 @@ gap:20px ;
 	padding: 20px;
 	width: calc(20.333% - 20px);
 	box-sizing: border-box;
-	max-height: 200px;
+	
 	overflow: hidden;
  }
  
- .card h2 {
-	font-size: 24px;
+ /* .card h2 {
+	font-size: 14px;
 	font-weight: bold;
 	margin-bottom: 10px;
- }
+	
+ } */
  
+ .title{
+	color: rgb(25, 146, 228);
+ }
  .card p {
-	font-size: 16px;
+	font-size: 12px;
+	font-style: oblique;
+	margin-bottom: 10px;
  }
  
  .cardNumber {
@@ -45,5 +54,14 @@ gap:20px ;
  }
  
  .link:hover{
+	color: aqua;
+ }
+
+ .file{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+ }
+ .file a:hover{
 	color: aqua;
  }

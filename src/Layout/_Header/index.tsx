@@ -22,6 +22,7 @@ export const _Header = ({
  
 	const [isScrolled, setIsScrolled] = useState<boolean>(false);
 	
+	
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 0);
     window.addEventListener("scroll", handleScroll);

@@ -6,76 +6,18 @@ import telegram from "./img/telegram.svg";
 import vk from "./img/vk.svg";
 
 import { indexProps } from "./index.props";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import React from "react";
 
-// export const Button = ({ appearance, arrow = 'none',  children, className, ...props }: ButtonProps): JSX.Element => {
-// 	return (
-// 	<button  className={cn(s.button, className, {
-// 		[s.primary]: appearance == 'primary',
-// 		[s.ghost]: appearance == 'ghost',
-// 	})}
-// 	{...props}
-// 	>
-// 		{children}
-// 		{arrow != 'none' && <span className={cn(s.arrow, {
-// 				[s.down]: arrow == 'down'
-// 			})}>
-// 				<ArrowIcon />
-// 			</span>}
+import { useZustandContact } from "../../store";
 
-// 	</button>)
-// }
 
-interface SiteInfo {
-  site_url: string;
-  site_title: string;
-  site_email: string;
-  site_social: string;
-  site_telegram: string;
-  site_postal: string;
-}
+
+
+
 
 export const Contact = ({ dop }: indexProps): JSX.Element => {
-  const [dataContact, setDataContac] = useState<SiteInfo | null>(null);
-//   const pattern = /\b(Магистраль)\b/g;
-//   const test = dataContact?.site_title
-//   const replacedStr = test?.replace(pattern, '<span>$1</span>');
-//   console.log(replacedStr);
-// const str = 'Это строка, в которой нужно найти слово Магистраль';
-// const pattern = /\b(Магистраль)\b/g;
-// const replacedStr = str.replace(pattern, '<span>$1</span>');
-// console.log(replacedStr);
-// const dataContact?.site_title = "Это строка, в которой есть слово Магистраль";
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const dataContact = useZustandContact((state: any) => state.data);
 
-const words = dataContact?.site_title.split(" ");
-//console.log(words);
-
-
-const highlightedText = words?.map((word, index) => {
-  if (word === "Магистраль") {
-	console.log('оно');
-	
-    return <span className={s['box']} key={index}>&laquo;{word}&raquo;</span>;
-  }
-  return word;
-});
-const renderedText = highlightedText?.map((item, i) =>
-    i + 1 !== highlightedText.length
-      ? [item, <React.Fragment key={`space-${i}`}>&nbsp;</React.Fragment>]
-      : item
-  )
-//  console.log(highlightedText?.join(" "));
-
-  useEffect(() => {
-    async function fetchData() {
-      const result = await axios.get("http://127.0.0.1:8000/api/conf/");
-      setDataContac(result.data);
-    }
-
-    fetchData();
-  }, []);
 
   return (
     <>
@@ -93,7 +35,7 @@ const renderedText = highlightedText?.map((item, i) =>
             {dop && (
               <>
                 <div className={s["boxAdress"]}>
-                  <div className={s["title"]}>{renderedText}</div>
+                  <div className={s["title"]}>{dataContact?.site_title}</div>
                   <div className={s["postal"]}>{dataContact?.site_postal}</div>
                 </div>
               </>

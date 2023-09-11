@@ -20,7 +20,12 @@ import { Question } from "../Question"
 import { Reports } from "../Reports"
 import { Celender } from "../Celender"
 
-
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// const arr = [
+// 	{ id: 1, name: 'Товар1', price: 100 },
+// 	{ id: 2, name: 'Товар2', price: 200 },
+// 	{ id: 3, name: 'Товар3', price: 300 },
+//  ];
 
 
 // eslint-disable-next-line no-empty-pattern
@@ -30,8 +35,12 @@ export const Menu = ({  }:indexProps): JSX.Element => {
 				<div className={s['menu']}>
 					<div className={s['one-third']}>sidebar</div>
 					<div className={s['two-thirds']} >
+						
 								Menu
 								<Routes>
+								{/* {arr.map((el) => {
+							return <Route key={el?.id}  path={el?.name} />;
+						})} */}
 								<Route  path="News" element={<News />} />
 								<Route path="Company" element={<Company />} />
 								<Route path="Info" element={<Info />} />
