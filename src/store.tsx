@@ -33,19 +33,19 @@ export interface fileNewsType {
 	file: string
 }
 
-interface News {
+export interface NewsType {
 	autor: string;
 	content_news: string;
 	file_news?: fileNewsType[];
 	pub_date: string;
 	tag_news: string;
 	title_news: string;
-	[Symbol.iterator](): IterableIterator<keyof News>;
+	[Symbol.iterator](): IterableIterator<keyof NewsType>;
  }
 
 export const useZustandNews = create((set) => ({
   data: [],
-  isUpdateNews: (news:News) =>
+  isUpdateNews: (news:NewsType) =>
     set(() => ({
       data: [ ...news],
     })),

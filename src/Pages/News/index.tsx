@@ -1,34 +1,33 @@
-// import s from './index.module.css'
+ import s from './index.module.css'
 // import { ButtonProps } from './Button.props'
 // import cn from 'classnames'
 // import ArrowIcon from './arrow.svg';
 
-import { indexProps } from "./index.props"
+import { NewsType, useZustandNews } from "../../store";
 
-// export const Button = ({ appearance, arrow = 'none',  children, className, ...props }: ButtonProps): JSX.Element => {
-// 	return (
-// 	<button  className={cn(s.button, className, {
-// 		[s.primary]: appearance == 'primary',
-// 		[s.ghost]: appearance == 'ghost',
-// 	})}
-// 	{...props}
-// 	>
-// 		{children}
-// 		{arrow != 'none' && <span className={cn(s.arrow, {
-// 				[s.down]: arrow == 'down'
-// 			})}>
-// 				<ArrowIcon />
-// 			</span>}
-			
-// 	</button>)
-// }
+
+import { indexProps } from "./index.props"
+import { Link } from 'react-router-dom';
 
 
 // eslint-disable-next-line no-empty-pattern
 export const News = ({  }:indexProps): JSX.Element => {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const dataNews = useZustandNews((state: any) => state.data);
+	//console.log(dataNews);
+	// dataNews?.map((el, inx) => 
+	// 	console.log(el)
+		
+	// 	)
 	return (
-		<div style={{fontSize: '40px', textAlign: "center"}}>
-			News
+		<div className={s['news']}>
+			{dataNews?.map((el:NewsType, inx:number) => 
+			<div className={s['boxNews']} key={inx}>
+			<div>{el?.pub_date}</div>
+			<Link  className={s['link']}to={''}>{el?.title_news}</Link>
+			
+			</div>
+			)}
 		</div>
 	)
 }

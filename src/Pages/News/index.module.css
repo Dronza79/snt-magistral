@@ -1,1 +1,15 @@
 /* stylelint-disable-next-line no-empty-source */
+.news{
+	padding: 20px 10px;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.boxNews{
+	line-height: 1.6;
+}
+
+.link{
+	color: aqua;
+}
