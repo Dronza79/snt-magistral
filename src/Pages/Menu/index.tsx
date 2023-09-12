@@ -19,6 +19,7 @@ import { Management } from "../Management"
 import { Question } from "../Question"
 import { Reports } from "../Reports"
 import { Celender } from "../Celender"
+import { DinamicPage } from '../DinamicPage'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 // const arr = [
@@ -42,6 +43,7 @@ export const Menu = ({  }:indexProps): JSX.Element => {
 							return <Route key={el?.id}  path={el?.name} />;
 						})} */}
 								<Route  path="News" element={<News />} />
+								<Route  path="News:id" element={<DinamicPage />} />
 								<Route path="Company" element={<Company />} />
 								<Route path="Info" element={<Info />} />
 								<Route path="Finance" element={<Finance />} />

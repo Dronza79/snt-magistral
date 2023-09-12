@@ -11,7 +11,7 @@ import { fileNewsType, useZustandNews } from "../../store";
 export const NewsFeed = ({}: indexProps): JSX.Element => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const dataNews = useZustandNews((state: any) => state.data);
-  console.log(dataNews);
+  //console.log(dataNews);
 
   function extractDate(s: string) {
     const timestamp = Date.parse(s);
