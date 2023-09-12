@@ -6,7 +6,7 @@ from .models import Advertisement, FileNews
 class FileNewsSerializer(serializers.ModelSerializer):
     class Meta:
         model = FileNews
-        fields = ['file_name', 'file_descr', 'file']
+        fields = ['id', 'file_name', 'file_descr', 'file']
 
 
 class AdvertisementSerializer(serializers.ModelSerializer):
@@ -14,5 +14,5 @@ class AdvertisementSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Advertisement
-        fields = ['pub_date', 'autor', 'tag_news', 'title_news', 'content_news', 'file_news']
+        fields = ['id', 'pub_date', 'autor', 'tag_news', 'title_news', 'content_news', 'file_news']
 
