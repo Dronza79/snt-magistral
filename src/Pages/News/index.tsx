@@ -14,17 +14,17 @@ import { Link } from 'react-router-dom';
 export const News = ({  }:indexProps): JSX.Element => {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const dataNews = useZustandNews((state: any) => state.data);
-	console.log(dataNews);
+	//console.log(dataNews);
 	// dataNews?.map((el, inx) => 
 	// 	console.log(el)
 		
 	// 	)
 	return (
 		<div className={s['news']}>
-			{dataNews?.map((el:NewsType, inx:number) => 
-			<div className={s['boxNews']} key={inx}>
+			{dataNews?.map((el:NewsType) => 
+			<div className={s['boxNews']} key={el.id}>
 			<div>{el?.pub_date}</div>
-			<Link  className={s['link']}to={'Menu/News:id'}>{el?.title_news}</Link>
+			<Link  className={s['link']}to={`${el.id}`}>{el?.title_news}</Link>
 			
 			</div>
 			)}

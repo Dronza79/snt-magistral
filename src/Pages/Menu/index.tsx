@@ -43,7 +43,7 @@ export const Menu = ({  }:indexProps): JSX.Element => {
 							return <Route key={el?.id}  path={el?.name} />;
 						})} */}
 								<Route  path="News" element={<News />} />
-								<Route  path="News:id" element={<DinamicPage />} />
+								<Route  path="News/:id" element={<DinamicPage />} />
 								<Route path="Company" element={<Company />} />
 								<Route path="Info" element={<Info />} />
 								<Route path="Finance" element={<Finance />} />

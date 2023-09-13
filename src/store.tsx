@@ -34,6 +34,7 @@ export interface fileNewsType {
 }
 
 export interface NewsType {
+	id:number;
 	autor: string;
 	content_news: string;
 	file_news?: fileNewsType[];
@@ -43,6 +44,10 @@ export interface NewsType {
 	[Symbol.iterator](): IterableIterator<keyof NewsType>;
  }
 
+ export interface NewsStateType {
+	data: NewsType[];
+	isUpdateNews: (news: NewsType) => void;
+ }
 export const useZustandNews = create((set) => ({
   data: [],
   isUpdateNews: (news:NewsType) =>
