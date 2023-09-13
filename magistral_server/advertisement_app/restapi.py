@@ -1,9 +1,11 @@
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView
 
 from .models import Advertisement
 from .serializer import AdvertisementSerializer
 
 
-class NewsAPIView(ListAPIView):
+class NewsAPIView(RetrieveAPIView, ListAPIView):
     serializer_class = AdvertisementSerializer
-    queryset = Advertisement.objects.filter(state_news__icontains='public')
+
+    def get_queryset(self):
+        return Advertisement.objects.filter(state_news__icontains='public')
