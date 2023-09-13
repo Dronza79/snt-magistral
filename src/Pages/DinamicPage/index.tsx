@@ -5,21 +5,32 @@
 
 import { useParams } from "react-router-dom"
 import { indexProps } from "./index.props"
-import { useEffect } from "react"
-import {  useZustandNews } from "../../store"
+import { useEffect, useState } from "react"
+//import {  useZustandNews } from "../../store"
+import { fetchNew } from "../../Api/Api"
+import { NewsType } from "../../store"
 
 
 
 
 // eslint-disable-next-line no-empty-pattern
 export const DinamicPage = ({  }:indexProps): JSX.Element => {
+	const [dataNew, setDataNew] = useState<NewsType>()
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const dataNews =useZustandNews((state:any) => state.data) 
-//const params = useParams()
+//const dataNews =useZustandNews((state:any) => state.data) 
 const {id} = useParams()
+console.log(dataNew);
+const numId = Number(id)
+
 
 useEffect(() => {
-	console.log(dataNews);
+	async function fetchData() {
+		const data =  await fetchNew(numId)
+		setDataNew(data)
+		
+
+	}
+	fetchData()
 }, [])
 
 
@@ -28,6 +39,7 @@ useEffect(() => {
 	
 				<div style={{fontSize: '40px', textAlign: "center"}}>
 			DinamicPage {id}
+			<div>{dataNew?.title_news}</div>
 		</div>
 	
 	)

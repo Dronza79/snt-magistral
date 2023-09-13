@@ -14,7 +14,7 @@ import { Link } from 'react-router-dom';
 export const News = ({  }:indexProps): JSX.Element => {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const dataNews = useZustandNews((state: any) => state.data);
-	//console.log(dataNews);
+	console.log(dataNews);
 	// dataNews?.map((el, inx) => 
 	// 	console.log(el)
 		
