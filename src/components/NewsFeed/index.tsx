@@ -39,7 +39,7 @@ export const NewsFeed = ({}: indexProps): JSX.Element => {
           <div key={inx} className={s.card}>
             {/* <p >Опубликовано </p> */}
             <p>Опубликовано {extractDate(el?.pub_date)}</p>
-            <Link className={s["title"]} to={""}>
+            <Link className={s["title"]} to={`Menu/News/${el?.id}`}>
               {el?.title_news}
             </Link>
             {el?.file_news

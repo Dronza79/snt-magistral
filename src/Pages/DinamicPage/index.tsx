@@ -1,4 +1,4 @@
-// import s from './index.module.css'
+ import s from './index.module.css'
 // import { ButtonProps } from './Button.props'
 // import cn from 'classnames'
 // import ArrowIcon from './arrow.svg';
@@ -35,11 +35,17 @@ useEffect(() => {
 
 
 
+
 	return (
 	
-				<div style={{fontSize: '40px', textAlign: "center"}}>
-			DinamicPage {id}
-			<div>{dataNew?.title_news}</div>
+				<div className={s['boxNews']}>
+			<div className={s['data']}> Дата публикации {dataNew?.pub_date.slice(0,10)}</div>
+			<div className={s['title']}>{dataNew?.title_news}</div>
+			<div className={s['content']}>{dataNew?.content_news}</div>
+			{dataNew?.file_news && dataNew?.file_news.map((el,inx)=>(
+				<a key={inx} className={s['link']} href={el.file} target='blank'> {el.file_name}</a>
+			))  }
+			
 		</div>
 	
 	)
