@@ -1,8 +1,9 @@
-// import s from './index.module.css'
+import s from './index.module.css'
 // import { ButtonProps } from './Button.props'
 // import cn from 'classnames'
 // import ArrowIcon from './arrow.svg';
 
+import { Contact } from "../../components/Contact"
 import { indexProps } from "./index.props"
 
 // export const Button = ({ appearance, arrow = 'none',  children, className, ...props }: ButtonProps): JSX.Element => {
@@ -28,8 +29,8 @@ import { indexProps } from "./index.props"
 export const Contacts = ({  }:indexProps): JSX.Element => {
 	return (
 	
-				<div style={{fontSize: '40px', textAlign: "center"}}>
-			Contacts
+				<div className={s['Contacts']}>
+			<Contact dop/>
 		</div>
 	
 	)

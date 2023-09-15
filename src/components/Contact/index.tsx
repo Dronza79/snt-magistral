@@ -89,6 +89,9 @@ const dataContact = useZustandContact((state: any) => state.data);
                 </svg>
               </a>
             )}
+				{dop && (
+					<div className={s['title']}>Реквизиты организации:</div>
+				)}
           </div>
         </div>
       </>
