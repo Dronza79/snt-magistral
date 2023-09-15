@@ -30,7 +30,7 @@ export const Contacts = ({  }:indexProps): JSX.Element => {
 	return (
 	
 				<div className={s['Contacts']}>
-			<Contact dop/>
+			<Contact dop req/>
 		</div>
 	
 	)

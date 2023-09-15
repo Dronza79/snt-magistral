@@ -14,7 +14,7 @@ import { useZustandContact } from "../../store";
 
 
 
-export const Contact = ({ dop }: indexProps): JSX.Element => {
+export const Contact = ({ dop, req }: indexProps): JSX.Element => {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const dataContact = useZustandContact((state: any) => state.data);
 
@@ -89,7 +89,7 @@ const dataContact = useZustandContact((state: any) => state.data);
                 </svg>
               </a>
             )}
-				{dop && (
+				{req && (
 					<div className={s['title']}>Реквизиты организации:</div>
 				)}
           </div>

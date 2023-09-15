@@ -15,5 +15,6 @@ export interface indexProps extends DetailedHTMLProps<HtmlHTMLAttributes<HTMLDiv
 	// arrow?: 'right' | 'down' | 'none';
 	// modalActive: boolean
 	dop?: boolean
+	req?: boolean
 	dataContact?: SiteInfo | null
 }
