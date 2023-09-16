@@ -27,8 +27,6 @@ useEffect(() => {
 	async function fetchData() {
 		const data =  await fetchNew(numId)
 		setDataNew(data)
-		
-
 	}
 	fetchData()
 }, [])

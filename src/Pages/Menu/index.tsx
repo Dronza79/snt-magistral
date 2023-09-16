@@ -20,6 +20,7 @@ import { Question } from "../Question"
 import { Reports } from "../Reports"
 import { Celender } from "../Celender"
 import { DinamicPage } from '../DinamicPage'
+import { DinamicPageDocuments } from '../DinamicPageDocuments'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 // const arr = [
@@ -53,6 +54,7 @@ export const Menu = ({  }:indexProps): JSX.Element => {
 								<Route path="Services" element={<Services />} />
 								<Route path="Contacts" element={<Contacts />} />
 								<Route path="Documents" element={<Documents />} />
+								<Route path="Documents/:id" element={<DinamicPageDocuments />} />
 								<Route path="Celender" element={<Celender />} />
 								<Route path="Reports" element={<Reports />} />
 								<Route path="Management" element={<Management />} />
