@@ -8,6 +8,12 @@ interface typeContacts {
 	site_social: string;
 	site_telegram: string;
 	site_postal: string;
+	site_inn: string;
+	site_kpp: string ;
+	site_bank: string ;
+	correspondent_account: string;
+	site_bik: string ;
+	payment_account: string
 }
 
 

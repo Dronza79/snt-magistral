@@ -90,7 +90,18 @@ const dataContact = useZustandContact((state: any) => state.data);
               </a>
             )}
 				{req && (
-					<div className={s['title']}>Реквизиты организации:</div>
+					<div className={s['title']}>Реквизиты организации:
+					<ul>
+					<li>ИНН: {dataContact?.site_inn}</li>	
+					<li>КПП: {dataContact?.site_kpp}</li>
+					<li>БАНК: {dataContact?.site_bank}</li>
+						
+					<li>Расч.счет: {dataContact?.payment_account}</li>	
+					<li>БИК:  {dataContact?.site_bik}</li>	
+					<li>Кор. счет: {dataContact?.correspondent_account}</li>	
+					<li>Юр. адрес: {dataContact?.site_postal}</li>	
+					</ul>
+					</div>
 				)}
           </div>
         </div>
