@@ -59,14 +59,14 @@ color: #3af0f0;
 	width: 100%;
 	
 }
-.menuScrolled{
+/* .menuScrolled{
 	background-color: var(--second-color);
 	position: fixed;
 	 top: 0;
 	right: 0;
 	left: 0;
 	z-index: 100;
-}
+} */
 
 .HeaderTop{
 	background: var(--main-color);

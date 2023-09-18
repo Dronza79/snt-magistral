@@ -5,6 +5,19 @@ import cn from 'classnames'
 import logo from './img/logoMS.svg'
 //import Accordion from "../../components/Accordion"
 
+/************************************************************************************************************************************
+ 					Отключил липкую шапку в CSS class menuScrolled
+ **********************************************************************************************************************************/
+
+
+
+
+
+
+
+
+
+
 import { DropdownMenu } from "../../components/DropdownMenu";
 import { indexProps } from "./index.props";
 import { Link } from "react-router-dom";
