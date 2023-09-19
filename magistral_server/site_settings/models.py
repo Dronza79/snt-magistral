@@ -3,7 +3,7 @@ import re
 from django.contrib import admin
 from django.db import models
 from django.utils.safestring import mark_safe
-from transliterate import translit, slugify
+# from transliterate import translit, slugify
 
 from .singleton_model import SingletonModel
 
