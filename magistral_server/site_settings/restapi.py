@@ -1,7 +1,7 @@
-from rest_framework.generics import RetrieveAPIView
+from rest_framework.generics import RetrieveAPIView, ListAPIView
 
-from .models import SiteSettings
-from .serializer import SiteSettingsSerializer
+from .models import SiteSettings, DocumentMenu
+from .serializer import SiteSettingsSerializer, DocumentsMenuSerializer
 
 
 class SettingsView(RetrieveAPIView):
@@ -10,3 +10,7 @@ class SettingsView(RetrieveAPIView):
     def get_object(self):
         return SiteSettings.objects.first()
 
+
+class DocumentMenuListView(ListAPIView):
+    serializer_class = DocumentsMenuSerializer
+    queryset = DocumentMenu.objects.all().prefetch_related('submenu')

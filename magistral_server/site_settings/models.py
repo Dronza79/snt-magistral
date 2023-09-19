@@ -32,7 +32,7 @@ class SiteSettings(SingletonModel):
 
 class DocumentMenu(models.Model):
     title = models.CharField(max_length=100, db_index=True, verbose_name='Название')
-    slug = models.SlugField(max_length=30, unique=True, verbose_name="URL пункта меню")
+    slug = models.SlugField(max_length=50, unique=True, verbose_name="URL пункта меню")
     parent = models.ForeignKey(
         'self',
         on_delete=models.PROTECT,
@@ -50,23 +50,25 @@ class DocumentMenu(models.Model):
     )
 
     class Meta:
+        ordering = ['title']
         verbose_name = "Пункт"
         verbose_name_plural = "Пункты меню"
 
     def __str__(self):
         return self.title
 
-    def save(self, *args, **kwargs):
-        if not re.fullmatch(r'[а-яА-ЯёЁ]+', self.title):
-            self.slug = slugify(translit(self.title, 'ru'))
-        else:
-            self.slug = slugify(self.title)
-        return super().save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     if not self.slug:
+    #         if not re.fullmatch(r'[а-яА-ЯёЁ]+', self.title):
+    #             self.slug = slugify(translit(self.title, 'ru'))
+    #         else:
+    #             self.slug = slugify(self.title)
+    #     return super().save(*args, **kwargs)
 
     @admin.display(description='Изображение')
     def get_icon(self):
         if self.image:
-            return mark_safe(f'<img src={self.image.src.url}>')
+            return mark_safe(f'<img width="50" src={self.image.src.url}>')
         else:
             return '==//=='
 
