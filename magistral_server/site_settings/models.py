@@ -1,4 +1,9 @@
+import re
+
+from django.contrib import admin
 from django.db import models
+from django.utils.safestring import mark_safe
+from transliterate import translit, slugify
 
 from .singleton_model import SingletonModel
 
@@ -23,3 +28,61 @@ class SiteSettings(SingletonModel):
     class Meta:
         verbose_name = "Конфигурация"
         verbose_name_plural = "Конфигурации"
+
+
+class DocumentMenu(models.Model):
+    title = models.CharField(max_length=100, db_index=True, verbose_name='Название')
+    slug = models.SlugField(max_length=30, unique=True, verbose_name="URL пункта меню")
+    parent = models.ForeignKey(
+        'self',
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        related_name='submenu',
+        verbose_name='Родительская категория'
+    )
+    image = models.ForeignKey(
+        'DocumentImage',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="item_menu"
+    )
+
+    class Meta:
+        verbose_name = "Пункт"
+        verbose_name_plural = "Пункты меню"
+
+    def __str__(self):
+        return self.title
+
+    def save(self, *args, **kwargs):
+        if not re.fullmatch(r'[а-яА-ЯёЁ]+', self.title):
+            self.slug = slugify(translit(self.title, 'ru'))
+        else:
+            self.slug = slugify(self.title)
+        return super().save(*args, **kwargs)
+
+    @admin.display(description='Изображение')
+    def get_icon(self):
+        if self.image:
+            return mark_safe(f'<img src={self.image.src.url}>')
+        else:
+            return '==//=='
+
+    @admin.display(description='Относительный путь')
+    def href(self):
+        return f'/documents/{self.slug}/'
+
+
+class DocumentImage(models.Model):
+    src = models.FileField(upload_to='category/', verbose_name='Выбор файла')
+    alt = models.CharField(max_length=150, blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.alt:
+            self.alt = 'Иконка ' + str(self.src.name)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.alt

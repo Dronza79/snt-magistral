@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.shortcuts import redirect
 
-from .models import SiteSettings
+from .models import SiteSettings, DocumentMenu, DocumentImage
 
 
 @admin.register(SiteSettings)
@@ -21,3 +21,16 @@ class SiteSettingsAdmin(admin.ModelAdmin):
     def has_delete_permission(self, request, obj=None):
         return False
 
+
+@admin.register(DocumentMenu)
+class DocumentMenuAdmin(admin.ModelAdmin):
+    list_display = ['id', 'get_icon', 'title', 'href', 'parent']
+    prepopulated_fields = {'slug': ('title',)}
+    # readonly_fields = ['slug']
+    fields = ['title', 'parent', 'slug', 'image']
+
+
+@admin.register(DocumentImage)
+class DocumentImageAdmin(admin.ModelAdmin):
+    def get_model_perms(self, request):
+        return {}
