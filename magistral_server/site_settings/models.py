@@ -33,6 +33,11 @@ class SiteSettings(SingletonModel):
 class DocumentMenu(models.Model):
     title = models.CharField(max_length=100, db_index=True, verbose_name='Название')
     slug = models.SlugField(max_length=50, unique=True, verbose_name="URL пункта меню")
+    left = models.IntegerField(blank=True, null=True)
+    right = models.IntegerField(blank=True, null=True)
+    position = models.IntegerField(verbose_name=u'Позиция', blank=True, null=True)
+    level = models.IntegerField(blank=True, null=True)
+    published = models.BooleanField(verbose_name=u'Опубликован', default=True)
     parent = models.ForeignKey(
         'self',
         on_delete=models.PROTECT,
@@ -50,27 +55,58 @@ class DocumentMenu(models.Model):
     )
 
     class Meta:
-        ordering = ['title']
+        ordering = [
+            # 'position',
+            # 'left',
+            'title',
+        ]
         verbose_name = "Пункт"
         verbose_name_plural = "Пункты меню"
 
     def __str__(self):
-        return self.title
+        level = self.level if self.level else 1
+        i = '| ' if level > 1 else ''
+        return ('|--' * (level - 1)) + i + self.title
 
-    # def save(self, *args, **kwargs):
-    #     if not self.slug:
-    #         if not re.fullmatch(r'[а-яА-ЯёЁ]+', self.title):
-    #             self.slug = slugify(translit(self.title, 'ru'))
-    #         else:
-    #             self.slug = slugify(self.title)
-    #     return super().save(*args, **kwargs)
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        self.set_mptt()
+
+    def set_mptt(
+            self,
+            left=1,
+            parent=None,
+            level=1,
+    ):
+        # for menu in type(self).objects.filter(parent=parent).order_by('position'):
+        print(f'{type(self).objects.filter(parent=parent)=}')
+        for i, menu in enumerate(type(self).objects.filter(parent=parent).select_related('parent'), start=1):
+            # obj, children_count = menu, 0
+            # while obj.submenu.exists():
+            #     for child in obj.submenu.all():
+            #         children_count += 1
+            #         obj = child
+            pos = menu.position if menu.position else i
+            print(f'{menu=} {pos=}')
+            menu.submenu.all().update(position=pos)
+            children_count = menu.submenu.count()
+            data = {
+                'level': level,
+                'left': left,
+                'right': left + (children_count * 2) + 1,
+                'position': i,
+            }
+            type(self).objects.filter(id=menu.id).update(**data)
+            print(f'{type(self).objects.filter(id=menu.id)=}')
+            left = (data['right'] + 1)
+            menu.set_mptt(left=data['left'] + 1, parent=menu.id, level=data['level'] + 1,)
 
     @admin.display(description='Изображение')
     def get_icon(self):
         if self.image:
             return mark_safe(f'<img width="50" src={self.image.src.url}>')
         else:
-            return '==//=='
+            return '-/-'
 
     @admin.display(description='Относительный путь')
     def href(self):
