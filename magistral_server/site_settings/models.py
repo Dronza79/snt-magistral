@@ -33,7 +33,7 @@ class SiteSettings(SingletonModel):
 class DocumentMenu(models.Model):
     title = models.CharField(max_length=100, db_index=True, verbose_name='Название')
     slug = models.SlugField(max_length=50, unique=True, verbose_name="URL пункта меню")
-    order = models.IntegerField(blank=True, null=True, verbose_name='Порядок пунктов')
+    order = models.CharField(blank=True, null=True, max_length=10, verbose_name='Порядок пунктов')
     order_parent = models.IntegerField(blank=True, null=True, verbose_name='Порядок прародителя')
     level = models.IntegerField(blank=True, null=True, verbose_name='Уровень вложенности')
     position = models.IntegerField(verbose_name='Позиция', blank=True, null=True)
@@ -55,21 +55,16 @@ class DocumentMenu(models.Model):
     )
 
     class Meta:
-        ordering = [
-            'order_parent',
-            # 'parent',
-            'level',
-            'position',
-
-        ]
+        ordering = ['order']
         verbose_name = "Пункт"
         verbose_name_plural = "Пункты меню"
 
     def __str__(self):
-        # level = self.level if self.level else 1
-        # i = '| ' if level > 1 else ''
-        # return ('|--' * (level - 1)) + i + self.title
-        return self.title
+        return ('--' * (self.level - 1)) + self.title
+
+    @admin.display(description='Название')
+    def admin_presentation(self):
+        return ('  ' * (self.level - 1)) + self.title
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -78,50 +73,22 @@ class DocumentMenu(models.Model):
 
     def set_mptt(self, queryset=None, level=1):
         if not queryset:
-            count = self.submenu.count()
             self.submenu.all().update(order_parent=self.order_parent, level=level)
             level += 1
-            for child in self.submenu.all().order_by('position'):
-                # self.submenu.all().filter(pk=child.pk).update(order=num + 1)
-                # num += 1
+            for child in self.submenu.all().order_by('order'):
+                order_str = f'{self.order_parent}{level - 1}{child.position}'
+                self.submenu.all().filter(pk=child.pk).update(order=order_str)
                 if child.submenu.exists():
                     child.submenu.all().update(order_parent=self.order_parent)
-                    count += child.set_mptt(level=level)
-            print(f'После подсчета детей {self} {count=}')
-            return count
+                    child.set_mptt(level=level)
         else:
-            count = 1
-            for i, menu in enumerate(queryset.order_by('position'), start=1):
+            for i, menu in enumerate(queryset.order_by('order'), start=1):
                 level = 1
-                queryset.filter(pk=menu.pk).update(order_parent=i, level=level, order=count)
-                count += 1
+                order_str = f'{i}{level}{menu.position}'
+                queryset.filter(pk=menu.pk).update(order_parent=i, level=level, order=order_str)
                 if menu.submenu.exists():
                     level = 2
-                    count += menu.set_mptt(level=level)
-                    print(f'{menu=} =>{count=}')
-
-    # for menu in type(self).objects.filter(parent=parent).order_by('position'):
-    # print(f'{type(self).objects.filter(parent=parent)=}')
-    # for i, menu in enumerate(type(self).objects.filter(parent=parent).select_related('parent'), start=1):
-    #     # obj, children_count = menu, 0
-    #     # while obj.submenu.exists():
-    #     #     for child in obj.submenu.all():
-    #     #         children_count += 1
-    #     #         obj = child
-    #     pos = menu.position if menu.position else i
-    #     print(f'{menu=} {pos=}')
-    #     menu.submenu.all().update(position=pos)
-    #     children_count = menu.submenu.count()
-    #     data = {
-    #         'level': level,
-    #         'left': left,
-    #         'right': left + (children_count * 2) + 1,
-    #         'position': i,
-    #     }
-    #     type(self).objects.filter(id=menu.id).update(**data)
-    #     print(f'{type(self).objects.filter(id=menu.id)=}')
-    #     left = (data['right'] + 1)
-    #     menu.set_mptt(left=data['left'] + 1, parent=menu.id, level=data['level'] + 1,)
+                    menu.set_mptt(level=level)
 
     @admin.display(description='Изображение')
     def get_icon(self):

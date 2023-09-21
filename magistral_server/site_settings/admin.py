@@ -24,9 +24,9 @@ class SiteSettingsAdmin(admin.ModelAdmin):
 
 @admin.register(DocumentMenu)
 class DocumentMenuAdmin(admin.ModelAdmin):
-    list_display = ['id', 'get_icon', 'title', 'parent', 'order_parent', 'order', 'level', 'position']
-    list_display_links = ['id', 'title']
-    list_editable = ['parent', 'order_parent', 'order', 'level', 'position']
+    list_display = ['admin_presentation', 'get_icon', 'parent', 'position', 'published']
+    list_display_links = ['admin_presentation']
+    list_editable = ['parent', 'position', 'published']
     prepopulated_fields = {'slug': ('title',)}
     fields = ['title', 'parent', 'slug', 'image', 'position']
 
