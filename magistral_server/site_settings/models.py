@@ -60,11 +60,8 @@ class DocumentMenu(models.Model):
         verbose_name_plural = "Пункты меню"
 
     def __str__(self):
-        return ('--' * (self.level - 1)) + self.title
-
-    @admin.display(description='Название')
-    def admin_presentation(self):
-        return ('  ' * (self.level - 1)) + self.title
+        level = self.level if self.level else 1
+        return ('...' * (level - 1)) + self.title
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -75,14 +72,14 @@ class DocumentMenu(models.Model):
         if not queryset:
             self.submenu.all().update(order_parent=self.order_parent, level=level)
             level += 1
-            for child in self.submenu.all().order_by('order'):
+            for child in self.submenu.all().order_by('position'):
                 order_str = f'{self.order_parent}{level - 1}{child.position}'
                 self.submenu.all().filter(pk=child.pk).update(order=order_str)
                 if child.submenu.exists():
                     child.submenu.all().update(order_parent=self.order_parent)
                     child.set_mptt(level=level)
         else:
-            for i, menu in enumerate(queryset.order_by('order'), start=1):
+            for i, menu in enumerate(queryset.order_by('position'), start=1):
                 level = 1
                 order_str = f'{i}{level}{menu.position}'
                 queryset.filter(pk=menu.pk).update(order_parent=i, level=level, order=order_str)
