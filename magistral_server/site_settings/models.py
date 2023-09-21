@@ -76,20 +76,29 @@ class DocumentMenu(models.Model):
         query_pra = type(self).objects.filter(parent=None)
         self.set_mptt(queryset=query_pra)
 
-    def set_mptt(self, queryset=None):
+    def set_mptt(self, queryset=None, level=1):
         if not queryset:
-            queryset = self.submenu.all()
-            for child in queryset:
+            count = self.submenu.count()
+            self.submenu.all().update(order_parent=self.order_parent, level=level)
+            level += 1
+            for child in self.submenu.all().order_by('position'):
+                # self.submenu.all().filter(pk=child.pk).update(order=num + 1)
+                # num += 1
                 if child.submenu.exists():
                     child.submenu.all().update(order_parent=self.order_parent)
-                    child.set_mptt()
+                    count += child.set_mptt(level=level)
+            print(f'После подсчета детей {self} {count=}')
+            return count
         else:
+            count = 1
             for i, menu in enumerate(queryset.order_by('position'), start=1):
-                queryset.filter(pk=menu.pk).update(order_parent=i)
-                child = menu.submenu.all()
-                if child:
-                    child.update(order_parent=i)
-                    menu.set_mptt()
+                level = 1
+                queryset.filter(pk=menu.pk).update(order_parent=i, level=level, order=count)
+                count += 1
+                if menu.submenu.exists():
+                    level = 2
+                    count += menu.set_mptt(level=level)
+                    print(f'{menu=} =>{count=}')
 
     # for menu in type(self).objects.filter(parent=parent).order_by('position'):
     # print(f'{type(self).objects.filter(parent=parent)=}')
