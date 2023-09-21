@@ -24,10 +24,10 @@ class SiteSettingsAdmin(admin.ModelAdmin):
 
 @admin.register(DocumentMenu)
 class DocumentMenuAdmin(admin.ModelAdmin):
-    list_display = ['id', 'get_icon', 'title', 'href', 'parent', 'left', 'right', 'level', 'position']
+    list_display = ['id', 'get_icon', 'title', 'parent', 'order_parent', 'order', 'level', 'position']
     list_display_links = ['id', 'title']
+    list_editable = ['parent', 'order_parent', 'order', 'level', 'position']
     prepopulated_fields = {'slug': ('title',)}
-    # readonly_fields = ['slug']
     fields = ['title', 'parent', 'slug', 'image', 'position']
 
 
