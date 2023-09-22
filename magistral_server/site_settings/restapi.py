@@ -13,4 +13,6 @@ class SettingsView(RetrieveAPIView):
 
 class DocumentMenuListView(ListAPIView):
     serializer_class = DocumentsMenuSerializer
-    queryset = DocumentMenu.objects.all().prefetch_related('submenu')
+
+    def get_queryset(self):
+        return DocumentMenu.is_published.all().select_related()

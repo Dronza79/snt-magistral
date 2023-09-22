@@ -30,6 +30,11 @@ class SiteSettings(SingletonModel):
         verbose_name_plural = "Конфигурации"
 
 
+class PublishedManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(published=True)
+
+
 class DocumentMenu(models.Model):
     title = models.CharField(max_length=100, db_index=True, verbose_name='Название')
     slug = models.SlugField(max_length=50, unique=True, verbose_name="URL пункта меню")
@@ -37,7 +42,7 @@ class DocumentMenu(models.Model):
     order_parent = models.IntegerField(blank=True, null=True, verbose_name='Порядок прародителя')
     level = models.IntegerField(blank=True, null=True, verbose_name='Уровень вложенности')
     position = models.IntegerField(verbose_name='Позиция', blank=True, null=True)
-    published = models.BooleanField(verbose_name='Состояние публикации', default=True)
+    published = models.BooleanField(verbose_name='Опубликовано', default=True)
     parent = models.ForeignKey(
         'self',
         on_delete=models.PROTECT,
@@ -53,6 +58,8 @@ class DocumentMenu(models.Model):
         blank=True,
         related_name="item_menu"
     )
+    is_published = PublishedManager()
+    objects = models.Manager()
 
     class Meta:
         ordering = ['order']
@@ -61,7 +68,13 @@ class DocumentMenu(models.Model):
 
     def __str__(self):
         level = self.level if self.level else 1
-        return ('...' * (level - 1)) + self.title
+        return ('...' * (level - 1)) + self.title[:25]
+
+    @admin.display(description='Наименование')
+    def admin_representation(self):
+        level = self.level if self.level else 1
+        stri = '   ' * level
+        return mark_safe(f'<pre>{stri}{self.title}</pre>')
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -87,16 +100,16 @@ class DocumentMenu(models.Model):
                     level = 2
                     menu.set_mptt(level=level)
 
-    @admin.display(description='Изображение')
+    @admin.display(description='Иконка')
     def get_icon(self):
         if self.image:
             return mark_safe(f'<img width="50" src={self.image.src.url}>')
         else:
-            return '-/-'
+            return 'None'
 
     @admin.display(description='Относительный путь')
     def href(self):
-        return f'/documents/{self.slug}/'
+        return f'/{self.slug}/'
 
 
 class DocumentImage(models.Model):
@@ -105,7 +118,7 @@ class DocumentImage(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.alt:
-            self.alt = 'Иконка ' + str(self.src.name)
+            self.alt = 'ico ' + str(self.src.name)
         super().save(*args, **kwargs)
 
     def __str__(self):
