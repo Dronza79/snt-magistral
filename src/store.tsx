@@ -33,6 +33,8 @@ export const useZustandContact = create<State>((set) => ({
     }),
 }));
 
+
+
 export interface fileNewsType {
 	file_name: string; 
 	file_descr: string; 
@@ -62,3 +64,34 @@ export const useZustandNews = create((set) => ({
     })),
 }));
 
+
+
+
+
+
+
+interface Image {
+	src: string;
+	alt: string;
+ }
+ 
+ interface menuType {
+	id: number;
+	title: string;
+	image: Image;
+	href: string;
+	submenu: [];
+ }
+ 
+ interface zustandMenuState {
+	data: menuType[];
+	isUpdatemenu: (menu: menuType[]) => void;
+ }
+ 
+ export const useZustandMenu = create<zustandMenuState>((set) => ({
+   data: [],
+   isUpdatemenu: (menu: menuType[]) =>
+     set(() => {
+       return { data: [...menu] };
+     }),
+ }));

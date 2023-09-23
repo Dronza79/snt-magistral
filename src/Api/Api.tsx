@@ -15,3 +15,8 @@ export async function fetchNew(id:number | undefined ) {
 	return(result.data);
  }
 
+export async function fetchMenu( ) {
+	const result = await axios.get(`http://127.0.0.1:8000/api/conf/menu/`);
+	return(result.data);
+ }
+

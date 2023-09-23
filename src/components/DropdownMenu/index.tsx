@@ -1,22 +1,31 @@
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import cn from "classnames";
 import s from "./index.module.css";
 import { indexProps } from "./index.props";
+import { fetchMenu } from "../../Api/Api";
+import { useZustandMenu } from "../../store";
 
 
 // eslint-disable-next-line no-empty-pattern
 export const DropdownMenu = ({}: indexProps): JSX.Element => {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const setMenu = useZustandMenu((state: any) => state.isUpdatemenu);
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const dataMenu = useZustandMenu((state: any) => state.data);
+
+	
+	
   const data = [
     {
       id: 1,
       title: "Правление",
       link: "Menu/Management",
       items: [
-        { link: "Menu/Company", name: "О компании" },
-        { link: "Menu/News", name: "Новости" },
-        { link: "Menu/Contacts", name: "Контакты" },
+        { link: "Menu/Company", title: "О компании" },
+        { link: "Menu/News", title: "Новости" },
+        { link: "Menu/Contacts", title: "Контакты" },
       ],
     },
     {
@@ -24,15 +33,16 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
       link: "Menu/Documents",
       title: "Документы и отчетность",
       items: [
-        { link: "Menu/info", name: "Общая информация" },
-        {
-          link: "Menu/finance",
-          name: `Основные показатели  финансово-хозяйственной деятельности`,
-        },
-        { link: "Menu/Works", name: "Сведения о выполняемых работах" },
-        { link: "Menu/Services", name: "Порядок и условия оказания услуг" },
-        { link: "Menu/CostOfWork", name: "Сведения о стоимости работ" },
-        { link: "Menu/Tariffs", name: "Тарифы на коммунальные ресурсы" },
+      //   { link: "Menu/info", name: "Общая информация" },
+      //   {
+      //     link: "Menu/finance",
+      //     name: `Основные показатели  финансово-хозяйственной деятельности`,
+      //   },
+      //   { link: "Menu/Works", name: "Сведения о выполняемых работах" },
+      //   { link: "Menu/Services", name: "Порядок и условия оказания услуг" },
+      //   { link: "Menu/CostOfWork", name: "Сведения о стоимости работ" },
+      //   { link: "Menu/Tariffs", name: "Тарифы на коммунальные ресурсы" },
+
       ],
     },
     {
@@ -54,6 +64,14 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
     //    items: [],
     //  },
   ];
+
+  //const newData = data
+  //console.log(dataMenu);
+  
+ data[1].items.push(...dataMenu);
+ console.log(data);
+ 
+
   const [activeId, setActiveId] = useState<number | undefined>();
   const [show, setShow] = useState<boolean>(false);
 
@@ -80,6 +98,15 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
     }, 100);
   };
 
+  useEffect(() => {
+		async function fetchData() {
+			const data = await fetchMenu()
+			setMenu(data)
+		}
+		fetchData()
+  }, [])
+  
+
   return (
     <div className={s.dropdownMenu}>
       {data.map(({ id, title, items, link }) => (
@@ -104,9 +131,9 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
               {items.map((item, i) => (
                 <li key={i} onClick={handleClickDisActive}>
                   {item.link ? (
-                    <Link to={item.link}>{item.name}</Link>
+                    <Link to={item.link}>{item.title}</Link>
                   ) : (
-                    <span>{item.name}</span>
+                    <span>{item.title}</span>
                   )}
                 </li>
               ))}
