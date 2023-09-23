@@ -30,9 +30,19 @@ class SiteSettings(SingletonModel):
         verbose_name_plural = "Конфигурации"
 
 
+class PublishedManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(published=True)
+
+
 class DocumentMenu(models.Model):
     title = models.CharField(max_length=100, db_index=True, verbose_name='Название')
     slug = models.SlugField(max_length=50, unique=True, verbose_name="URL пункта меню")
+    order = models.CharField(blank=True, null=True, max_length=10, verbose_name='Порядок пунктов')
+    order_parent = models.IntegerField(blank=True, null=True, verbose_name='Порядок прародителя')
+    level = models.IntegerField(blank=True, null=True, verbose_name='Уровень вложенности')
+    position = models.IntegerField(verbose_name='Позиция', blank=True, null=True)
+    published = models.BooleanField(verbose_name='Опубликовано', default=True)
     parent = models.ForeignKey(
         'self',
         on_delete=models.PROTECT,
@@ -48,33 +58,58 @@ class DocumentMenu(models.Model):
         blank=True,
         related_name="item_menu"
     )
+    is_published = PublishedManager()
+    objects = models.Manager()
 
     class Meta:
-        ordering = ['title']
+        ordering = ['order']
         verbose_name = "Пункт"
         verbose_name_plural = "Пункты меню"
 
     def __str__(self):
-        return self.title
+        level = self.level if self.level else 1
+        return ('...' * (level - 1)) + self.title[:25]
 
-    # def save(self, *args, **kwargs):
-    #     if not self.slug:
-    #         if not re.fullmatch(r'[а-яА-ЯёЁ]+', self.title):
-    #             self.slug = slugify(translit(self.title, 'ru'))
-    #         else:
-    #             self.slug = slugify(self.title)
-    #     return super().save(*args, **kwargs)
+    @admin.display(description='Наименование')
+    def admin_representation(self):
+        level = self.level if self.level else 1
+        stri = '   ' * level
+        return mark_safe(f'<pre>{stri}{self.title}</pre>')
 
-    @admin.display(description='Изображение')
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        query_pra = type(self).objects.filter(parent=None)
+        self.set_mptt(queryset=query_pra)
+
+    def set_mptt(self, queryset=None, level=1):
+        if not queryset:
+            self.submenu.all().update(order_parent=self.order_parent, level=level)
+            level += 1
+            for child in self.submenu.all().order_by('position'):
+                order_str = f'{self.order_parent}{level - 1}{child.position}'
+                self.submenu.all().filter(pk=child.pk).update(order=order_str)
+                if child.submenu.exists():
+                    child.submenu.all().update(order_parent=self.order_parent)
+                    child.set_mptt(level=level)
+        else:
+            for i, menu in enumerate(queryset.order_by('position'), start=1):
+                level = 1
+                order_str = f'{i}{level}{menu.position}'
+                queryset.filter(pk=menu.pk).update(order_parent=i, level=level, order=order_str)
+                if menu.submenu.exists():
+                    level = 2
+                    menu.set_mptt(level=level)
+
+    @admin.display(description='Иконка')
     def get_icon(self):
         if self.image:
             return mark_safe(f'<img width="50" src={self.image.src.url}>')
         else:
-            return '==//=='
+            return 'None'
 
     @admin.display(description='Относительный путь')
     def href(self):
-        return f'/documents/{self.slug}/'
+        return f'/{self.slug}/'
 
 
 class DocumentImage(models.Model):
@@ -83,7 +118,7 @@ class DocumentImage(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.alt:
-            self.alt = 'Иконка ' + str(self.src.name)
+            self.alt = 'ico ' + str(self.src.name)
         super().save(*args, **kwargs)
 
     def __str__(self):

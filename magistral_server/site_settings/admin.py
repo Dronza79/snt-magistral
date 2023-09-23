@@ -24,10 +24,15 @@ class SiteSettingsAdmin(admin.ModelAdmin):
 
 @admin.register(DocumentMenu)
 class DocumentMenuAdmin(admin.ModelAdmin):
-    list_display = ['id', 'get_icon', 'title', 'href', 'parent']
+    ordering = ['order']
+    list_display = ['admin_representation', 'get_icon', 'position', 'published']
+    list_display_links = ['admin_representation']
+    # list_editable = ['parent', 'position', 'published']
     prepopulated_fields = {'slug': ('title',)}
-    # readonly_fields = ['slug']
-    fields = ['title', 'parent', 'slug', 'image']
+    fields = ['title', 'parent', 'slug', 'image', 'position', 'published']
+
+    def get_queryset(self, request):
+        return self.model.objects.all()
 
 
 @admin.register(DocumentImage)

@@ -34,4 +34,4 @@ class DocumentsMenuSerializer(serializers.ModelSerializer):
     class Meta:
         list_serializer_class = FilterSerializer
         model = DocumentMenu
-        fields = ['id', 'title', 'image', 'href', 'submenu']
+        fields = ['id', 'published', 'title', 'image', 'href', 'submenu']
