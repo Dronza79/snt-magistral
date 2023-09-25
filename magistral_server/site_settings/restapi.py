@@ -15,4 +15,4 @@ class DocumentMenuListView(ListAPIView):
     serializer_class = DocumentsMenuSerializer
 
     def get_queryset(self):
-        return DocumentMenu.is_published.all().select_related()
+        return DocumentMenu.objects.all().select_related()

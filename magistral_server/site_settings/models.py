@@ -42,7 +42,7 @@ class DocumentMenu(models.Model):
     order_parent = models.IntegerField(blank=True, null=True, verbose_name='Порядок прародителя')
     level = models.IntegerField(blank=True, null=True, verbose_name='Уровень вложенности')
     position = models.IntegerField(verbose_name='Позиция', blank=True, null=True)
-    published = models.BooleanField(verbose_name='Опубликовано', default=True)
+    is_public = models.BooleanField(verbose_name='Публично', default=True)
     parent = models.ForeignKey(
         'self',
         on_delete=models.PROTECT,
@@ -58,8 +58,6 @@ class DocumentMenu(models.Model):
         blank=True,
         related_name="item_menu"
     )
-    is_published = PublishedManager()
-    objects = models.Manager()
 
     class Meta:
         ordering = ['order']
