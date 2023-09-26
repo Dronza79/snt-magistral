@@ -23,9 +23,9 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
       title: "Правление",
       link: "Menu/Management",
       items: [
-        { link: "Menu/Company", title: "О компании" },
-        { link: "Menu/News", title: "Новости" },
-        { link: "Menu/Contacts", title: "Контакты" },
+        { href: "Menu/Company", title: "О компании" },
+        { href: "Menu/News", title: "Новости" },
+        { href: "Menu/Contacts", title: "Контакты" },
       ],
     },
     {
@@ -130,8 +130,8 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
             >
               {items.map((item, i) => (
                 <li key={i} onClick={handleClickDisActive}>
-                  {item.link ? (
-                    <Link to={item.link}>{item.title}</Link>
+                  {item.href ? (
+                    <Link to={`Menu/Documents${item.href}`}>{item.title}</Link>
                   ) : (
                     <span>{item.title}</span>
                   )}

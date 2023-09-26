@@ -19,7 +19,7 @@ export const DinamicPageDocuments = ({  }:indexProps): JSX.Element => {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 //const dataNews =useZustandNews((state:any) => state.data) 
 const {id} = useParams()
-// console.log(dataNew);
+ console.log(id);
 // const numId = Number(id)
 
 
@@ -36,7 +36,7 @@ const {id} = useParams()
 
 	return (
 	<>
-<div> параметр из пути страницы{id}</div>
+<div> параметр из пути страницы - "{id}"</div>
 	</>
 	
 	)
