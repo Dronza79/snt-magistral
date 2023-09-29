@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import cn from "classnames";
@@ -7,16 +6,13 @@ import { indexProps } from "./index.props";
 import { fetchMenu } from "../../Api/Api";
 import { useZustandMenu } from "../../store";
 
-
 // eslint-disable-next-line no-empty-pattern
 export const DropdownMenu = ({}: indexProps): JSX.Element => {
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const setMenu = useZustandMenu((state: any) => state.isUpdatemenu);
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const dataMenu = useZustandMenu((state: any) => state.data);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const setMenu = useZustandMenu((state: any) => state.isUpdatemenu);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const dataMenu = useZustandMenu((state: any) => state.data);
 
-	
-	
   const data = [
     {
       id: 1,
@@ -33,16 +29,15 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
       link: "Menu/Documents",
       title: "Документы и отчетность",
       items: [
-      //   { link: "Menu/info", name: "Общая информация" },
-      //   {
-      //     link: "Menu/finance",
-      //     name: `Основные показатели  финансово-хозяйственной деятельности`,
-      //   },
-      //   { link: "Menu/Works", name: "Сведения о выполняемых работах" },
-      //   { link: "Menu/Services", name: "Порядок и условия оказания услуг" },
-      //   { link: "Menu/CostOfWork", name: "Сведения о стоимости работ" },
-      //   { link: "Menu/Tariffs", name: "Тарифы на коммунальные ресурсы" },
-
+        //   { link: "Menu/info", name: "Общая информация" },
+        //   {
+        //     link: "Menu/finance",
+        //     name: `Основные показатели  финансово-хозяйственной деятельности`,
+        //   },
+        //   { link: "Menu/Works", name: "Сведения о выполняемых работах" },
+        //   { link: "Menu/Services", name: "Порядок и условия оказания услуг" },
+        //   { link: "Menu/CostOfWork", name: "Сведения о стоимости работ" },
+        //   { link: "Menu/Tariffs", name: "Тарифы на коммунальные ресурсы" },
       ],
     },
     {
@@ -65,18 +60,19 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
     //  },
   ];
 
-  //const newData = data
+  const newData = data
   //console.log(dataMenu);
-  
- data[1].items.push(...dataMenu);
- console.log(data);
- 
+
+  data[1].items.push(...dataMenu);
+  console.log(data);
 
   const [activeId, setActiveId] = useState<number | undefined>();
   const [show, setShow] = useState<boolean>(false);
+  //const [isHovered, setIsHovered] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState<number | undefined>();
 
   let timerId: ReturnType<typeof setTimeout> | null = null;
- // console.log(timerId);
+  // console.log(timerId);
 
   const handleActive = (id: number | undefined) => () => {
     setActiveId(id);
@@ -87,25 +83,33 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
   const handleDisActive = () => {
     timerId = setTimeout(() => {
       setActiveId(undefined);
-     // console.log("setTimeout");
+      // console.log("setTimeout");
     }, 1000);
   };
   const handleClickDisActive = () => {
     setShow((e) => !e);
     setTimeout(() => {
       setShow((e) => !e);
-		setActiveId(undefined)
+      setActiveId(undefined);
     }, 100);
   };
 
   useEffect(() => {
-		async function fetchData() {
-			const data = await fetchMenu()
-			setMenu(data)
-		}
-		fetchData()
-  }, [])
-  
+    async function fetchData() {
+      const data = await fetchMenu();
+      setMenu(data);
+    }
+    fetchData();
+  }, []);
+
+  function handleMouseEnter(i: number) {
+	// console.log(i);
+	setHoveredIndex(i);
+ }
+ 
+ function handleMouseLeave() {
+	setHoveredIndex(undefined);
+ }
 
   return (
     <div className={s.dropdownMenu}>
@@ -129,12 +133,27 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
               onMouseLeave={handleDisActive}
             >
               {items.map((item, i) => (
-                <li key={i} onClick={handleClickDisActive}>
+                <li
+                  onMouseEnter={() => handleMouseEnter(i)}
+                  onMouseLeave={handleMouseLeave}
+                  // className={cn({ [s.sub]: showMenu })}
+                  key={i}
+                  onClick={handleClickDisActive}
+                >
                   {item.href ? (
                     <Link to={`Menu/Documents${item.href}`}>{item.title}</Link>
                   ) : (
                     <span>{item.title}</span>
                   )}
+                  <ul
+                  //   onMouseEnter={handleActive(id)}
+                  //   onMouseLeave={handleDisActive}
+                    className={cn(s.sub, { [s.subActive]: i === hoveredIndex })}
+                  >
+                    {/* <ul className={cn(s.sub, { [s.subActive]: isHovered })}> */}
+                    {/* <li className={s['sub']}>позиция2</li> */}
+						
+                  </ul>
                 </li>
               ))}
             </ul>
