@@ -75,11 +75,12 @@ interface Image {
 	alt: string;
  }
  
- interface menuType {
+ export interface menuType {
 	id: number;
 	title: string;
 	image: Image;
 	href: string;
+	position:number;
 	submenu: [];
  }
  

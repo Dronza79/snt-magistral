@@ -146,13 +146,17 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
                     <span>{item.title}</span>
                   )}
                   <ul
-                  //   onMouseEnter={handleActive(id)}
-                  //   onMouseLeave={handleDisActive}
+                    //   onMouseEnter={handleActive(id)}
+                    //   onMouseLeave={handleDisActive}
                     className={cn(s.sub, { [s.subActive]: i === hoveredIndex })}
                   >
                     {/* <ul className={cn(s.sub, { [s.subActive]: isHovered })}> */}
-                    {/* <li className={s['sub']}>позиция2</li> */}
-						
+                    {item.submenu
+                      ? item?.submenu.map((el) => {
+                        return  <li>{el.title}</li>;
+                        })
+                      : null}
+                    {/* <span>{item?.submenu[0]?.title}</span> */}
                   </ul>
                 </li>
               ))}
