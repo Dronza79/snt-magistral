@@ -153,7 +153,7 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
                     {/* <ul className={cn(s.sub, { [s.subActive]: isHovered })}> */}
                     {item.submenu
                       ? item?.submenu.map((el) => {
-                        return  <li>{el.title}</li>;
+                        return <Link to={`Menu/Documents/${el.id}`}> <li>{el.title}</li></Link>;
                         })
                       : null}
                     {/* <span>{item?.submenu[0]?.title}</span> */}
