@@ -68,6 +68,7 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
 
   const [activeId, setActiveId] = useState<number | undefined>();
   const [show, setShow] = useState<boolean>(false);
+  const [isAuth] = useState<boolean>(true);
   //const [isHovered, setIsHovered] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState<number | undefined>();
 
@@ -150,13 +151,19 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
                     //   onMouseLeave={handleDisActive}
                     className={cn(s.sub, { [s.subActive]: i === hoveredIndex })}
                   >
-                    {/* <ul className={cn(s.sub, { [s.subActive]: isHovered })}> */}
                     {item.submenu
-                      ? item?.submenu.map((el) => {
-                        return <Link to={`Menu/Documents/${el.id}`}> <li>{el.title}</li></Link>;
-                        })
+                      ? item?.submenu.map((el) =>
+                          isAuth ? (
+                            <Link key={el.id} to={`Menu/Documents/${el.id}`}>
+                              <li>{el.title}</li>
+                            </Link>
+                          ) : el.is_public ? (
+                            <Link key={el.id} to={`Menu/Documents/${el.id}`}>
+                              <li>{el.title}</li>
+                            </Link>
+                          ) : null
+                        )
                       : null}
-                    {/* <span>{item?.submenu[0]?.title}</span> */}
                   </ul>
                 </li>
               ))}
