@@ -107,7 +107,8 @@ class DocumentMenu(models.Model):
 
     @admin.display(description='Относительный путь')
     def href(self):
-        return f'/{self.slug}/'
+        return (f'{self.parent.parent.slug}/{self.parent.slug}/{self.slug}/' if self.parent.parent
+                else f'{self.parent.slug}/{self.slug}/') if self.parent else f'{self.slug}/'
 
 
 class DocumentImage(models.Model):
