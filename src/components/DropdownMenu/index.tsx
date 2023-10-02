@@ -60,7 +60,7 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
     //  },
   ];
 
-  const newData = data
+  const newData = data;
   //console.log(dataMenu);
 
   data[1].items.push(...dataMenu);
@@ -104,13 +104,13 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
   }, []);
 
   function handleMouseEnter(i: number) {
-	// console.log(i);
-	setHoveredIndex(i);
- }
- 
- function handleMouseLeave() {
-	setHoveredIndex(undefined);
- }
+    // console.log(i);
+    setHoveredIndex(i);
+  }
+
+  function handleMouseLeave() {
+    setHoveredIndex(undefined);
+  }
 
   return (
     <div className={s.dropdownMenu}>
@@ -152,14 +152,24 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
                     className={cn(s.sub, { [s.subActive]: i === hoveredIndex })}
                   >
                     {item.submenu
-                      ? item?.submenu.map((el) =>
+                      ? item?.submenu.map((el, inx) =>
                           isAuth ? (
-                            <Link key={el.id} to={`Menu/Documents/${el.id}`}>
+                            <Link
+                              onMouseEnter={() => handleMouseEnter(inx)}
+                              onMouseLeave={handleMouseLeave}
+                              key={el.id}
+                              to={`Menu/Documents/${el.id}`}
+                            >
                               <li>{el.title}</li>
+                              <li>{el.submenu[0].href}</li>
                             </Link>
                           ) : el.is_public ? (
                             <Link key={el.id} to={`Menu/Documents/${el.id}`}>
-                              <li>{el.title}</li>
+                              <li>{el.title}
+										<ul className={cn(s.sub, { [s.subActive]: inx === hoveredIndex })}>
+											<li>тест</li>
+										</ul>
+										</li>
                             </Link>
                           ) : null
                         )
