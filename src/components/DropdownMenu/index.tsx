@@ -68,7 +68,7 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
 
   const [activeId, setActiveId] = useState<number | undefined>();
   const [show, setShow] = useState<boolean>(false);
-  const [isAuth] = useState<boolean>(true);
+  const [isAuth] = useState<boolean>(false);
   //const [isHovered, setIsHovered] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState<number | undefined>();
 
