@@ -116,9 +116,8 @@ class DocumentImage(models.Model):
     alt = models.CharField(max_length=150, blank=True)
 
     def save(self, *args, **kwargs):
-        if not self.alt:
-            self.alt = 'ico ' + str(self.src.name)
+        self.alt = 'ico ' + self.__str__().split('.')[0]
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.alt
+        return self.src.name.split('/')[1]
