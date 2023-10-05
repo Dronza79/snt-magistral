@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'drf_yasg',
     # 'government_app',
+    'document_app',
     'advertisement_app',
     'site_settings',
 ]
@@ -127,10 +128,10 @@ REST_FRAMEWORK = {
     'DATETIME_FORMAT': '%d-%m-%Y %H:%M',
     'DATE_INPUT_FORMATS': [
         '%d-%m-%Y',  # '25-10-2006'
-    #     '%d/%m/%Y',  # '25/10/2006'
-    #     '%d/%m/%y',  # '25/10/06'
-    #     '%d.%m.%y',  # '25/10/06'
-    #     '%d/%m/%Y',  # '25/10/06'
+        #     '%d/%m/%Y',  # '25/10/2006'
+        #     '%d/%m/%y',  # '25/10/06'
+        #     '%d.%m.%y',  # '25/10/06'
+        #     '%d/%m/%Y',  # '25/10/06'
     ]
 }
 
