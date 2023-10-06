@@ -74,6 +74,10 @@ class DocumentMenu(models.Model):
         stri = '   ' * level
         return mark_safe(f'<pre>{stri}{self.title}</pre>')
 
+    @admin.display(description='Кол-во документов')
+    def show_how_many_includes(self):
+        return self.documents.count()
+
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         query_pra = type(self).objects.filter(parent=None)

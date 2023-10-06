@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.shortcuts import redirect
 
 from .models import SiteSettings, DocumentMenu, DocumentImage
+from document_app.models import Document
 
 
 @admin.register(SiteSettings)
@@ -22,14 +23,20 @@ class SiteSettingsAdmin(admin.ModelAdmin):
         return False
 
 
+class DocumentInlines(admin.TabularInline):
+    model = Document
+    extra = 1
+
+
 @admin.register(DocumentMenu)
 class DocumentMenuAdmin(admin.ModelAdmin):
     ordering = ['order']
-    list_display = ['admin_representation', 'get_icon', 'position', 'is_public']
+    list_display = ['admin_representation', 'get_icon', 'position', 'show_how_many_includes', 'is_public']
     list_display_links = ['admin_representation']
     list_editable = ['position', 'is_public']
     prepopulated_fields = {'slug': ('title',)}
     fields = ['title', 'parent', 'slug', 'image', 'position', 'is_public']
+    inlines = [DocumentInlines]
 
 
 @admin.register(DocumentImage)
