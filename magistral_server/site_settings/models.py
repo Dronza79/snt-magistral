@@ -30,11 +30,6 @@ class SiteSettings(SingletonModel):
         verbose_name_plural = "Конфигурации"
 
 
-class PublishedManager(models.Manager):
-    def get_queryset(self):
-        return super().get_queryset().filter(published=True)
-
-
 class DocumentMenu(models.Model):
     title = models.CharField(max_length=100, db_index=True, verbose_name='Название')
     slug = models.SlugField(max_length=50, unique=True, verbose_name="URL пункта меню")

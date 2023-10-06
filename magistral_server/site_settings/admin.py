@@ -25,7 +25,7 @@ class SiteSettingsAdmin(admin.ModelAdmin):
 
 class DocumentInlines(admin.TabularInline):
     model = Document
-    extra = 1
+    extra = 0
 
 
 @admin.register(DocumentMenu)

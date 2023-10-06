@@ -22,14 +22,11 @@ def get_html_string(file):
         return ''
 
 
-def get_list_id_items(ID):
-    item = DocumentMenu.objects.get(pk=ID)
-    print(f'{item=}')
-    print(f'{item.id=}')
-    if not item.parent:
-        [item.id].extend(get_list_id_items(ID))
+def get_list_id_items(number):
+    item = DocumentMenu.objects.get(pk=number)
     if not item.submenu:
         return [item.id]
-    lst = [menu.id for menu in item.submenu.all()]
-    print(f'{lst=}')
+    lst = [item.id]
+    for sub in item.submenu.all():
+        lst.extend(get_list_id_items(sub.id))
     return lst
