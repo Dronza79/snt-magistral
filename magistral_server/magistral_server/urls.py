@@ -16,9 +16,9 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.template.defaulttags import url
 from django.urls import path, include
 from django.views.generic import RedirectView
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from .views import index
 from .yasg import urlpatterns as doc_urls
@@ -28,6 +28,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('site_settings.urls')),
     path('', include('advertisement_app.urls')),
+    path('', include('document_app.urls')),
+    path('api/auth/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/auth/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('favicon.ico', RedirectView.as_view(url='/static/img/favicon.ico'), name='favicon')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

@@ -30,18 +30,12 @@ class SiteSettings(SingletonModel):
         verbose_name_plural = "Конфигурации"
 
 
-class PublishedManager(models.Manager):
-    def get_queryset(self):
-        return super().get_queryset().filter(published=True)
-
-
 class DocumentMenu(models.Model):
     title = models.CharField(max_length=100, db_index=True, verbose_name='Название')
     slug = models.SlugField(max_length=50, unique=True, verbose_name="URL пункта меню")
     order = models.CharField(blank=True, null=True, max_length=10, verbose_name='Порядок пунктов')
-    order_parent = models.IntegerField(blank=True, null=True, verbose_name='Порядок прародителя')
     level = models.IntegerField(blank=True, null=True, verbose_name='Уровень вложенности')
-    position = models.IntegerField(verbose_name='Позиция', blank=True, null=True)
+    position = models.IntegerField(verbose_name='Позиция', blank=True, null=True, default=99)
     is_public = models.BooleanField(verbose_name='Публично', default=True)
     parent = models.ForeignKey(
         'self',
@@ -49,7 +43,8 @@ class DocumentMenu(models.Model):
         null=True,
         blank=True,
         related_name='submenu',
-        verbose_name='Родительская категория'
+        verbose_name='Родительская категория',
+        limit_choices_to={'level__lt': 3},
     )
     image = models.ForeignKey(
         'DocumentImage',
@@ -74,29 +69,25 @@ class DocumentMenu(models.Model):
         stri = '   ' * level
         return mark_safe(f'<pre>{stri}{self.title}</pre>')
 
+    @admin.display(description='Кол-во документов')
+    def show_how_many_includes(self):
+        return self.documents.count()
+
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         query_pra = type(self).objects.filter(parent=None)
         self.set_mptt(queryset=query_pra)
 
     def set_mptt(self, queryset=None, level=1):
-        if not queryset:
-            self.submenu.all().update(order_parent=self.order_parent, level=level)
-            level += 1
-            for child in self.submenu.all().order_by('position'):
-                order_str = f'{self.order_parent}{level - 1}{child.position}'
-                self.submenu.all().filter(pk=child.pk).update(order=order_str)
-                if child.submenu.exists():
-                    child.submenu.all().update(order_parent=self.order_parent)
-                    child.set_mptt(level=level)
-        else:
-            for i, menu in enumerate(queryset.order_by('position'), start=1):
-                level = 1
-                order_str = f'{i}{level}{menu.position}'
-                queryset.filter(pk=menu.pk).update(order_parent=i, level=level, order=order_str)
-                if menu.submenu.exists():
-                    level = 2
-                    menu.set_mptt(level=level)
+        for i, menu in enumerate(queryset.order_by('position'), start=1):
+            order_str = (
+                f'{i}00' if not menu.parent else
+                f'{menu.parent.position}{i}0' if level == 2 else
+                f'{menu.parent.parent.position}{menu.parent.position}{i}')
+            queryset.filter(pk=menu.pk).update(level=level, order=order_str, position=i)
+            if menu.submenu.exists():
+                qs = menu.submenu.all()
+                menu.set_mptt(level=level + 1, queryset=qs)
 
     @admin.display(description='Иконка')
     def get_icon(self):

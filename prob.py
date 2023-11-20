@@ -1,3 +1,6 @@
+from pprint import pprint
+
+
 class Person:
     class_depth = 0
 
@@ -33,8 +36,8 @@ class Person:
     #         'friends': [person.to_dist() for person in self.friends]
     #     }
     def to_dist(self):
-        Person.class_depth += 1
-        if Person.class_depth > len(self.friends):
+        type(self).class_depth += 1
+        if type(self).class_depth > len(self.friends):
             return {
                 'name': self.name,
                 'age': self.age,
@@ -68,7 +71,7 @@ ket.add_friend(rob)
 # print(bob.__dict__)
 # print(nik.__dict__)
 # print(rob.__dict__)
-print(bob.to_dist())
+pprint(bob.to_dist())
 
 MEMBER = {'name': 'Боб',
           'age': '12',
