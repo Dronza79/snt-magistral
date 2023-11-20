@@ -64,13 +64,14 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
   //console.log(dataMenu);
 
   data[1].items.push(...dataMenu);
-  console.log(data);
+//   console.log(data);
 
   const [activeId, setActiveId] = useState<number | undefined>();
   const [show, setShow] = useState<boolean>(false);
   const [isAuth] = useState<boolean>(false);
   //const [isHovered, setIsHovered] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState<number | undefined>();
+  const [hoveredIndex2, setHoveredIndex2] = useState<number | undefined>();
 
   let timerId: ReturnType<typeof setTimeout> | null = null;
   // console.log(timerId);
@@ -103,11 +104,24 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
     fetchData();
   }, []);
 
-  function handleMouseEnter(i: number) {
-    // console.log(i);
-    setHoveredIndex(i);
+  function handleMouseEnter(i: number, elem) {
+	if (elem.submenu.length  !== 0) {
+		setHoveredIndex(i);
+	}
+    
+    console.log(elem.submenu);
+  }
+  function handleMouseEnter2(elem, i: number ) {
+	if (elem.submenu?.length  !== 0) {
+		setHoveredIndex2(i);
+	}
+    
+    console.log(elem);
   }
 
+  function handleMouseLeave2() {
+    setHoveredIndex2(undefined);
+  }
   function handleMouseLeave() {
     setHoveredIndex(undefined);
   }
@@ -135,16 +149,16 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
             >
               {items.map((item, i) => (
                 <li
-                  onMouseEnter={() => handleMouseEnter(i)}
+                  onMouseEnter={() => handleMouseEnter(i, item)}
                   onMouseLeave={handleMouseLeave}
                   // className={cn({ [s.sub]: showMenu })}
                   key={i}
                   onClick={handleClickDisActive}
                 >
                   {item.href ? (
-                    <Link to={`Menu/Documents${item.href}`}>{item.title}</Link>
+                    <Link to={`Menu/Documents/${item.href}`}>{item.title}</Link>
                   ) : (
-                    <span>{item.title}</span>
+                    <span>{item.title}</span>					  
                   )}
                   <ul
                     //   onMouseEnter={handleActive(id)}
@@ -154,22 +168,35 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
                     {item.submenu
                       ? item?.submenu.map((el, inx) =>
                           isAuth ? (
-                            <Link
-                              onMouseEnter={() => handleMouseEnter(inx)}
-                              onMouseLeave={handleMouseLeave}
-                              key={el.id}
-                              to={`Menu/Documents/${el.id}`}
-                            >
+                            <Link key={el.id} to={`Menu/Documents/${el.id}`}>
                               <li>{el.title}</li>
                               <li>{el.submenu[0].href}</li>
                             </Link>
                           ) : el.is_public ? (
-                            <Link key={el.id} to={`Menu/Documents/${el.id}`}>
-                              <li>{el.title}
-										<ul className={cn(s.sub, { [s.subActive]: inx === hoveredIndex })}>
-											<li>тест</li>
-										</ul>
-										</li>
+                            <Link key={el.id} to={`Menu/Documents/${el.href}`}>
+                              <li
+                                onMouseEnter={() => handleMouseEnter2(el,inx)}
+                                onMouseLeave={handleMouseLeave2}
+                              >
+                                {el.title}
+
+                                <ul
+                                  className={cn(s.sub, {
+                                    [s.subActive]: inx === hoveredIndex2,
+                                  })}
+                                  // {el?.submenu.map(item =>(
+
+                                  // ))}
+                                  //className={s['sub']}
+                                >
+
+												{el.submenu.map((el, inx) => (
+													<Link to={''} key={inx}>
+														<li >{el.title}</li>
+													</Link>
+												))}
+                                </ul>
+                              </li>
                             </Link>
                           ) : null
                         )
