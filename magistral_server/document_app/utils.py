@@ -23,6 +23,8 @@ def get_html_string(file):
 
 
 def get_list_id_items(number):
+    if not number:
+        return DocumentMenu.objects.none()
     item = DocumentMenu.objects.get(pk=number)
     if not item.submenu:
         return [item.id]
