@@ -27,7 +27,8 @@ const {id3} = useParams()
 //  console.log(id);
 //  console.log(id2);
 // const numId = Number(id)
-
+const discount = 10
+const price = 100
 
 useEffect(() => {
 	console.log(Content);
@@ -38,19 +39,18 @@ useEffect(() => {
 
 
 	return (
-	<>
-<div>1й параметр из пути страницы - "{id}"</div>
-<div>2й параметр из пути страницы - "{id2}"</div>
-<div>3й параметр из пути страницы - "{id3}"</div>
-{Content.map((item: any) => (
-	<div key={item.id}>
-        <p >{item.title}</p>
-        <p >{item.content}</p>
-  </div>
+    <>
+      <div>1й параметр из пути страницы - "{id}"</div>
+      <div>2й параметр из пути страницы - "{id2}"</div>
+      <div>3й параметр из пути страницы - "{id3}"</div>
+      {Content.map((item: any) => (
+        <div key={item.id}>
+          <p>{item.title}</p>
+          {/* <p >{item.content}</p> */}
+          <div dangerouslySetInnerHTML={{ __html: item.content }} />
+        </div>
       ))}
-		
-	</>
-	
-	)
+    </>
+  );
 }
 
