@@ -96,3 +96,12 @@ interface Image {
        return { data: [...menu] };
      }),
  }));
+
+ 
+ export const useZustandContent = create<zustandMenuState>((set) => ({
+   data: [],
+   isUpdatemenu: (menu: menuType[]) =>
+     set(() => {
+       return { data: [...menu] };
+     }),
+ }));

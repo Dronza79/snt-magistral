@@ -4,7 +4,8 @@ import cn from "classnames";
 import s from "./index.module.css";
 import { indexProps } from "./index.props";
 import { fetchMenu } from "../../Api/Api";
-import { useZustandMenu } from "../../store";
+import { useZustandContent, useZustandMenu } from "../../store";
+import { fetchDoclist } from "../../Api/Api";
 
 // eslint-disable-next-line no-empty-pattern
 export const DropdownMenu = ({}: indexProps): JSX.Element => {
@@ -12,6 +13,11 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
   const setMenu = useZustandMenu((state: any) => state.isUpdatemenu);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const dataMenu = useZustandMenu((state: any) => state.data);
+  
+  
+  const setContent = useZustandContent((state: any) => state.isUpdatemenu);
+ 
+  
 
   const data = [
     {
@@ -64,7 +70,7 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
   //console.log(dataMenu);
 
   data[1].items.push(...dataMenu);
-//   console.log(data);
+  //   console.log(data);
 
   const [activeId, setActiveId] = useState<number | undefined>();
   const [show, setShow] = useState<boolean>(false);
@@ -105,18 +111,18 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
   }, []);
 
   function handleMouseEnter(i: number, elem) {
-	if (elem.submenu?.length  !== 0) {
-		setHoveredIndex(i);
-	}
-    
-    console.log(elem.submenu);
+    if (elem.submenu?.length !== 0) {
+      setHoveredIndex(i);
+    }
+
+   // console.log(elem.submenu);
   }
-  function handleMouseEnter2(elem, i: number ) {
-	if (elem.submenu?.length  !== 0) {
-		setHoveredIndex2(i);
-	}
-    
-    console.log(elem);
+  function handleMouseEnter2(elem, i: number) {
+    if (elem.submenu?.length !== 0) {
+      setHoveredIndex2(i);
+    }
+
+   // console.log(elem.href);
   }
 
   function handleMouseLeave2() {
@@ -124,6 +130,11 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
   }
   function handleMouseLeave() {
     setHoveredIndex(undefined);
+  }
+
+  async function  handleClickId (params) {
+	const data = await fetchDoclist(params.id)
+	setContent(data)
   }
 
   return (
@@ -156,9 +167,14 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
                   onClick={handleClickDisActive}
                 >
                   {item.href ? (
-                    <Link to={`Menu/Documents/${item.href}`}>{item.title}</Link>
+                    <Link
+                      onClick={() => handleClickId(item)}
+                      to={`Menu/Documents/${item.href}`}
+                    >
+                      {item.title}
+                    </Link>
                   ) : (
-                    <span>{item.title}</span>					  
+                    <span>{item.title}</span>
                   )}
                   <ul
                     //   onMouseEnter={handleActive(id)}
@@ -168,17 +184,26 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
                     {item.submenu
                       ? item?.submenu.map((el, inx) =>
                           isAuth ? (
-                            <Link key={el.id} to={`Menu/Documents/${el.id}`}>
+                            <Link
+                              onClick={() => handleClickId(el)}
+                              key={el.id}
+                              to={`Menu/Documents/${el.href}`}
+                            >
                               <li>{el.title}</li>
                               <li>{el.submenu[0].href}</li>
                             </Link>
                           ) : el.is_public ? (
-                            <Link key={el.id} to={`Menu/Documents/${el.href}`}>
+                            <ul key={el.id}>
                               <li
-                                onMouseEnter={() => handleMouseEnter2(el,inx)}
+                                onMouseEnter={() => handleMouseEnter2(el, inx)}
                                 onMouseLeave={handleMouseLeave2}
                               >
-                                {el.title}
+                                <Link
+                                  onClick={() => handleClickId(el)}
+                                  to={`Menu/Documents/${el.href}`}
+                                >
+                                  {el.title}
+                                </Link>
 
                                 <ul
                                   className={cn(s.sub, {
@@ -189,15 +214,18 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
                                   // ))}
                                   //className={s['sub']}
                                 >
-
-												{el.submenu.map((el, inx) => (
-													<Link to={''} key={inx}>
-														<li >{el.title}</li>
-													</Link>
-												))}
+                                  {el.submenu.map((el, inx) => (
+                                    <Link
+                                      to={`Menu/Documents/${el.href}`}
+                                      key={inx}
+                                      onClick={() => handleClickId(el)}
+                                    >
+                                      <li>{el.title}</li>
+                                    </Link>
+                                  ))}
                                 </ul>
                               </li>
-                            </Link>
+                            </ul>
                           ) : null
                         )
                       : null}
