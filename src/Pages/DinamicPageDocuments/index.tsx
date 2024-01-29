@@ -27,8 +27,7 @@ const {id3} = useParams()
 //  console.log(id);
 //  console.log(id2);
 // const numId = Number(id)
-const discount = 10
-const price = 100
+
 
 useEffect(() => {
 	console.log(Content);
@@ -47,7 +46,7 @@ useEffect(() => {
         <div key={item.id}>
           <p>{item.title}</p>
           {/* <p >{item.content}</p> */}
-          <div dangerouslySetInnerHTML={{ __html: item.content }} />
+          { Content.length !== 0  ?  <div dangerouslySetInnerHTML={{ __html: item.content }} /> : <p >!</p> }
         </div>
       ))}
     </>

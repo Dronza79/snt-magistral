@@ -166,7 +166,7 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
                   key={i}
                   onClick={handleClickDisActive}
                 >
-                  {item.href ? (
+                  {item.href && item?.id ? (
                     <Link
                       onClick={() => handleClickId(item)}
                       to={`Menu/Documents/${item.href}`}
@@ -174,7 +174,12 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
                       {item.title}
                     </Link>
                   ) : (
-                    <span>{item.title}</span>
+                    <Link
+                      onClick={() => handleClickId(item)}
+                      to={`${item.href}`}
+                    >
+                      {item.title}
+                    </Link>
                   )}
                   <ul
                     //   onMouseEnter={handleActive(id)}
