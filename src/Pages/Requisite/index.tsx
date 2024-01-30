@@ -26,11 +26,11 @@ import { indexProps } from "./index.props"
 
 
 // eslint-disable-next-line no-empty-pattern
-export const Contacts = ({  }:indexProps): JSX.Element => {
+export const Requisite = ({  }:indexProps): JSX.Element => {
 	return (
 	
 				<div className={s['Contacts']}>
-			<Contact dop />
+			<Contact req />
 		</div>
 	
 	)

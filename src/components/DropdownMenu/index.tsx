@@ -28,6 +28,7 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
         { href: "Menu/Company", title: "О компании" },
         { href: "Menu/News", title: "Новости" },
         { href: "Menu/Contacts", title: "Контакты" },
+        { href: "Menu/Requisite", title: "Реквизиты" },
       ],
     },
     {
@@ -175,7 +176,7 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
                     </Link>
                   ) : (
                     <Link
-                      onClick={() => handleClickId(item)}
+                     // onClick={() => handleClickId(item)}
                       to={`${item.href}`}
                     >
                       {item.title}

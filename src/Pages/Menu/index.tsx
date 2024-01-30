@@ -21,6 +21,7 @@ import { Reports } from "../Reports"
 import { Celender } from "../Celender"
 import { DinamicPage } from '../DinamicPage'
 import { DinamicPageDocuments } from '../DinamicPageDocuments'
+import { Requisite } from '../Requisite'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 // const arr = [
@@ -53,6 +54,7 @@ export const Menu = ({  }:indexProps): JSX.Element => {
 								<Route path="CostOfWork" element={<CostOfWork />} />
 								<Route path="Services" element={<Services />} />
 								<Route path="Contacts" element={<Contacts />} />
+								<Route path="Requisite" element={<Requisite />} />
 								<Route path="Documents" element={<Documents />} />
 								<Route path="Documents/:id/" element={<DinamicPageDocuments />} />
 								<Route path="Documents/:id/:id2" element={<DinamicPageDocuments />} />
