@@ -112,7 +112,10 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
   }, []);
 
   function handleMouseEnter(i: number, elem) {
-    if (elem.submenu?.length !== 0) {
+    if (elem.submenu?.length !== 0 && elem.id) {
+		//console.log(elem);
+		//console.log(i);
+		
       setHoveredIndex(i);
     }
 
@@ -183,8 +186,8 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
                     </Link>
                   )}
                   <ul
-                    //   onMouseEnter={handleActive(id)}
-                    //   onMouseLeave={handleDisActive}
+                       //onMouseEnter={handleActive(id)}
+                     // onMouseLeave={handleDisActive}
                     className={cn(s.sub, { [s.subActive]: i === hoveredIndex })}
                   >
                     {item.submenu

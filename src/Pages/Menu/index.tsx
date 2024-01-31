@@ -22,6 +22,7 @@ import { Celender } from "../Celender"
 import { DinamicPage } from '../DinamicPage'
 import { DinamicPageDocuments } from '../DinamicPageDocuments'
 import { Requisite } from '../Requisite'
+import { SideBar } from '../../components/SideBar'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 // const arr = [
@@ -36,8 +37,8 @@ export const Menu = ({  }:indexProps): JSX.Element => {
 	return (
 	
 				<div className={s['menu']}>
-					<div className={s['one-third']}>sidebar</div>
-					<div className={s['two-thirds']} >
+					<div className={s['one-third']}><SideBar/></div>
+					<div className={s['two-thirds']}>
 						
 								Menu
 								<Routes>

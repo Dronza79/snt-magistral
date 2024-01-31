@@ -30,7 +30,7 @@ const {id3} = useParams()
 
 
 useEffect(() => {
-	console.log(Content);
+	//console.log(Content);
 	
 }, [Content])
 
