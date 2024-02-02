@@ -26,3 +26,8 @@ export async function fetchDoclist(id:number ) {
 	return(result.data);
  }
 
+export async function fetchLogin (data: any){
+	const result = await axios.post(`127.0.0.1:8000/api/auth`,{data})
+
+	return result.data
+}

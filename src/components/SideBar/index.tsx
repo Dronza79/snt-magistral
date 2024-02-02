@@ -8,24 +8,6 @@ import { useLocation } from "react-router-dom"
 import { indexProps } from "./index.props"
 import { useZustandMenu } from "../../store";
 
-// export const Button = ({ appearance, arrow = 'none',  children, className, ...props }: ButtonProps): JSX.Element => {
-// 	return (
-// 	<button  className={cn(s.button, className, {
-// 		[s.primary]: appearance == 'primary',
-// 		[s.ghost]: appearance == 'ghost',
-// 	})}
-// 	{...props}
-// 	>
-// 		{children}
-// 		{arrow != 'none' && <span className={cn(s.arrow, {
-// 				[s.down]: arrow == 'down'
-// 			})}>
-// 				<ArrowIcon />
-// 			</span>}
-			
-// 	</button>)
-// }
-
 
 
 
@@ -45,7 +27,7 @@ export const SideBar = ({ className }:indexProps): JSX.Element => {
     document = false;
   }
 
-	console.log(dataMenu);
+	//console.log(dataMenu);
 	
 
 
@@ -54,7 +36,7 @@ export const SideBar = ({ className }:indexProps): JSX.Element => {
       <div>Sidebar</div>
 
       {document && <div> Documents </div>}
-      {document && dataMenu.map((el) => <p>{el?.title}</p>)}
+      {document && dataMenu.map((el, inx) => <p key={inx}>{el?.title}</p>)}
     </div>
   );
 }

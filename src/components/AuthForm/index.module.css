@@ -1,0 +1,12 @@
+/* stylelint-disable-next-line no-empty-source */
+form {
+	height: 100%;
+}
+.container{
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 20px;
+}

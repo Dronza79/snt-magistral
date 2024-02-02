@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 
 import {  useZustandContact, useZustandNews } from "../store";
 import { fetchContacts, fetchNews } from "../Api/Api";
+import { AuthForm } from "../components/AuthForm";
 
 
 
@@ -50,7 +51,7 @@ export const Layout = ({}: indexProps): JSX.Element => {
   return (
     <div className={s.wrapper}>
       <_Header
-      //   dataContact={dataContact}
+        //   dataContact={dataContact}
         setModalActive={setModalActive}
         className={s.header}
       />
@@ -60,8 +61,8 @@ export const Layout = ({}: indexProps): JSX.Element => {
       </_Main>
       <Footer className={s.footer} />
       <Modal modalActive={modalActive} setModalActive={setModalActive}>
-        {" "}
-        Авторизация
+        
+        <AuthForm />
       </Modal>
     </div>
   );
