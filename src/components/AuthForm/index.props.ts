@@ -3,7 +3,7 @@
  import { DetailedHTMLProps,  HtmlHTMLAttributes } from 'react';
 // Dispatch SetStateAction
  export interface indexProps extends DetailedHTMLProps<HtmlHTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-	name: string;
+	username: string;
 	// children: ReactNode;
 	// appearance: 'primary' | 'ghost';
 	// arrow?: 'right' | 'down' | 'none';

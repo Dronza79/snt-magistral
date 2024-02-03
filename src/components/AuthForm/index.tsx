@@ -8,6 +8,7 @@ import { Input } from "../Input"
 import { indexProps } from "./index.props"
 import { Button } from '../Button'
 import { fetchLogin } from '../../Api/Api'
+import { createContext, useState } from 'react'
 
 // export const Button = ({ appearance, arrow = 'none',  children, className, ...props }: ButtonProps): JSX.Element => {
 // 	return (
@@ -27,32 +28,34 @@ import { fetchLogin } from '../../Api/Api'
 // 	</button>)
 // }
 
+const initialState = {
+	username: '',
+	password: '',
+}
+ export const AuthContext = createContext();
 
+export const AuthForm = ({}: indexProps): JSX.Element => {
+  const [state, setState] = useState({});
+console.log(state);
 
-export const AuthForm = ({  }:indexProps): JSX.Element => {
-	const handleSubmit = (e: { preventDefault: () => void }) => {
+  const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-	console.log(e);
-	
+    console.log(e);
+
     //fetchLogin(data)
   };
 
-
-	return (
-		<>
-		<form onSubmit={handleSubmit} action="">
-			<div className={s['container']}>
-				<h1>Авторизация</h1>
-				<Input name='Имя Пользователя' type='text'/>
-				<Input name='Пароль' type='password'/>
-				<Button >
-					Отправить
-				</Button>
-					
-				
-			</div>
-			</form>
-		</>
-	)
-}
+  return (
+    <AuthContext.Provider value={{ state, setState }}>
+      <form onSubmit={handleSubmit} action="">
+        <div className={s["container"]}>
+          <h1>Авторизация</h1>
+          <Input username="Имя Пользователя" type="text" />
+          <Input username="Пароль" type="password" />
+          <Button>Отправить</Button>
+        </div>
+      </form>
+    </AuthContext.Provider>
+  );
+};
 
