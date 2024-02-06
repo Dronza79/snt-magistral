@@ -4,7 +4,7 @@
 // import cn from 'classnames'
 // import ArrowIcon from './arrow.svg';
 
-import { SetStateAction, useContext, useState } from "react"
+import { SetStateAction, useContext, useEffect, useState } from "react"
 import { indexProps } from "./index.props"
 import { AuthContext } from '../AuthForm';
 //import AuthContext from "../AuthForm/index"
@@ -28,20 +28,20 @@ import { AuthContext } from '../AuthForm';
 
 
 
-export const Input = ({ username, ...props }: indexProps): JSX.Element => {
+export const Input = ({name, prop, ...props }: indexProps): JSX.Element => {
   const [inputValue, setInputValue] = useState("");
   const { state, setState } = useContext(AuthContext);
-
   const handleChange = (event: { target: { value: SetStateAction<string>; }; }) => {
     setInputValue(event.target.value);
-    setState( state.username = inputValue);
-    //console.log(event.target.value);
+    setState((state: any) => ({ ...state, [prop]: event.target.value } ));
   };
+
+  
   return (
     <>
       <label htmlFor="">
         {" "}
-        {username}
+        {name}
         <input
           value={inputValue}
           onChange={handleChange}

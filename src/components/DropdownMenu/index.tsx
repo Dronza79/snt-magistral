@@ -4,7 +4,7 @@ import cn from "classnames";
 import s from "./index.module.css";
 import { indexProps } from "./index.props";
 import { fetchMenu } from "../../Api/Api";
-import { useZustandContent, useZustandMenu } from "../../store";
+import { useZustandAuth, useZustandContent, useZustandMenu } from "../../store";
 import { fetchDoclist } from "../../Api/Api";
 
 // eslint-disable-next-line no-empty-pattern
@@ -16,9 +16,11 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
   
   
   const setContent = useZustandContent((state: any) => state.isUpdatemenu);
- 
+  const isAuth = useZustandAuth((state) => state.data);
+  //console.log(isAuth);
   
-
+  
+  //const [isAuth] = useState(false)
   const data = [
     {
       id: 1,
@@ -75,7 +77,7 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
 
   const [activeId, setActiveId] = useState<number | undefined>();
   const [show, setShow] = useState<boolean>(false);
-  const [isAuth] = useState<boolean>(false);
+  
   //const [isHovered, setIsHovered] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState<number | undefined>();
   const [hoveredIndex2, setHoveredIndex2] = useState<number | undefined>();
@@ -199,7 +201,7 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
                               to={`Menu/Documents/${el.href}`}
                             >
                               <li>{el.title}</li>
-                              <li>{el.submenu[0].href}</li>
+                              <li>{el.submenu[0]?.href}</li>
                             </Link>
                           ) : el.is_public ? (
                             <ul key={el.id}>

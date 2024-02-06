@@ -61,8 +61,7 @@ export const Layout = ({}: indexProps): JSX.Element => {
       </_Main>
       <Footer className={s.footer} />
       <Modal modalActive={modalActive} setModalActive={setModalActive}>
-        
-        <AuthForm />
+        <AuthForm setModalActive={setModalActive}/>
       </Modal>
     </div>
   );

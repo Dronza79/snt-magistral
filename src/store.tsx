@@ -105,3 +105,13 @@ interface Image {
        return { data: [...menu] };
      }),
  }));
+
+
+
+
+
+ export const useZustandAuth = create((set => ({
+	data: false,
+	setIsAuth: () => set(state => ({ ...state, data: !state.data }))
+
+ })))
