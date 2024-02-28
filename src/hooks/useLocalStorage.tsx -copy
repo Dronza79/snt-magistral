@@ -22,5 +22,3 @@ export function useLocalStorage(initialValue:any, key:any) {
 	
 	return [value, setValue]
 }
-
- 

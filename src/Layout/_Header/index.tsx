@@ -23,6 +23,7 @@ import { indexProps } from "./index.props";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Contact } from "../../components/Contact";
+import { useZustandAuth } from "../../store";
 
 //import  logo  from './img/logoM.png'
 //import { Link, NavLink } from 'react-router-dom'
@@ -34,6 +35,7 @@ export const _Header = ({
 }: indexProps): JSX.Element => {
  
 	const [isScrolled, setIsScrolled] = useState<boolean>(false);
+	const isAuth = useZustandAuth((state) => (state.data))
 	
 	
   useEffect(() => {
@@ -61,8 +63,9 @@ export const _Header = ({
       </div>
       <div className={cn(s["header-menu"], { [s.menuScrolled]: isScrolled })}>
         <DropdownMenu></DropdownMenu>
-        <div className={s["auth"]} onClick={handleClick}>
-          Авторизация
+        <div className={s["auth"]} >
+		{isAuth && <p>Выйти</p> }
+		{!isAuth && <p onClick={handleClick}>Авторизация</p> }
         </div>
       </div>
     </header>

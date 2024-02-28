@@ -7,24 +7,7 @@
 import { SetStateAction, useContext, useEffect, useState } from "react"
 import { indexProps } from "./index.props"
 import { AuthContext } from '../AuthForm';
-//import AuthContext from "../AuthForm/index"
-// export const Button = ({ appearance, arrow = 'none',  children, className, ...props }: ButtonProps): JSX.Element => {
-// 	return (
-// 	<button  className={cn(s.button, className, {
-// 		[s.primary]: appearance == 'primary',
-// 		[s.ghost]: appearance == 'ghost',
-// 	})}
-// 	{...props}
-// 	>
-// 		{children}
-// 		{arrow != 'none' && <span className={cn(s.arrow, {
-// 				[s.down]: arrow == 'down'
-// 			})}>
-// 				<ArrowIcon />
-// 			</span>}
-			
-// 	</button>)
-// }
+
 
 
 
