@@ -112,6 +112,6 @@ interface Image {
 
  export const useZustandAuth = create((set => ({
 	data: false,
-	setIsAuth: () => set(state => ({ ...state, data: !state.data }))
+	setIsAuth: (el) => set(state => ({ ...state, data: el }))
 
  })))

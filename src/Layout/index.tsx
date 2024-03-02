@@ -12,7 +12,7 @@ import { Outlet } from "react-router-dom";
 import { Modal } from "../components/Modal/Modal";
 import { useEffect, useState } from "react";
 
-import { useZustandContact, useZustandNews } from "../store";
+import { useZustandAuth, useZustandContact, useZustandNews } from "../store";
 import { fetchContacts, fetchNews, fetchRefresh } from "../Api/Api";
 import { AuthForm } from "../components/AuthForm";
 import { jwtDecode } from "jwt-decode";
@@ -21,7 +21,8 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 // eslint-disable-next-line no-empty-pattern
 export const Layout = ({}: indexProps): JSX.Element => {
   const [modalActive, setModalActive] = useState<boolean>(false);
-
+  const setAuth = useZustandAuth((state) => state.setIsAuth);
+  const isAuth = useZustandAuth((state) => (state.data))
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   //const dataConfig = useZustand((state: any) => state.data);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -34,26 +35,34 @@ export const Layout = ({}: indexProps): JSX.Element => {
   //console.log(setConfig);
 
   useEffect(() => {
+	//console.log( typeof tokenData);
+	if (tokenData.access) {
+		setAuth(true)	
+	}
+	
     async function fetchData() {
       const contacts = await fetchContacts();
       const news = await fetchNews();
       setConfig(contacts);
       setNews(news);
-      if (typeof tokenData.access === "string") {
-        const decoded = jwtDecode(tokenData.access);
-        const date = new Date(decoded.exp * 1000);
-        const dataIsNow = new Date();
-        const tokenLifeTime = Math.round((dataIsNow - date) / 1000);
-        console.log(tokenData.access);
 
-        if (tokenLifeTime > 0) {
-          console.log(tokenLifeTime);
-          const refreshToken = await fetchRefresh(tokenData.refresh);
-          console.log(refreshToken);
-          setTokenData(refreshToken);
+      try {
+        if (typeof tokenData.access === "string") {
+          const decoded = jwtDecode(tokenData.access);
+          const date = new Date(decoded.exp * 1000);
+          const dataIsNow = new Date();
+          const tokenLifeTime = Math.round((dataIsNow - date) / 1000);
+          // console.log(tokenData.access);
 
-          // доработать fetchRefresh(tokenData.refresh); чтобы менять ключи в хронилище
+          if (tokenLifeTime > 0) {
+            //console.log(tokenLifeTime);
+            const refreshToken = await fetchRefresh(tokenData.refresh);
+            console.log(refreshToken);
+            setTokenData(refreshToken);
+          }
         }
+      } catch (error) {
+		setTokenData([], "token")
       }
     }
     fetchData();

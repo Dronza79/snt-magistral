@@ -47,7 +47,7 @@ export const AuthForm = ({ setModalActive }: indexProps): JSX.Element => {
     try {
       const data = await fetchLogin(state);
       setTokenData(data);
-      setAuth();
+      setAuth(true);
       navigate("/");
       setModalActive((el) => !el);
       //console.log(data);

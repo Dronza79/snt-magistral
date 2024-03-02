@@ -35,7 +35,7 @@ export async function fetchLogin (data: any){
 }
 
 export async function fetchRefresh (token: any){
-	console.log(token);	
+	//console.log(token);	
 	const result = await axios.post(`http://127.0.0.1:8000/api/auth/refresh/`, {
 		refresh: token
 	})
