@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'document_app',
     'advertisement_app',
     'site_settings',
+    'voting_app',
 ]
 
 MIDDLEWARE = [

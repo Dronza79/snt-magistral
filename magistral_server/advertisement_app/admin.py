@@ -3,18 +3,10 @@ from django.contrib import admin
 from .models import *
 
 
-def register_hidden_models(*model_names):
-    for model in model_names:
-        model_admin = type(
-            str(model)+'Admin',
-            (admin.ModelAdmin,),
-            {
-                'get_model_perms': lambda self, request: {}
-            })
-        admin.site.register(model, model_admin)
-
-
-register_hidden_models(FileNews)
+@admin.register(FileNews)
+class FileNewsAdmin(admin.ModelAdmin):
+    def get_model_perms(self, request):
+        return {}
 
 
 class FileNewsInline(admin.StackedInline):
