@@ -1,0 +1,306 @@
+[
+{
+  "model": "site_settings.sitesettings",
+  "pk": 1,
+  "fields": {
+    "site_url": "http://magistral-snt.ru/",
+    "site_title": "Садовое некоммерческое товарищество «Магистраль»",
+    "site_email": "info@magistral-snt.ru",
+    "site_social": "https://vk.com/club169888777",
+    "site_telegram": "https://t.me/+unRBgH4G1gwwYjRi",
+    "site_postal": "187300, Ленинградская область, Кировский район, массив Славянка, СНТ Магистраль, 6 линия, участок 411",
+    "site_inn": "4706010390",
+    "site_kpp": "470601001",
+    "site_bank": "191119, г Санкт-Петербург, Загородный пр-т, 46 к. 2 лит. Б, ПАО Банк \"Александровский\"",
+    "correspondent_account": "30101810000000000755",
+    "site_bik": "044030755",
+    "payment_account": "40703810400400000156"
+  }
+},
+{
+  "model": "site_settings.documentmenu",
+  "pk": 43,
+  "fields": {
+    "title": "Руководящие документы",
+    "slug": "rukovodyashie-dokumenty",
+    "order": "100",
+    "level": 1,
+    "position": 1,
+    "is_public": true,
+    "parent": null,
+    "image": 7
+  }
+},
+{
+  "model": "site_settings.documentmenu",
+  "pk": 44,
+  "fields": {
+    "title": "Протоколы",
+    "slug": "protokoly",
+    "order": "200",
+    "level": 1,
+    "position": 2,
+    "is_public": true,
+    "parent": null,
+    "image": 8
+  }
+},
+{
+  "model": "site_settings.documentmenu",
+  "pk": 45,
+  "fields": {
+    "title": "Отчеты",
+    "slug": "otchety",
+    "order": "300",
+    "level": 1,
+    "position": 3,
+    "is_public": true,
+    "parent": null,
+    "image": 9
+  }
+},
+{
+  "model": "site_settings.documentmenu",
+  "pk": 46,
+  "fields": {
+    "title": "Устав",
+    "slug": "ustav",
+    "order": "400",
+    "level": 1,
+    "position": 4,
+    "is_public": true,
+    "parent": null,
+    "image": 10
+  }
+},
+{
+  "model": "site_settings.documentmenu",
+  "pk": 47,
+  "fields": {
+    "title": "Общие положения",
+    "slug": "obshie-polozheniya",
+    "order": "410",
+    "level": 2,
+    "position": 1,
+    "is_public": true,
+    "parent": 46,
+    "image": 11
+  }
+},
+{
+  "model": "site_settings.documentmenu",
+  "pk": 48,
+  "fields": {
+    "title": "Порядок управления деятельностью товарищества",
+    "slug": "poryadok-upravleniya-deyatelnostyu",
+    "order": "420",
+    "level": 2,
+    "position": 2,
+    "is_public": true,
+    "parent": 46,
+    "image": 11
+  }
+},
+{
+  "model": "site_settings.documentmenu",
+  "pk": 49,
+  "fields": {
+    "title": "Права, обязанности и ответственность членов товарищества",
+    "slug": "prava-obyazannosti-i-otvetstvennost",
+    "order": "430",
+    "level": 2,
+    "position": 3,
+    "is_public": true,
+    "parent": 46,
+    "image": 11
+  }
+},
+{
+  "model": "site_settings.documentmenu",
+  "pk": 50,
+  "fields": {
+    "title": "Заключительные положения",
+    "slug": "zaklyuchitelnye-polozheniya",
+    "order": "440",
+    "level": 2,
+    "position": 4,
+    "is_public": true,
+    "parent": 46,
+    "image": 11
+  }
+},
+{
+  "model": "site_settings.documentmenu",
+  "pk": 51,
+  "fields": {
+    "title": "Федеральный Закон 217-ФЗ",
+    "slug": "federalnyj-zakon-217-fz",
+    "order": "110",
+    "level": 2,
+    "position": 1,
+    "is_public": true,
+    "parent": 43,
+    "image": 12
+  }
+},
+{
+  "model": "site_settings.documentmenu",
+  "pk": 52,
+  "fields": {
+    "title": "Гражданский кодекс РФ",
+    "slug": "grazhdanskij-kodeks-rf",
+    "order": "120",
+    "level": 2,
+    "position": 2,
+    "is_public": true,
+    "parent": 43,
+    "image": 12
+  }
+},
+{
+  "model": "site_settings.documentmenu",
+  "pk": 54,
+  "fields": {
+    "title": "Отчет председателя",
+    "slug": "otchet-predsedatelya",
+    "order": "320",
+    "level": 2,
+    "position": 2,
+    "is_public": true,
+    "parent": 45,
+    "image": 8
+  }
+},
+{
+  "model": "site_settings.documentmenu",
+  "pk": 55,
+  "fields": {
+    "title": "Отчет за 2022 год",
+    "slug": "otchet-za-2022-god",
+    "order": "321",
+    "level": 3,
+    "position": 1,
+    "is_public": true,
+    "parent": 54,
+    "image": 8
+  }
+},
+{
+  "model": "site_settings.documentmenu",
+  "pk": 56,
+  "fields": {
+    "title": "Отчет за 2023 год",
+    "slug": "otchet-za-2023-god",
+    "order": "322",
+    "level": 3,
+    "position": 2,
+    "is_public": true,
+    "parent": 54,
+    "image": 8
+  }
+},
+{
+  "model": "site_settings.documentmenu",
+  "pk": 57,
+  "fields": {
+    "title": "Тест1",
+    "slug": "Test1",
+    "order": "130",
+    "level": 2,
+    "position": 3,
+    "is_public": true,
+    "parent": 43,
+    "image": null
+  }
+},
+{
+  "model": "site_settings.documentmenu",
+  "pk": 58,
+  "fields": {
+    "title": "Test2",
+    "slug": "Test2",
+    "order": "111",
+    "level": 3,
+    "position": 1,
+    "is_public": true,
+    "parent": 51,
+    "image": null
+  }
+},
+{
+  "model": "site_settings.documentmenu",
+  "pk": 59,
+  "fields": {
+    "title": "Смета",
+    "slug": "smeta",
+    "order": "310",
+    "level": 2,
+    "position": 1,
+    "is_public": true,
+    "parent": 45,
+    "image": null
+  }
+},
+{
+  "model": "site_settings.documentmenu",
+  "pk": 60,
+  "fields": {
+    "title": "Смета за 2022 год",
+    "slug": "smeta-za-2022-god",
+    "order": "311",
+    "level": 3,
+    "position": 1,
+    "is_public": true,
+    "parent": 59,
+    "image": null
+  }
+},
+{
+  "model": "site_settings.documentimage",
+  "pk": 7,
+  "fields": {
+    "src": "category/bookshelf.png",
+    "alt": "Иконка bookshelf.png"
+  }
+},
+{
+  "model": "site_settings.documentimage",
+  "pk": 8,
+  "fields": {
+    "src": "category/report.png",
+    "alt": "Иконка report.png"
+  }
+},
+{
+  "model": "site_settings.documentimage",
+  "pk": 9,
+  "fields": {
+    "src": "category/papirus.png",
+    "alt": "Иконка papirus.png"
+  }
+},
+{
+  "model": "site_settings.documentimage",
+  "pk": 10,
+  "fields": {
+    "src": "category/book.png",
+    "alt": "Иконка book.png"
+  }
+},
+{
+  "model": "site_settings.documentimage",
+  "pk": 11,
+  "fields": {
+    "src": "category/page.png",
+    "alt": "Иконка page.png"
+  }
+},
+{
+  "model": "site_settings.documentimage",
+  "pk": 12,
+  "fields": {
+    "src": "category/lex.png",
+    "alt": "Иконка lex.png"
+  }
+}
+]
