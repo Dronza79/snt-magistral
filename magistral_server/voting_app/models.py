@@ -9,20 +9,22 @@ from django.utils.html import format_html
 
 class MeetingProtocol(Model):
     STATUS_CHOICE = (('open', 'Открыт'), ('close', 'Закрыт'))
-
-    title = CharField(verbose_name='Название документа', max_length=255, default='Протокол')
-    date_event = DateField(verbose_name='Дата проведения', default=timezone.now)
-    time_event = TimeField(verbose_name='Время проведения', default=datetime.time())
-    close_through = DateTimeField(verbose_name='Дата закрытия', default=datetime.datetime.now() + datetime.timedelta(7))
+    number = SmallIntegerField(verbose_name='Номер документа')
+    title = CharField(
+        verbose_name='Название документа',
+        max_length=255,
+        default='Протокол голосования с применением технических средств')
+    start_event = DateTimeField(verbose_name='Дата проведения', default=timezone.now)
+    close_event = DateTimeField(verbose_name='Дата закрытия', default=timezone.now() + datetime.timedelta(7))
     agenda = TextField(verbose_name='Повестка', blank=True, null=True, help_text="Не обязательно")
     status = CharField(verbose_name='Состояние', max_length=5, choices=STATUS_CHOICE, default='open')
 
     class Meta:
-        verbose_name = "Протокол собрания"
-        verbose_name_plural = 'Протоколы собрания'
+        verbose_name = "Протокол голосования"
+        verbose_name_plural = 'Протоколы голосования'
 
     def __str__(self):
-        return self.title
+        return f'{self.title[:8]} №{self.number}'
 
     @admin.display(description='Вопросов на голосовании')
     def count_issue(self):
@@ -35,7 +37,7 @@ class MeetingProtocol(Model):
         return int(self.votes.count() / self.questions.count())
 
     def save(self, **kwargs):
-        self.title += f' №{type(self).objects.count() + 1}'
+        self.number = type(self).objects.count() + 1
         return super().save(**kwargs)
 
 

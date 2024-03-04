@@ -46,10 +46,20 @@ pip install drf-yasg
 * [redoc](http://127.0.0.1:8000/redoc/)
 ## Работа с фикстурами
 * [x] Создать фикстуры по приложениям :
-```
+```shell
 python -Xutf8 manage.py dumpdata app_label.ModelName --indent 2 -o app_label/fixtures/app_label.json
 ```
 * [x] Загрузить фикстуры :
-```
+```shell
 python manage.py loaddata fixture [fixture...]
+```
+## Работа с Django Shell по созданию нескольких пользователей
+* [x] Запустить Django Shell:
+```shell
+python manage.py shell
+```
+* [x] Ввести команду создания 9 юзеров:
+```pyton
+from django.contrib.auth.models import User
+list([User.objects.create_user('User' + str(i), password='1234') for i in range(1, 10)])
 ```

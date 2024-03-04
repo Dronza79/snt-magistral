@@ -11,12 +11,15 @@ class IssueInline(admin.StackedInline):
 
 @admin.register(MeetingProtocol)
 class MeetingProtocolAdmin(admin.ModelAdmin):
-    ordering = ['-status', 'date_event', 'time_event']
-    readonly_fields = ['title']
-    list_display = ['title', 'count_issue', 'count_vote', 'status', 'date_event', 'time_event', 'close_through']
+    ordering = ['-status', 'number', 'start_event']
+    readonly_fields = ['title', 'number']
+    list_display = [
+        'title', 'number', 'count_issue', 'count_vote',
+        'status', 'start_event', 'close_event'
+    ]
     list_display_links = ['title']
-    list_editable = ['date_event', 'time_event', 'close_through', 'status']
-    fields = ('title', ('date_event', 'time_event'), 'close_through', 'agenda', 'status')
+    list_editable = ['start_event', 'close_event', 'status']
+    fields = ('title', 'start_event', 'close_event', 'agenda', 'status')
     inlines = [IssueInline]
 
 
@@ -35,8 +38,8 @@ class AnswerAdmin(admin.ModelAdmin):
 
 @admin.register(Vote)
 class VoteAdmin(admin.ModelAdmin):
-    ordering = ('owner', 'protocol', 'question', )
-    list_display = ['value', 'protocol', 'question', 'owner', 'create_at' ]
+    ordering = ('owner', 'protocol', 'question',)
+    list_display = ['value', 'protocol', 'question', 'owner', 'create_at']
     list_display_links = ['value']
 
     # def get_model_perms(self, request):
