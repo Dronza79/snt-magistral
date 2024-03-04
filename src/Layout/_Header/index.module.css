@@ -48,8 +48,14 @@ color: red;
 	justify-content: center;
 }
 .auth{
+	font-size: 18px;
+	display: flex;
+	gap: 40px;
+}
+.question-box{
 	cursor: pointer;
 }
+
 .logo{
 	display: flex;
  width: 350px;
