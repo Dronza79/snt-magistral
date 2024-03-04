@@ -3,42 +3,28 @@ from django.contrib import admin
 from .models import *
 
 
-class AnswerOptionInline(admin.TabularInline):
-    model = AnswerOption
+class IssueInline(admin.StackedInline):
+    model = Issue
     extra = 0
-
-
-class IssueInline(admin.TabularInline):
-    # model = Issue.answer.through
-    model = MeetingProtocol.questions.through
-    extra = 0
-    # inlines = [AnswerOptionInline]
-    # filter_horizontal = "answer",
+    filter_horizontal = "answers",
 
 
 @admin.register(MeetingProtocol)
 class MeetingProtocolAdmin(admin.ModelAdmin):
-    ordering = ['-date_event', '-time_event']
-    list_display = ['title', 'date_event', 'time_event', 'count_issue', 'close_through', 'status']
+    ordering = ['-status', 'date_event', 'time_event']
+    readonly_fields = ['title']
+    list_display = ['title', 'count_issue', 'count_vote', 'status', 'date_event', 'time_event', 'close_through']
     list_display_links = ['title']
     list_editable = ['date_event', 'time_event', 'close_through', 'status']
+    fields = ('title', ('date_event', 'time_event'), 'close_through', 'agenda', 'status')
     inlines = [IssueInline]
 
 
 @admin.register(Issue)
 class IssueAdmin(admin.ModelAdmin):
-    # ordering = ['-meeting']
-    # list_display = ['title', 'meeting']
-    list_display = ['title']
-    list_display_links = ['title']
-    filter_horizontal = "answer",
-    inlines = [AnswerOptionInline]
-
-
-@admin.register(AnswerOption)
-class AnswerOptionAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        return {}
+    list_display = ['protocol', 'title', 'show_answer_options', 'voting_results', ]
+    list_display_links = ['protocol', 'title']
+    filter_horizontal = "answers",
 
 
 @admin.register(Answer)
@@ -49,7 +35,9 @@ class AnswerAdmin(admin.ModelAdmin):
 
 @admin.register(Vote)
 class VoteAdmin(admin.ModelAdmin):
-    pass
+    ordering = ('owner', 'protocol', 'question', )
+    list_display = ['value', 'protocol', 'question', 'owner', 'create_at' ]
+    list_display_links = ['value']
 
     # def get_model_perms(self, request):
     #     return {}
