@@ -29,6 +29,7 @@ urlpatterns = [
     path('', include('site_settings.urls')),
     path('', include('advertisement_app.urls')),
     path('', include('document_app.urls')),
+    path('', include('voting_app.urls')),
     path('api/auth/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/auth/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('favicon.ico', RedirectView.as_view(url='/static/img/favicon.ico'), name='favicon')
