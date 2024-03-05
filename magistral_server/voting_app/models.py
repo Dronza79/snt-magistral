@@ -56,17 +56,12 @@ class Issue(Model):
     def __str__(self):
         return f'{self.protocol}:{self.title}'
 
-    # def count_vote(self):
-    #     self.amount_votes = self.votes.count()
-    #     return self.amount_votes
-
     @admin.display(description='Варианты ответов')
     def show_answer_options(self):
         return format_html('<br>'.join(item.name for item in self.answers.all()))
 
     def count_part_votes(self, value):
         amount = self.votes.filter(value__name=value).count()
-        # return f'{amount} ({(amount / self.amount_votes * 100) if self.amount_votes else 0:.1f}%)\n'
         return f'{amount} ({(amount / self.votes.count() * 100) if self.votes.count() else 0:.1f}%)\n'
 
     @admin.display(description='Результаты голосования')
