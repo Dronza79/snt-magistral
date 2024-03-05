@@ -37,7 +37,8 @@ class MeetingProtocol(Model):
         return int(self.votes.count() / self.questions.count())
 
     def save(self, **kwargs):
-        self.number = type(self).objects.count() + 1
+        if not self.number:
+            self.number = type(self).objects.count() + 1
         return super().save(**kwargs)
 
 
@@ -61,7 +62,7 @@ class Issue(Model):
 
     @admin.display(description='Варианты ответов')
     def show_answer_options(self):
-        return format_html('<br>'.join([item.name for item in self.answers.all()]))
+        return format_html('<br>'.join(item.name for item in self.answers.all()))
 
     def count_part_votes(self, value):
         amount = self.votes.filter(value__name=value).count()
@@ -70,7 +71,7 @@ class Issue(Model):
 
     @admin.display(description='Результаты голосования')
     def voting_results(self):
-        return format_html('<br>'.join([self.count_part_votes(anwr.name) for anwr in self.answers.all()]))
+        return format_html('<br>'.join(self.count_part_votes(anwr.name) for anwr in self.answers.all()))
 
 
 class Answer(Model):

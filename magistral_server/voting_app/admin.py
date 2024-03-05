@@ -11,15 +11,15 @@ class IssueInline(admin.StackedInline):
 
 @admin.register(MeetingProtocol)
 class MeetingProtocolAdmin(admin.ModelAdmin):
-    ordering = ['-status', 'number', 'start_event']
+    ordering = ['-status', 'start_event']
     readonly_fields = ['title', 'number']
     list_display = [
-        'title', 'number', 'count_issue', 'count_vote',
-        'status', 'start_event', 'close_event'
+        '__str__', 'status', 'count_issue',
+        'count_vote', 'start_event', 'close_event'
     ]
-    list_display_links = ['title']
+    list_display_links = ['__str__']
     list_editable = ['start_event', 'close_event', 'status']
-    fields = ('title', 'start_event', 'close_event', 'agenda', 'status')
+    fields = ('title', 'number', 'start_event', 'close_event', 'agenda', 'status')
     inlines = [IssueInline]
 
 
