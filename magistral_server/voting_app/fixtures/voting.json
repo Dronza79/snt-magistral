@@ -7,7 +7,7 @@
       "title": "Протокол голосования с применением технических средств",
       "start_event": "2024-03-05T06:18:18Z",
       "close_event": "2024-03-12T06:15:05Z",
-      "agenda": "",
+      "agenda": "1. Утверждение отчета председателя\r\n2. Утверждение обоснования сметы\r\n3. Выборы нового председателя СНТ",
       "status": "open"
    }
 },
@@ -19,7 +19,7 @@
       "title": "Протокол голосования с применением технических средств",
       "start_event": "2024-03-05T07:12:03Z",
       "close_event": "2024-03-12T07:11:14Z",
-      "agenda": "",
+      "agenda": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, debitis dolores, eligendi facilis illum laborum molestias porro quasi qui repellat repudiandae rerum, sequi similique sint sit. Eveniet nesciunt provident suscipit?",
       "status": "open"
    }
 },
@@ -31,7 +31,7 @@
       "title": "Протокол голосования с применением технических средств",
       "start_event": "2024-03-05T07:17:08Z",
       "close_event": "2024-03-12T07:17:05Z",
-      "agenda": "",
+      "agenda": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, debitis dolores, eligendi facilis illum laborum molestias porro quasi qui repellat repudiandae rerum, sequi similique sint sit. Eveniet nesciunt provident suscipit?",
       "status": "open"
    }
 },
@@ -43,7 +43,7 @@
       "title": "Протокол голосования с применением технических средств",
       "start_event": "2024-03-05T07:21:30Z",
       "close_event": "2024-03-12T07:20:56Z",
-      "agenda": "",
+      "agenda": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, debitis dolores, eligendi facilis illum laborum molestias porro quasi qui repellat repudiandae rerum, sequi similique sint sit. Eveniet nesciunt provident suscipit?",
       "status": "open"
    }
 },
@@ -53,7 +53,7 @@
    "fields": {
       "protocol": 1,
       "title": "Утверждение отчета",
-      "description": "",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, debitis dolores, eligendi facilis illum laborum molestias porro quasi qui repellat repudiandae rerum, sequi similique sint sit. Eveniet nesciunt provident suscipit?",
       "answers": [
          1,
          2
@@ -66,7 +66,7 @@
    "fields": {
       "protocol": 1,
       "title": "Утверждение сметы",
-      "description": "",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, debitis dolores, eligendi facilis illum laborum molestias porro quasi qui repellat repudiandae rerum, sequi similique sint sit. Eveniet nesciunt provident suscipit?",
       "answers": [
          1,
          2
@@ -79,7 +79,7 @@
    "fields": {
       "protocol": 1,
       "title": "Выборы председателя",
-      "description": "",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, debitis dolores, eligendi facilis illum laborum molestias porro quasi qui repellat repudiandae rerum, sequi similique sint sit. Eveniet nesciunt provident suscipit?",
       "answers": [
          3,
          4
@@ -92,7 +92,7 @@
    "fields": {
       "protocol": 2,
       "title": "Передача электросетей в ЛенЭнерго",
-      "description": "",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, debitis dolores, eligendi facilis illum laborum molestias porro quasi qui repellat repudiandae rerum, sequi similique sint sit. Eveniet nesciunt provident suscipit?",
       "answers": [
          1,
          2
@@ -105,7 +105,7 @@
    "fields": {
       "protocol": 2,
       "title": "Модернизация сетей подрядчиками",
-      "description": "",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, debitis dolores, eligendi facilis illum laborum molestias porro quasi qui repellat repudiandae rerum, sequi similique sint sit. Eveniet nesciunt provident suscipit?",
       "answers": [
          1,
          2
@@ -118,7 +118,7 @@
    "fields": {
       "protocol": 3,
       "title": "Строительство бани",
-      "description": "",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, debitis dolores, eligendi facilis illum laborum molestias porro quasi qui repellat repudiandae rerum, sequi similique sint sit. Eveniet nesciunt provident suscipit?",
       "answers": [
          1,
          2
@@ -131,7 +131,7 @@
    "fields": {
       "protocol": 4,
       "title": "Покрасить забор",
-      "description": "",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, debitis dolores, eligendi facilis illum laborum molestias porro quasi qui repellat repudiandae rerum, sequi similique sint sit. Eveniet nesciunt provident suscipit?",
       "answers": [
          1,
          2
@@ -144,7 +144,7 @@
    "fields": {
       "protocol": 4,
       "title": "Построить туалет",
-      "description": "",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, debitis dolores, eligendi facilis illum laborum molestias porro quasi qui repellat repudiandae rerum, sequi similique sint sit. Eveniet nesciunt provident suscipit?",
       "answers": [
          1,
          2
@@ -157,7 +157,7 @@
    "fields": {
       "protocol": 4,
       "title": "Провести аудит",
-      "description": "",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, debitis dolores, eligendi facilis illum laborum molestias porro quasi qui repellat repudiandae rerum, sequi similique sint sit. Eveniet nesciunt provident suscipit?",
       "answers": [
          1,
          2
