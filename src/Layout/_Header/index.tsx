@@ -63,7 +63,9 @@ export const _Header = ({
       </div>
       <div className={cn(s["header-menu"], { [s.menuScrolled]: isScrolled })}>
         <DropdownMenu></DropdownMenu>
+		  
         <div className={s["auth"]}>
+			{isAuth && <div className={s['question-box']}>Вопрос-Ответ</div> }
           {isAuth && (
             <Menu menuButton={<MenuButton className={s['home']}>Дом</MenuButton>} transition>
               <MenuItem>Дом</MenuItem>
