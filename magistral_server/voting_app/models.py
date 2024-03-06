@@ -7,6 +7,10 @@ from django.utils import timezone
 from django.utils.html import format_html
 
 
+def get_time_delta():
+    return timezone.now() + datetime.timedelta(7)
+
+
 class MeetingProtocol(Model):
     STATUS_CHOICE = (('open', 'Открыт'), ('close', 'Закрыт'))
     number = SmallIntegerField(verbose_name='Номер документа')
@@ -15,8 +19,7 @@ class MeetingProtocol(Model):
         max_length=255,
         default='Протокол голосования с применением технических средств')
     start_event = DateTimeField(verbose_name='Дата проведения', default=timezone.now)
-    close_event = DateTimeField(verbose_name='Дата закрытия', default=timezone.now() + datetime.timedelta(7))
-    # close_event = DurationField(default=7)
+    close_event = DateTimeField(verbose_name='Дата закрытия', default=get_time_delta)
     agenda = TextField(verbose_name='Повестка', blank=True, null=True, help_text="Не обязательно")
     status = CharField(verbose_name='Состояние', max_length=5, choices=STATUS_CHOICE, default='open')
 
