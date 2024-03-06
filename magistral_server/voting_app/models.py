@@ -16,6 +16,7 @@ class MeetingProtocol(Model):
         default='Протокол голосования с применением технических средств')
     start_event = DateTimeField(verbose_name='Дата проведения', default=timezone.now)
     close_event = DateTimeField(verbose_name='Дата закрытия', default=timezone.now() + datetime.timedelta(7))
+    # close_event = DurationField(default=7)
     agenda = TextField(verbose_name='Повестка', blank=True, null=True, help_text="Не обязательно")
     status = CharField(verbose_name='Состояние', max_length=5, choices=STATUS_CHOICE, default='open')
 

@@ -9,12 +9,18 @@ class MeetingProtocolListView(ListAPIView):
     serializer_class = MeetingProtocolSerializer
 
     def get_queryset(self):
-        return MeetingProtocol.objects.select_related().all()
+        return (MeetingProtocol.objects
+                .prefetch_related('questions', 'questions__answers')
+                .all())
 
 
 class DetailMeetingProtocolView(RetrieveAPIView):
     serializer_class = MeetingProtocolSerializer
-    queryset = MeetingProtocol.objects.all()
+
+    def get_queryset(self):
+        return (MeetingProtocol.objects
+                .prefetch_related('questions', 'questions__answers')
+                .all())
 
 
 class CreateVotesView(CreateAPIView):

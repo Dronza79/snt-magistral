@@ -25,6 +25,7 @@ class MeetingProtocolAdmin(admin.ModelAdmin):
 
 @admin.register(Issue)
 class IssueAdmin(admin.ModelAdmin):
+    list_select_related = True
     list_display = ['protocol', 'title', 'show_answer_options', 'voting_results', ]
     list_display_links = ['protocol', 'title']
     filter_horizontal = "answers",
@@ -38,6 +39,7 @@ class AnswerAdmin(admin.ModelAdmin):
 
 @admin.register(Vote)
 class VoteAdmin(admin.ModelAdmin):
+    list_select_related = True
     ordering = ('owner', 'protocol', 'question',)
     list_display = ['value', 'protocol', 'question', 'owner', 'create_at']
     list_display_links = ['value']
