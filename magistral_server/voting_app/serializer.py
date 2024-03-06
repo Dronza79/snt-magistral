@@ -10,20 +10,52 @@ class AnswerSerializer(serializers.ModelSerializer):
         fields = ['id', 'name']
 
 
+class CountVotersFild(serializers.Field):
+    def to_representation(self, instance):
+        return instance.get_count_voters()
+
+
+class CountIssueFild(serializers.Field):
+    def to_representation(self, instance):
+        return instance.display_count_questions()
+
+
+class VotingResultFild(serializers.Field):
+    def to_representation(self, instance):
+        return {f'{a.name}': instance.count_part_votes(a.name) for a in instance.answers.all()}
+
+
 class IssueSerializer(serializers.ModelSerializer):
     answers = AnswerSerializer(many=True)
+    voting_result = VotingResultFild(source='*')
 
     class Meta:
         model = Issue
-        fields = ['id', 'title', 'description', 'answers']
+        fields = ['id', 'title', 'description', 'answers', 'voting_result']
 
 
-class MeetingProtocolSerializer(serializers.ModelSerializer):
+class ListSerializer(serializers.ModelSerializer):
+    count_voters = CountVotersFild(source='*')
+    count_questions = CountIssueFild(source='*')
+
+    class Meta:
+        model = MeetingProtocol
+        fields = [
+            'id', 'title', 'number', 'start_event',
+            'close_event', 'status', 'count_questions',
+            'count_voters']
+
+
+class DetailSerializer(serializers.ModelSerializer):
+    count_voters = CountVotersFild(source='*')
     questions = IssueSerializer(many=True)
 
     class Meta:
         model = MeetingProtocol
-        fields = ['id', 'title', 'number', 'start_event', 'close_event', 'agenda', 'status', 'questions']
+        fields = [
+            'id', 'title', 'number', 'start_event',
+            'close_event', 'agenda', 'status', 'count_voters',
+            'questions']
 
 
 class QuestionSerializer(serializers.Serializer):

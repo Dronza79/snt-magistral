@@ -28,13 +28,13 @@ class MeetingProtocol(Model):
         return f'{self.title[:8]} №{self.number}'
 
     @admin.display(description='Вопросов на голосовании')
-    def count_issue(self):
+    def display_count_questions(self):
         count = self.questions.count()
         suffix = "ов" if count > 4 or count == 0 else 'а'
         return str(count) + " вопрос" + (suffix if count != 1 else '')
 
     @admin.display(description='Проголосовало')
-    def count_vote(self):
+    def get_count_voters(self):
         return int(self.votes.count() / self.questions.count())
 
     def save(self, **kwargs):
@@ -63,7 +63,7 @@ class Issue(Model):
 
     def count_part_votes(self, value):
         amount = self.votes.filter(value__name=value).count()
-        return f'{amount} ({(amount / self.votes.count() * 100) if self.votes.count() else 0:.1f}%)\n'
+        return f'{amount} ({(amount / self.votes.count() * 100) if self.votes.count() else 0:.1f}%)'
 
     @admin.display(description='Результаты голосования')
     def voting_results(self):

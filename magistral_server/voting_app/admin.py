@@ -14,8 +14,8 @@ class MeetingProtocolAdmin(admin.ModelAdmin):
     ordering = ['-status', 'start_event']
     readonly_fields = ['title', 'number']
     list_display = [
-        '__str__', 'status', 'count_issue',
-        'count_vote', 'start_event', 'close_event'
+        '__str__', 'status', 'display_count_questions',
+        'get_count_voters', 'start_event', 'close_event'
     ]
     list_display_links = ['__str__']
     list_editable = ['start_event', 'close_event', 'status']

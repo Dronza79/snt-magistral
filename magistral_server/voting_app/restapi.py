@@ -2,11 +2,11 @@ from rest_framework.generics import RetrieveAPIView, ListAPIView, CreateAPIView
 from rest_framework.permissions import IsAuthenticated
 
 from .models import MeetingProtocol, Vote
-from .serializer import MeetingProtocolSerializer, VoteSerializer
+from .serializer import VoteSerializer, ListSerializer, DetailSerializer
 
 
 class MeetingProtocolListView(ListAPIView):
-    serializer_class = MeetingProtocolSerializer
+    serializer_class = ListSerializer
 
     def get_queryset(self):
         return (MeetingProtocol.objects
@@ -15,7 +15,7 @@ class MeetingProtocolListView(ListAPIView):
 
 
 class DetailMeetingProtocolView(RetrieveAPIView):
-    serializer_class = MeetingProtocolSerializer
+    serializer_class = DetailSerializer
 
     def get_queryset(self):
         return (MeetingProtocol.objects
