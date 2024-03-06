@@ -21,8 +21,8 @@ class CountIssueFild(serializers.Field):
 
 
 class VotingResultFild(serializers.Field):
-    def to_representation(self, instance):
-        return {f'{a.name}': instance.count_part_votes(a.name) for a in instance.answers.all()}
+    def to_representation(self, instance: Issue) -> dict:
+        return {a.name: instance.count_part_votes(a.name) for a in instance.answers.all()}
 
 
 class IssueSerializer(serializers.ModelSerializer):
