@@ -89,7 +89,11 @@ class Vote(Model):
         auto_now_add=True, verbose_name="Дата и время голоса")
 
     class Meta:
-        constraints = [UniqueConstraint(fields=['protocol', 'question', 'owner'], name='unique_vote')]
+        constraints = [UniqueConstraint(
+            fields=['protocol', 'question', 'owner'],
+            name='unique_vote',
+            violation_error_message='Нельзя проголосовать по одному и тому же вопросу дважды'
+        )]
         verbose_name = "Голос"
         verbose_name_plural = 'Голоса'
 

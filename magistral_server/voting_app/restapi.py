@@ -27,4 +27,3 @@ class CreateVotesView(CreateAPIView):
     serializer_class = VoteSerializer
     queryset = Vote.objects.all()
     permission_classes = [IsAuthenticated]
-

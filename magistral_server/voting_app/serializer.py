@@ -1,5 +1,6 @@
+from django.db import IntegrityError
 from rest_framework import serializers
-from rest_framework.exceptions import ParseError
+from rest_framework.exceptions import ParseError, NotAcceptable
 
 from .models import MeetingProtocol, Issue, Answer, Vote
 
@@ -74,12 +75,16 @@ class VoteSerializer(serializers.Serializer):
                     .get(id=validated_data.get('protocol')))
         questions = validated_data.get('questions')
         if protocol.questions.count() != len(questions):
-            raise ParseError('Количество ответов не соответствует количеству вопросов')
-        Vote.objects.bulk_create([
-            Vote(
-                protocol=protocol,
-                question=Issue.objects.get(id=answer.get('question')),
-                owner=self.context.get("request").user,
-                value=Answer.objects.get(id=answer.get('value')))
-            for answer in questions])
-        return {'protocol': protocol.id, 'questions': questions}
+            raise NotAcceptable('Количество ответов не соответствует количеству вопросов')
+        try:
+            Vote.objects.bulk_create([
+                Vote(
+                    protocol=protocol,
+                    question=Issue.objects.get(id=answer.get('question')),
+                    owner=self.context.get("request").user,
+                    value=Answer.objects.get(id=answer.get('value')))
+                for answer in questions])
+        except IntegrityError:
+            raise NotAcceptable('Нельзя проголосовать по одному и тому же вопросу дважды')
+        else:
+            return {'protocol': protocol.id, 'questions': questions}
