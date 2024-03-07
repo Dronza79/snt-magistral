@@ -1,6 +1,6 @@
 from django.db import IntegrityError
 from rest_framework import serializers
-from rest_framework.exceptions import ParseError, NotAcceptable
+from rest_framework.exceptions import NotAcceptable
 
 from .models import MeetingProtocol, Issue, Answer, Vote
 
@@ -69,7 +69,7 @@ class VoteSerializer(serializers.Serializer):
     questions = QuestionSerializer(many=True)
 
     def create(self, validated_data):
-        print(f'{validated_data=}')
+        # print(f'{validated_data=}')
         protocol = (MeetingProtocol.objects
                     .prefetch_related('questions', 'questions__answers')
                     .get(id=validated_data.get('protocol')))
