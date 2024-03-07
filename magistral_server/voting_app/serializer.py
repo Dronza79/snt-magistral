@@ -3,6 +3,7 @@ from rest_framework import serializers
 from rest_framework.exceptions import NotAcceptable
 
 from .models import MeetingProtocol, Issue, Answer, Vote
+from .utils import get_data_for_check, check_data
 
 
 class AnswerSerializer(serializers.ModelSerializer):
@@ -73,9 +74,15 @@ class VoteSerializer(serializers.Serializer):
         protocol = (MeetingProtocol.objects
                     .prefetch_related('questions', 'questions__answers')
                     .get(id=validated_data.get('protocol')))
+        # print(f'{protocol=}')
+        pool_of_data = list([(get_data_for_check(x)) for x in protocol.questions.all()])
         questions = validated_data.get('questions')
+        # print(f'{pool_of_data=}')
+        # print(f'{questions=}')
         if protocol.questions.count() != len(questions):
-            raise NotAcceptable('Количество ответов не соответствует количеству вопросов')
+            raise NotAcceptable('Количество ответов не соответствует количеству вопросов в протоколе')
+        if not all(map(check_data, zip(pool_of_data, questions))):
+            raise NotAcceptable('Вопросы и ответы не соответствуют протоколу')
         try:
             Vote.objects.bulk_create([
                 Vote(

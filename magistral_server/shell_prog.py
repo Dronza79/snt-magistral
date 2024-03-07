@@ -19,3 +19,7 @@ def print_data(protocol, question, owner, value):
     print(f'{protocol=}\n{question=}\n{owner=}\n{value=}\n')
 
 list([User.objects.create_user('User' + str(i)) for i in range(54, 60)])
+
+user = User.objects.create_user(username='User1', password='1234')
+user.set_password(raw_password='1234')
+user.check_password('1234')
