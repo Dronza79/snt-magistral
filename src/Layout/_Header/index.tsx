@@ -65,7 +65,7 @@ export const _Header = ({
         <DropdownMenu></DropdownMenu>
 		  
         <div className={s["auth"]}>
-			{isAuth && <div className={s['question-box']}>Вопрос-Ответ</div> }
+			{isAuth && <Link to='Menu/Question' className={s['auth-box']}>Вопрос-Ответ</Link> }
           {isAuth && (
             <Menu menuButton={<MenuButton className={s['home']}>Дом</MenuButton>} transition>
               <MenuItem>Дом</MenuItem>
@@ -73,7 +73,7 @@ export const _Header = ({
            
             </Menu>
           )}
-          {!isAuth && <p onClick={handleClick}>Авторизация</p>}
+          {!isAuth && <p className={s['auth-box']} onClick={handleClick}>Авторизация</p>}
         </div>
       </div>
     </header>

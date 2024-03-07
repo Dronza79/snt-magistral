@@ -1,1 +1,18 @@
 /* stylelint-disable-next-line no-empty-source */
+
+
+.wrapper{
+display: flex;
+flex-direction: column;
+gap: 10px;
+/* align-items: center;
+justify-content: center; */
+}
+.link {
+	display: flex;
+	font-size: 25px;
+	font-weight: 500;
+}
+.box{
+	color: red;
+}

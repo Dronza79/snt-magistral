@@ -52,7 +52,7 @@ color: red;
 	display: flex;
 	gap: 40px;
 }
-.question-box{
+.auth-box{
 	cursor: pointer;
 }
 

@@ -57,7 +57,7 @@ export const Layout = ({}: indexProps): JSX.Element => {
           if (tokenLifeTime > 0) {
             //console.log(tokenLifeTime);
             const refreshToken = await fetchRefresh(tokenData.refresh);
-            console.log(refreshToken);
+            //console.log(refreshToken);
             setTokenData(refreshToken);
           }
         }

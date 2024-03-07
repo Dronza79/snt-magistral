@@ -43,3 +43,13 @@ export async function fetchRefresh (token: any){
 	
 	return result.data
 }
+
+
+
+export async function fetchVotingList (){
+	//console.log(token);	
+	const result = await axios.get(`http://127.0.0.1:8000/api/voting/list/`)
+	//console.log(result);
+	
+	return result.data
+}
