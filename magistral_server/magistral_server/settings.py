@@ -55,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'middlewares.custom.CheckMeetingProtocolsMiddleware',
 ]
 
 ROOT_URLCONF = 'magistral_server.urls'
