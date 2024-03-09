@@ -12,16 +12,6 @@ class AnswerSerializer(serializers.ModelSerializer):
         fields = ['id', 'name']
 
 
-class CountVotersFild(serializers.Field):
-    def to_representation(self, instance):
-        return instance.get_count_voters()
-
-
-class CountIssueFild(serializers.Field):
-    def to_representation(self, instance):
-        return instance.display_count_questions()
-
-
 class VotingResultFild(serializers.Field):
     def to_representation(self, instance: Issue) -> dict:
         return {a.name: instance.count_part_votes(a.name) for a in instance.answers.all()}
@@ -37,8 +27,10 @@ class IssueSerializer(serializers.ModelSerializer):
 
 
 class ListSerializer(serializers.ModelSerializer):
-    count_voters = CountVotersFild(source='*')
-    count_questions = CountIssueFild(source='*')
+    count_voters = serializers.IntegerField(source='get_count_voters', read_only=True)
+    # count_voters = CountVotersFild(source='*')
+    count_questions = serializers.CharField(source='display_count_questions', read_only=True)
+    # count_questions = CountIssueFild(source='*')
 
     class Meta:
         model = MeetingProtocol
@@ -49,7 +41,7 @@ class ListSerializer(serializers.ModelSerializer):
 
 
 class DetailSerializer(serializers.ModelSerializer):
-    count_voters = CountVotersFild(source='*')
+    count_voters = serializers.IntegerField(source='get_count_voters', read_only=True)
     questions = IssueSerializer(many=True)
 
     class Meta:

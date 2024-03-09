@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'advertisement_app',
     'site_settings',
     'voting_app',
+    'forum_app',
 ]
 
 MIDDLEWARE = [
