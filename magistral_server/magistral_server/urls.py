@@ -30,6 +30,7 @@ urlpatterns = [
     path('', include('advertisement_app.urls')),
     path('', include('document_app.urls')),
     path('', include('voting_app.urls')),
+    path('', include('rest_framework.urls', namespace='rest_framework')),  # добавлена форма авторизации в АПИ
     path('api/auth/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/auth/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('favicon.ico', RedirectView.as_view(url='/static/img/favicon.ico'), name='favicon')
