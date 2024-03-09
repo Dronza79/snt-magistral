@@ -24,15 +24,16 @@ from .views import index
 from .yasg import urlpatterns as doc_urls
 
 urlpatterns = [
-    path('', index, name='home'),
-    path('admin/', admin.site.urls),
-    path('', include('site_settings.urls')),
-    path('', include('advertisement_app.urls')),
-    path('', include('document_app.urls')),
-    path('', include('voting_app.urls')),
-    path('api/auth/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/auth/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('favicon.ico', RedirectView.as_view(url='/static/img/favicon.ico'), name='favicon')
+  path('', index, name='home'),
+  path('admin/', admin.site.urls),
+  path('', include('site_settings.urls')),
+  path('', include('advertisement_app.urls')),
+  path('', include('document_app.urls')),
+  path('', include('voting_app.urls')),
+  path('', include('rest_framework.urls', namespace='rest_framework')),  # добавлена авторизация в браузерную форму АПИ
+  path('api/auth/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+  path('api/auth/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+  path('favicon.ico', RedirectView.as_view(url='/static/img/favicon.ico'), name='favicon')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += doc_urls
