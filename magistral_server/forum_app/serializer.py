@@ -15,7 +15,7 @@ class RecursiveSerializer(serializers.Serializer):
 
     def to_representation(self, instance):
         ser = self.parent.parent.__class__(instance, context=self.context)
-        print(f'{ser.data=}')
+        # print(f'{ser.data=}')
         return ser.data
 
 
@@ -60,5 +60,27 @@ class PostSerializer(serializers.ModelSerializer):
             'author',
             'publisher',
             'content',
+            'comments'
+        ]
+
+
+class CountCommentSerializer(serializers.Serializer):
+    def to_representation(self, instance: Post) -> int:
+        return instance.comments.count()
+
+
+class ListPostSerializer(serializers.ModelSerializer):
+    comments = CountCommentSerializer(source='*')
+    publisher = serializers.CharField(source='publisher.username')
+
+    class Meta:
+        model = Post
+        fields = [
+            'id',
+            'create_at',
+            'active',
+            'title',
+            'author',
+            'publisher',
             'comments'
         ]

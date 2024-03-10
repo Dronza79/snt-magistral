@@ -9,11 +9,16 @@ class Post(Model):
     hidden = BooleanField(default=False, verbose_name='Скрыт', help_text="Скрытие модератором")
     author = CharField(max_length=255, verbose_name='Автор')
     publisher = ForeignKey(settings.AUTH_USER_MODEL, on_delete=CASCADE, verbose_name='Аккаунт')
-    title = CharField(max_length=255, verbose_name='Заголовок', default='заголовок')
+    title = CharField(max_length=255, verbose_name='Заголовок')
     content = TextField(verbose_name='Содержание')
 
+    class Meta:
+        verbose_name = "Тема обсуждения"
+        verbose_name_plural = 'Темы обсуждения'
+        ordering = 'pk',
+
     def __str__(self):
-        return f'пост {self.title}'
+        return f'тема {self.title}'
 
 
 class Comment(Model):
@@ -25,11 +30,16 @@ class Comment(Model):
                          blank=True,
                          null=True,
                          related_name='recomments',
-                         verbose_name='Ответ на...')
+                         verbose_name='Ответ на коммент')
     hidden = BooleanField(default=False, verbose_name='Скрыт', help_text="Скрытие модератором")
     author = CharField(max_length=255, verbose_name='Автор')
     publisher = ForeignKey(settings.AUTH_USER_MODEL, on_delete=CASCADE, verbose_name='Аккаунт')
     content = TextField(verbose_name='Содержание')
+
+    class Meta:
+        verbose_name = "Комментарий"
+        verbose_name_plural = 'Комментарии'
+        ordering = 'post', 'pk',
 
     def __str__(self):
         return f'коммент {self.id} на {self.comment.id if self.comment else self.post}'

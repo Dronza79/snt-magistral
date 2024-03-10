@@ -51,7 +51,7 @@ python -Xutf8 manage.py dumpdata app_label.ModelName --indent 2 -o app_label/fix
 ```
 * [x] Загрузить фикстуры :
 ```shell
-py manage.py loaddata auth advertisement_app document_app site_settings voting
+py manage.py loaddata auth advertisement_app document_app site_settings voting forum
 ```
 ## Работа с Django Shell по созданию нескольких пользователей
 * [x] Запустить Django Shell:

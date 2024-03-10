@@ -1,16 +1,16 @@
-from rest_framework.generics import RetrieveAPIView
+from rest_framework.generics import RetrieveAPIView, ListAPIView
 
 from .models import Post
-from .serializer import PostSerializer
+from .serializer import PostSerializer, ListPostSerializer
 
 
-# class MeetingProtocolListView(ListAPIView):
-#     serializer_class = ListSerializer
-#
-#     def get_queryset(self):
-#         return (MeetingProtocol.objects
-#                 .prefetch_related('questions', 'questions__answers')
-#                 .all())
+class ListPostView(ListAPIView):
+    serializer_class = ListPostSerializer
+
+    def get_queryset(self):
+        return (Post.objects
+                .prefetch_related('comments')
+                .all())
 
 
 class DetailPostView(RetrieveAPIView):
