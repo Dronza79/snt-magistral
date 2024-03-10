@@ -56,6 +56,7 @@ class PostSerializer(serializers.ModelSerializer):
             'id',
             'create_at',
             'active',
+            'title',
             'author',
             'publisher',
             'content',

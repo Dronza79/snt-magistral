@@ -11,7 +11,7 @@ def get_time_delta():
     return timezone.now() + datetime.timedelta(7)
 
 
-class MeetingProtocol(Model):
+class Protocol(Model):
     STATUS_CHOICE = (('open', 'Открыт'), ('close', 'Закрыт'))
     number = SmallIntegerField(verbose_name='Номер документа')
     title = CharField(
@@ -47,7 +47,7 @@ class MeetingProtocol(Model):
 
 
 class Issue(Model):
-    protocol = ForeignKey(MeetingProtocol, on_delete=CASCADE, verbose_name='Протокол', related_name='questions')
+    protocol = ForeignKey(Protocol, on_delete=CASCADE, verbose_name='Протокол', related_name='questions')
     title = CharField(verbose_name='Суть вопроса', max_length=255)
     description = TextField(blank=True, verbose_name='Дополнительные пояснения', help_text="Не обязательно")
     answers = ManyToManyField('Answer', verbose_name='Варианты ответов')
@@ -81,7 +81,7 @@ class Answer(Model):
 
 
 class Vote(Model):
-    protocol = ForeignKey(MeetingProtocol, on_delete=CASCADE, verbose_name='Протокол', related_name='votes')
+    protocol = ForeignKey(Protocol, on_delete=CASCADE, verbose_name='Протокол', related_name='votes')
     question = ForeignKey(Issue, on_delete=CASCADE, related_name='votes', verbose_name='Вопрос')
     owner = ForeignKey(settings.AUTH_USER_MODEL, on_delete=CASCADE, related_name='votes', verbose_name='Участник')
     value = ForeignKey(Answer, on_delete=CASCADE, related_name='votes', verbose_name='Значение')

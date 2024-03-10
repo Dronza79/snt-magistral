@@ -5,7 +5,7 @@ from django.db.models import QuerySet
 from rest_framework import serializers
 from rest_framework.exceptions import NotAcceptable
 
-from .models import MeetingProtocol, Issue, Answer, Vote
+from .models import Protocol, Issue, Answer, Vote
 from .utils import get_data_for_check, check_data
 
 
@@ -29,24 +29,24 @@ class IssueSerializer(serializers.ModelSerializer):
         fields = ['id', 'title', 'description', 'answers', 'voting_result']
 
 
-class ListSerializer(serializers.ModelSerializer):
+class ListProtocolSerializer(serializers.ModelSerializer):
     count_voters = serializers.IntegerField(source='get_count_voters', read_only=True)
     count_questions = serializers.CharField(source='display_count_questions', read_only=True)
 
     class Meta:
-        model = MeetingProtocol
+        model = Protocol
         fields = [
             'id', 'title', 'number', 'start_event',
             'close_event', 'status', 'count_questions',
             'count_voters']
 
 
-class DetailSerializer(serializers.ModelSerializer):
+class DetailProtocolSerializer(serializers.ModelSerializer):
     count_voters = serializers.IntegerField(source='get_count_voters', read_only=True)
     questions = IssueSerializer(many=True)
 
     class Meta:
-        model = MeetingProtocol
+        model = Protocol
         fields = [
             'id', 'title', 'number', 'start_event',
             'close_event', 'agenda', 'status', 'count_voters',
@@ -63,7 +63,7 @@ class VoteSerializer(serializers.Serializer):
     questions = QuestionSerializer(many=True)
 
     def create(self, validated_data):
-        protocol = (MeetingProtocol.objects
+        protocol = (Protocol.objects
                     .prefetch_related('questions', 'questions__answers')
                     .get(id=validated_data.get('protocol')))
         pool_of_data = list([(get_data_for_check(x)) for x in protocol.questions.all()])

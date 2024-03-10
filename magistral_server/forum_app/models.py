@@ -9,11 +9,11 @@ class Post(Model):
     hidden = BooleanField(default=False, verbose_name='Скрыт', help_text="Скрытие модератором")
     author = CharField(max_length=255, verbose_name='Автор')
     publisher = ForeignKey(settings.AUTH_USER_MODEL, on_delete=CASCADE, verbose_name='Аккаунт')
+    title = CharField(max_length=255, verbose_name='Заголовок', default='заголовок')
     content = TextField(verbose_name='Содержание')
 
     def __str__(self):
-        # return f'топик от {self.create_at:%d.%m.%Y %H:%M} ({self.publisher}/{self.author})'
-        return f'пост {self.id}'
+        return f'пост {self.title}'
 
 
 class Comment(Model):
@@ -32,4 +32,4 @@ class Comment(Model):
     content = TextField(verbose_name='Содержание')
 
     def __str__(self):
-        return f'коммент {self.id}'
+        return f'коммент {self.id} на {self.comment.id if self.comment else self.post}'

@@ -1,7 +1,7 @@
 from django.urls import reverse
 from django.utils import timezone
 
-from voting_app.models import MeetingProtocol
+from voting_app.models import Protocol
 
 
 class CheckMeetingProtocolsMiddleware:
@@ -9,7 +9,7 @@ class CheckMeetingProtocolsMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
-        obj = MeetingProtocol
+        obj = Protocol
         if request.path in (reverse('protocols_list'),
                             f'/admin/{obj._meta.app_label}/{obj._meta.model_name}/'):
             (obj.objects
