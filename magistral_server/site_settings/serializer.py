@@ -9,15 +9,27 @@ class SiteSettingsSerializer(serializers.ModelSerializer):
         exclude = 'id',
 
 
+class FilterAuthSerializer(serializers.ListSerializer):
+    def to_representation(self, data):
+        if self.context.get("request").user.is_anonymous:
+            data = data.filter(is_public=True)
+        return super().to_representation(data)
+
+
 class RecursiveSerializer(serializers.Serializer):
+    class Meta:
+        list_serializer_class = FilterAuthSerializer
+
     def to_representation(self, instance):
         ser = self.parent.parent.__class__(instance, context=self.context)
         return ser.data
 
 
-class FilterSerializer(serializers.ListSerializer):
+class FilterParentSerializer(serializers.ListSerializer):
     def to_representation(self, data):
         data = data.filter(parent=None)
+        if self.context.get("request").user.is_anonymous:
+            data = data.filter(is_public=True)
         return super().to_representation(data)
 
 
@@ -32,6 +44,6 @@ class DocumentsMenuSerializer(serializers.ModelSerializer):
     image = IconSerializer()
 
     class Meta:
-        list_serializer_class = FilterSerializer
+        list_serializer_class = FilterParentSerializer
         model = DocumentMenu
         fields = ['id', 'is_public', 'title', 'position', 'image', 'href', 'submenu']
