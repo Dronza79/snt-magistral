@@ -9,8 +9,8 @@ class IssueInline(admin.StackedInline):
     filter_horizontal = "answers",
 
 
-@admin.register(MeetingProtocol)
-class MeetingProtocolAdmin(admin.ModelAdmin):
+@admin.register(Protocol)
+class ProtocolAdmin(admin.ModelAdmin):
     ordering = ['-status', 'start_event']
     readonly_fields = ['title', 'number']
     list_display = [
