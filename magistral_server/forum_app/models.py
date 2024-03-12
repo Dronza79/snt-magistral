@@ -4,7 +4,7 @@ from django.db.models import *
 
 class Post(Model):
     create_at = DateTimeField(auto_now_add=True, verbose_name='Создан')
-    edit_at = DateTimeField(auto_now_add=True, verbose_name='Отредактирован')
+    edit_at = DateTimeField(auto_now=True, verbose_name='Отредактирован')
     active = BooleanField(default=True, verbose_name='Статус', help_text="Открыт или закрыт")
     hidden = BooleanField(default=False, verbose_name='Скрыт', help_text="Скрытие модератором")
     author = CharField(max_length=255, verbose_name='Автор')
@@ -23,7 +23,7 @@ class Post(Model):
 
 class Comment(Model):
     create_at = DateTimeField(auto_now_add=True, verbose_name='Создан')
-    edit_at = DateTimeField(auto_now_add=True, verbose_name='Отредактирован')
+    edit_at = DateTimeField(auto_now=True, verbose_name='Отредактирован')
     post = ForeignKey(Post, on_delete=CASCADE, verbose_name='Топикстартер', related_name='comments')
     comment = ForeignKey('self',
                          on_delete=CASCADE,

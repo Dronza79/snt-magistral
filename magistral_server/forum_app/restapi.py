@@ -1,39 +1,35 @@
-from rest_framework.generics import RetrieveAPIView, ListAPIView, CreateAPIView
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.generics import RetrieveAPIView, CreateAPIView, ListCreateAPIView, UpdateAPIView, \
+    RetrieveUpdateAPIView
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 
-from .models import Post
-from .serializer import PostSerializer, ListPostSerializer
+from .models import Post, Comment
+from .permissions import IsAdminOrIsOwnerOrReadOnly
+from .serializer import DetailPostSerializer, CommentSerializer, ListPostSerializer
 
 
-class ListPostView(ListAPIView):
+class ListCreatePostView(ListCreateAPIView):
     serializer_class = ListPostSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     def get_queryset(self):
-        return (Post.objects
+        return (Post.objects.filter(hidden=False)
                 .prefetch_related('comments')
                 .all())
 
 
-class CreatePostView(CreateAPIView):
-    serializer_class = ListPostSerializer
+class DetailUpdatePostView(RetrieveUpdateAPIView):
+    serializer_class = DetailPostSerializer
+    permission_classes = [IsAdminOrIsOwnerOrReadOnly]
+
+    def get_queryset(self):
+        return (Post.objects.filter(hidden=False)
+                .prefetch_related('comments')
+                .all())
+
+
+class CreateCommentView(CreateAPIView):
+    serializer_class = CommentSerializer
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return (Post.objects
-                .prefetch_related('comments')
-                .all())
-
-
-class DetailPostView(RetrieveAPIView):
-    serializer_class = PostSerializer
-
-    def get_queryset(self):
-        return (Post.objects
-                .prefetch_related('comments')
-                .all())
-
-
-# class CreateVotesView(CreateAPIView):
-#     serializer_class = VoteSerializer
-#     queryset = Vote.objects.all()
-#     permission_classes = [IsAuthenticated]
+        return Comment.objects.all()
