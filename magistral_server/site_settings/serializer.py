@@ -16,7 +16,7 @@ class FilterAuthSerializer(serializers.ListSerializer):
         return super().to_representation(data)
 
 
-class RecursiveSerializer(serializers.Serializer):
+class RecursiveMenuSerializer(serializers.Serializer):
     class Meta:
         list_serializer_class = FilterAuthSerializer
 
@@ -40,7 +40,7 @@ class IconSerializer(serializers.ModelSerializer):
 
 
 class DocumentsMenuSerializer(serializers.ModelSerializer):
-    submenu = RecursiveSerializer(many=True)
+    submenu = RecursiveMenuSerializer(many=True)
     image = IconSerializer()
 
     class Meta:

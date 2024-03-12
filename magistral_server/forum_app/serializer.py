@@ -11,7 +11,7 @@ class FilterHiddenSerializer(serializers.ListSerializer):
         return super().to_representation(data)
 
 
-class RecursiveSerializer(serializers.Serializer):
+class RecursiveCommentSerializer(serializers.Serializer):
     class Meta:
         list_serializer_class = FilterHiddenSerializer
 
@@ -30,7 +30,7 @@ class FilterParentSerializer(serializers.ListSerializer):
 
 
 class CommentSerializer(serializers.ModelSerializer):
-    recomments = RecursiveSerializer(many=True, read_only=True)
+    recomments = RecursiveCommentSerializer(many=True, read_only=True)
     publisher = serializers.CharField(source='publisher.username', read_only=True)
     comment = serializers.IntegerField(write_only=True, required=False)
 
@@ -65,16 +65,15 @@ class CountCommentSerializer(serializers.Serializer):
 class ListPostSerializer(serializers.ModelSerializer):
     count_comments = CountCommentSerializer(source='*', read_only=True)
     publisher = serializers.CharField(source='publisher.username', read_only=True)
-    content = serializers.CharField(write_only=True)
-    update_post = serializers.IntegerField(write_only=True)
+    content = serializers.CharField(write_only=True, label='Содержание новости')
 
     class Meta:
         model = Post
-        fields = ['id', 'create_at', 'active',
-                  'title', 'author', 'publisher',
-                  'content', 'count_comments', 'update_post'
+        fields = ['id', 'create_at', 'edit_at', 'active',
+                  'author', 'publisher',  'count_comments',
+                  'title', 'content',
                   ]
-        read_only_fields = ('active',)
+        read_only_fields = ('active', 'count_comments')
 
     def create(self, validated_data):
         validated_data["publisher"] = self.context.get("request").user
@@ -90,7 +89,7 @@ class DetailPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = ['id', 'create_at', 'edit_at', 'active',
-                  'author', 'publisher', 'title',
-                  'content', 'count_comments', 'comments'
+                  'author', 'publisher', 'count_comments',
+                  'title', 'content', 'comments'
                   ]
         read_only_fields = ('author', 'title',)
