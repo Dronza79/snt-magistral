@@ -7,80 +7,13 @@ import { fetchMenu } from "../../Api/Api";
 import { useZustandAuth, useZustandContent, useZustandMenu } from "../../store";
 import { fetchDoclist } from "../../Api/Api";
 import React from "react";
+
 import { DownOutlined } from "@ant-design/icons";
 import type { MenuProps } from "antd";
-import { Dropdown  } from "antd";
+import { Dropdown } from "antd";
+import { MenuItemType } from "antd/es/menu/hooks/useItems";
 
-const items: MenuProps["items"] = [
-  {
-    
-      
-        key: "1-1",
-        label: "1st menu item",
-        children: [
-          {
-            key: "2-1",
-            label: "3rd menu item",
-          },
-          {
-            key: "2-2",
-            label: "4th menu item",
-          },
-        ],
-      
-    
-  },
-
-];
-const items2: MenuProps["items2"] = [
-  {
-    
-      
-        key: "1-1",
-        label: "1st menu item",
-        children: [
-          {
-            key: "2-1",
-            label: "3rd menu item",
-          },
-          {
-            key: "2-2",
-            label: "4th menu item",
-          },
-        ],
-      
-    
-  },
-  {
-    key: "2",
-    label: "sub menu",
-    children: [
-      {
-        key: "2-1",
-        label: "3rd menu item",
-      },
-      {
-        key: "2-2",
-        label: "4th menu item",
-      },
-    ],
-  },
-  {
-    key: "3",
-    label: "disabled sub menu",
-    disabled: false,
-    children: [
-      {
-        key: "3-1",
-        label: "5d menu item",
-      },
-      {
-        key: "3-2",
-        label: "6th menu item",
-      },
-    ],
-  },
-];
+import nextId from "react-id-generator"
 
 // eslint-disable-next-line no-empty-pattern
 export const DropdownMenu = ({}: indexProps): JSX.Element => {
@@ -93,6 +26,69 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
   const isAuth = useZustandAuth((state) => state.data);
   console.log(dataMenu);
 
+  const items: MenuProps["items"] = [
+   //  {
+   //    key: "1-1",
+   //    label: (
+   //      <Link
+         
+   //        rel="noopener noreferrer"
+   //        to={"/"}
+   //      >
+   //        1st menu item
+   //      </Link>
+   //    ),
+   //    children: [
+   //      {
+   //        key: "2-1",
+   //        label: "3rd menu item",
+   //      },
+   //      {
+   //        key: "2-2",
+   //        label: "4th menu item",
+   //      },
+   //    ],
+   //  },
+  ];
+  //const newData: any = [];
+  dataMenu.map((el, indx) => {
+   const menuItem: MenuItemType = {
+     label: (
+       <Link
+         rel="noopener noreferrer"
+         to={`Menu/Documents/${el.href}`}
+       >
+         {el.title}
+       </Link>
+     ),
+     key: nextId(),
+   };
+	if (el.submenu.length !== 0) {
+		menuItem.children = []
+		el.submenu.map((el,indx)=>{
+			menuItem.children.push({
+        key: nextId(),
+        label: (
+          <Link rel="noopener noreferrer" to={`Menu/Documents/${el.href}`}>
+            {el.title}
+          </Link>
+        ),
+      });
+		if (el.submenu.length !== 0){
+			console.log(el.submenu);
+			 
+		}
+
+		})
+		//menuItem.children = []
+		
+  }
+	items.push(menuItem);
+  });
+  //console.log(newData);
+ // items.push(newData)
+  //console.log(items);
+  
   useEffect(() => {
     async function fetchData() {
       const data = await fetchMenu();
@@ -102,15 +98,10 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
   }, []);
 
   return (
-	<React.Fragment>
-   
+    <div className={s.dropdownMenu}>
       <Dropdown key={1} menu={{ items }}>
         <a onClick={(e) => e.preventDefault()}>Документы и отчетность</a>
       </Dropdown>
-      <Dropdown  key={2} menu={{ items2 }}>
-        <a onClick={(e) => e.preventDefault()}>Документы </a>
-      </Dropdown>
-  
- </React.Fragment>
+    </div>
   );
 };
