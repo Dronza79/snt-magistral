@@ -24,7 +24,7 @@ export const DinamicPageDocuments = ({  }:indexProps): JSX.Element => {
 const {id} = useParams()
 const {id2} = useParams()
 const {id3} = useParams()
-//  console.log(id);
+  
 //  console.log(id2);
 // const numId = Number(id)
 

@@ -27,71 +27,63 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
  // console.log(dataMenu);
 
   const items: MenuProps["items"] = [
-   //  {
-   //    key: "1-1",
-   //    label: (
-   //      <Link
-         
-   //        rel="noopener noreferrer"
-   //        to={"/"}
-   //      >
-   //        1st menu item
-   //      </Link>
-   //    ),
-   //    children: [
-   //      {
-   //        key: "2-1",
-   //        label: "3rd menu item",
-   //      },
-   //      {
-   //        key: "2-2",
-   //        label: "4th menu item",
-   //      },
-   //    ],
-   //  },
+  
   ];
   //const newData: any = [];
-  dataMenu.map((el, indx) => {
-   const menuItem: MenuItemType = {
-     label: (
-       <Link
-         rel="noopener noreferrer"
-         to={`Menu/Documents/${el.href}`}
-       >
-         {el.title}
-       </Link>
-     ),
-     key: nextId(),
-   };
-	if (el.submenu.length !== 0) {
-		menuItem.children = []
-		el.submenu.map((el,indx)=>{
-			menuItem.children.push({
-        key: nextId(),
-        label: (
-          <Link rel="noopener noreferrer" to={`Menu/Documents/${el.href}`}>
-            {el.title}
-          </Link>
-        ),
-      });
-		if (el.submenu.length !== 0){
-			
-			el.submenu.map((el,indx)=>{
-				
-			})
-		
-		}
 
-		})
-		//menuItem.children = []
-		
-  }
-	items.push(menuItem);
-  });
   //console.log(newData);
  // items.push(newData)
   //console.log(items);
-  
+  const newData = dataMenu.map((el) => {
+ const item = {
+  label: (
+    <Link onClick={() => handleClickId(el)} rel="noopener noreferrer" to={`Menu/Documents/${el.href}`}>
+      {el.title}
+    </Link>
+  ),
+  key: nextId(),
+}
+if (el.submenu.length !== 0) {
+	item.children = []
+	el.submenu.map((el)=>{
+		
+		const item1 = {
+      label: (
+        <Link onClick={() => handleClickId(el)} rel="noopener noreferrer" to={`Menu/Documents/${el.href}`}>
+          {el.title}
+        </Link>
+      ),
+      key: nextId(),
+    };
+	item.children.push(item1);
+	if (el.submenu.length !== 0) {
+		item1.children = []
+		//console.log(el.submenu);
+		el.submenu.map((el)=>{
+			//console.log(el);
+			const item2 = {
+        label: (
+          <Link onClick={() => handleClickId(el)} rel="noopener noreferrer" to={`Menu/Documents/${el.href}`}>
+            {el.title}
+          </Link>
+        ),
+        key: nextId(),
+      };
+		item1.children.push(item2);
+		})	
+	}
+	})
+}
+return item
+  })
+//console.log(dataMenu);
+//console.log(newData);
+newData.map((el)=>{
+	items.push(el)
+})
+//console.log(items);
+
+
   useEffect(() => {
     async function fetchData() {
       const data = await fetchMenu();
@@ -99,6 +91,11 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
     }
     fetchData();
   }, []);
+
+  async function  handleClickId (params) {
+	const data = await fetchDoclist(params.id)
+	setContent(data)
+  }
 
   return (
     <div className={s.dropdownMenu}>
