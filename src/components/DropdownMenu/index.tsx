@@ -24,7 +24,7 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
 
   const setContent = useZustandContent((state: any) => state.isUpdatemenu);
   const isAuth = useZustandAuth((state) => state.data);
-  console.log(dataMenu);
+ // console.log(dataMenu);
 
   const items: MenuProps["items"] = [
    //  {
@@ -75,8 +75,11 @@ export const DropdownMenu = ({}: indexProps): JSX.Element => {
         ),
       });
 		if (el.submenu.length !== 0){
-			console.log(el.submenu);
-			 
+			
+			el.submenu.map((el,indx)=>{
+				
+			})
+		
 		}
 
 		})
