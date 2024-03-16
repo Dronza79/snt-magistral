@@ -25,10 +25,10 @@ export const DynamicMenu = ({}: indexProps): JSX.Element => {
   const setContent = useZustandContent((state: any) => state.isUpdatemenu);
   const isAuth = useZustandAuth((state) => state.data);
 
+  const items: MenuProps["items"] = [];
 
- const element = (param) =>{
-	return (
-	{
+  const element = (param) => {
+    return {
       label: (
         <Link
           onClick={() => handleClickId(param)}
@@ -39,71 +39,26 @@ export const DynamicMenu = ({}: indexProps): JSX.Element => {
         </Link>
       ),
       key: nextId(),
-    }
- )}
-
-console.log(element('ss'));
-
-
-  const items: MenuProps["items"] = [];
-
-  const newData = dataMenu.map((el) => {
-    const item = {
-      label: (
-        <Link
-          onClick={() => handleClickId(el)}
-          rel="noopener noreferrer"
-          to={`Menu/Documents/${el.href}`}
-        >
-          {el.title}
-        </Link>
-      ),
-      key: nextId(),
     };
+  };
+
+  const createMenuItem = (el) => {
+    const item = element(el);
     if (el.submenu.length !== 0) {
-      item.children = [];
-      el.submenu.map((el) => {
-        const item1 = {
-          label: (
-            <Link
-              onClick={() => handleClickId(el)}
-              rel="noopener noreferrer"
-              to={`Menu/Documents/${el.href}`}
-            >
-              {el.title}
-            </Link>
-          ),
-          key: nextId(),
-        };
-        item.children.push(item1);
-        if (el.submenu.length !== 0) {
-          item1.children = [];
-          //console.log(el.submenu);
-          el.submenu.map((el) => {
-            //console.log(el);
-            const item2 = {
-              label: (
-                <Link
-                  onClick={() => handleClickId(el)}
-                  rel="noopener noreferrer"
-                  to={`Menu/Documents/${el.href}`}
-                >
-                  {el.title}
-                </Link>
-              ),
-              key: nextId(),
-            };
-            item1.children.push(item2);
-          });
-        }
-      });
+      item.children = el.submenu.map(createMenuItem);
     }
     return item;
-  });
+  };
+
+  const newData = dataMenu.map(createMenuItem);
   newData.map((el) => {
     items.push(el);
   });
-  //console.log(items);
+
+  async function handleClickId(params) {
+	const data = await fetchDoclist(params.id);
+	setContent(data);
+ }
 
   useEffect(() => {
     async function fetchData() {
@@ -113,10 +68,6 @@ console.log(element('ss'));
     fetchData();
   }, []);
 
-  async function handleClickId(params) {
-    const data = await fetchDoclist(params.id);
-    setContent(data);
-  }
 
   return (
     <div className={s.dropdownMenu}>
