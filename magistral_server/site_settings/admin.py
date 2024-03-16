@@ -28,15 +28,23 @@ class DocumentInlines(admin.TabularInline):
     extra = 0
 
 
+class DocumentMenuInlines(admin.TabularInline):
+    model = DocumentMenu
+    prepopulated_fields = {'slug': ('title',)}
+    fields = ['title', 'slug', 'order', 'position', 'is_public']
+    readonly_fields = ['order', 'position']
+    extra = 0
+
+
 @admin.register(DocumentMenu)
 class DocumentMenuAdmin(admin.ModelAdmin):
     ordering = ['order']
-    list_display = ['admin_representation', 'get_icon', 'position', 'show_how_many_includes', 'is_public']
+    list_display = ['admin_representation', 'get_icon', 'order', 'position', 'show_how_many_includes', 'is_public']
     list_display_links = ['admin_representation']
-    list_editable = ['position', 'is_public']
+    list_editable = ['position', 'order', 'is_public']
     prepopulated_fields = {'slug': ('title',)}
-    fields = ['title', 'parent', 'slug', 'image', 'position', 'is_public']
-    inlines = [DocumentInlines]
+    fields = ['title', 'parent', 'slug', 'image', 'is_public']
+    inlines = [DocumentMenuInlines, DocumentInlines]
 
 
 @admin.register(DocumentImage)
