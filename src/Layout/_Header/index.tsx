@@ -13,7 +13,7 @@ import { Menu, MenuItem, MenuButton } from "@szhsin/react-menu";
 import "@szhsin/react-menu/dist/index.css";
 import "@szhsin/react-menu/dist/transitions/slide.css";
 
-import { DropdownMenu } from "../../components/DropdownMenu";
+import { DropdownMenu, DynamicMenu } from "../../components/DynamicMenu";
 import { indexProps } from "./index.props";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -62,8 +62,7 @@ export const _Header = ({
         </div>
       </div>
       <div className={cn(s["header-menu"], { [s.menuScrolled]: isScrolled })}>
-        <DropdownMenu></DropdownMenu>
-		  
+		<DynamicMenu/>
         <div className={s["auth"]}>
 			{isAuth && <Link to='Menu/Question' className={s['auth-box']}>Вопрос-Ответ</Link> }
           {isAuth && (
