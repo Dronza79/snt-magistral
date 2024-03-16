@@ -44,7 +44,7 @@ class DocumentMenu(models.Model):
         blank=True,
         related_name='submenu',
         verbose_name='Родительская категория',
-        limit_choices_to={'level__lt': 3},
+        limit_choices_to={'level__lt': 10},
     )
     image = models.ForeignKey(
         'DocumentImage',
