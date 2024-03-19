@@ -66,10 +66,11 @@ export const _Header = ({
       <div className={cn(s["header-menu"], { [s.menuScrolled]: isScrolled })}>
 			<Management/>
 		<DynamicMenu/>
+		<Link to='Menu/Question' >Вопрос-Ответ</Link> 
 		
 
         <div className={s["auth"]}>
-			{isAuth && <Link to='Menu/Question' className={s['auth-box']}>Вопрос-Ответ</Link> }
+			{/* {isAuth && <Link to='Menu/Question' className={s['auth-box']}>Вопрос-Ответ</Link> } */}
           {isAuth && (
             <Menu menuButton={<MenuButton className={s['home']}>Дом</MenuButton>} transition>
               <MenuItem>Дом</MenuItem>

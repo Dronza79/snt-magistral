@@ -67,9 +67,9 @@ export const Management = ({}: indexProps): JSX.Element => {
     <div	className={s['wrapper']}>
      
       <Dropdown key={2} menu={{ items }}>
-        <a onClick={(e) => e.preventDefault()}><Link to={`Menu/Management`} rel="noopener noreferrer">
+        <Link to={`Menu/Management`} rel="noopener noreferrer">
         Правление
-      </Link></a>
+      </Link>
       </Dropdown>
     
     </div>

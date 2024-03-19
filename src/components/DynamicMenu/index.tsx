@@ -15,6 +15,7 @@ import { MenuItemType } from "antd/es/menu/hooks/useItems";
 
 import nextId from "react-id-generator";
 
+
 // eslint-disable-next-line no-empty-pattern
 export const DynamicMenu = ({}: indexProps): JSX.Element => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -24,6 +25,7 @@ export const DynamicMenu = ({}: indexProps): JSX.Element => {
 
   const setContent = useZustandContent((state: any) => state.isUpdatemenu);
   const isAuth = useZustandAuth((state) => state.data);
+
 
   const items: MenuProps["items"] = [];
 
@@ -50,7 +52,11 @@ export const DynamicMenu = ({}: indexProps): JSX.Element => {
     return item;
   };
 
+
+
   const newData = dataMenu.map(createMenuItem);
+  
+  //console.log(newData);
   newData.map((el) => {
     items.push(el);
   });
@@ -72,7 +78,7 @@ export const DynamicMenu = ({}: indexProps): JSX.Element => {
   return (
     <div className={s.dropdownMenu}>
       <Dropdown key={1} menu={{ items }}>
-        <a onClick={(e) => e.preventDefault()}>Документы и отчетность</a>
+        <Link to={`Menu/Documents`}>Документы и отчетность</Link>
       </Dropdown>
     </div>
   );

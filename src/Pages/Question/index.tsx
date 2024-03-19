@@ -38,19 +38,26 @@ export const Question = ({}: indexProps): JSX.Element => {
     getData();
   }, []);
 
-  console.log(data);
+
 
   return (
     <div className={s["wrapper"]}>
       <h1>Вопрос-ответ</h1>
-      {data?.map((el) => (
-        <div key={el.id}>
-          <Link className={s["link"]} to={""} >
-            {el.title}
-          </Link>
-          <span> Cтатус голосовалки - {el.status}</span>  <p>Закрытие голосования <span className={s['box']}>{el.close_event}</span></p>
-        </div>
-      ))}
+    
     </div>
   );
 };
+
+// return (
+// 	<div className={s["wrapper"]}>
+// 	  <h1>Вопрос-ответ</h1>
+// 	  {data?.map((el) => (
+// 		 <div key={el.id}>
+// 			<Link className={s["link"]} to={""} >
+// 			  {el.title}
+// 			</Link>
+// 			<span> Cтатус голосовалки - {el.status}</span>  <p>Закрытие голосования <span className={s['box']}>{el.close_event}</span></p>
+// 		 </div>
+// 	  ))}
+// 	</div>
+//  );
