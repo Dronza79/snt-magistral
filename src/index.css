@@ -54,3 +54,13 @@ input {
 .active {
 	display: none !important;
 }
+
+.ant-menu {
+	border: none; /* Убрать границу */
+	/* font-size: 18px; */
+ }
+ 
+ .ant-menu-item-selected {
+	background-color: transparent !important; /* Убрать цвет фона при выборе элемента меню */
+ }
+

@@ -41,7 +41,7 @@ export const Layout = ({}: indexProps): JSX.Element => {
 	}
 	
     async function fetchData() {
-      const contacts = await fetchContacts();
+      const contacts = await fetchContacts(tokenData.access);
       const news = await fetchNews();
       setConfig(contacts);
       setNews(news);

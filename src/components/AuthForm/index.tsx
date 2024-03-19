@@ -26,7 +26,7 @@ export const AuthForm = ({ setModalActive }: indexProps): JSX.Element => {
   const [state, setState] = useState(initialState);
   const [errors, setErrors] = useState([]);
   const navigate = useNavigate();
- //console.log(tokenData.access);
+// console.log(tokenData);
  //const decodedToken = jwt.decode('sssss')
  //console.log(decodedToken);
  

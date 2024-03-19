@@ -20,6 +20,8 @@ import { useEffect, useState } from "react";
 import { Contact } from "../../components/Contact";
 import { useZustandAuth } from "../../store";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { NavMenu } from "../../components/NavMenu";
+import { Management } from "../../components/Management";
 
 //import  logo  from './img/logoM.png'
 //import { Link, NavLink } from 'react-router-dom'
@@ -62,7 +64,10 @@ export const _Header = ({
         </div>
       </div>
       <div className={cn(s["header-menu"], { [s.menuScrolled]: isScrolled })}>
+			<Management/>
 		<DynamicMenu/>
+		
+
         <div className={s["auth"]}>
 			{isAuth && <Link to='Menu/Question' className={s['auth-box']}>Вопрос-Ответ</Link> }
           {isAuth && (
