@@ -36,14 +36,16 @@ export const Login = ({}: indexProps): JSX.Element => {
   const [tokenData, setTokenData] = useLocalStorage([], "token");
 
   function handleClickExit() {
-    setTokenData([], "token");
-    setAuth(false);
+	console.log('сработала');
+	setTokenData([], "token")
+    
+    //setAuth(false);
   }
 
   return (
     <div className={s["wrapper"]}>
       <Dropdown key={3} menu={{ items }}>
-        <Link to={``} rel="noopener noreferrer">
+        <Link to={``} rel="noopener noreferrer" >
           Дом
         </Link>
       </Dropdown>
