@@ -14,6 +14,7 @@ import { Dropdown } from "antd";
 import { MenuItemType } from "antd/es/menu/hooks/useItems";
 
 import nextId from "react-id-generator";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 
 // eslint-disable-next-line no-empty-pattern
@@ -25,7 +26,9 @@ export const DynamicMenu = ({}: indexProps): JSX.Element => {
 
   const setContent = useZustandContent((state: any) => state.isUpdatemenu);
   const isAuth = useZustandAuth((state) => state.data);
-
+  const [tokenData, setTokenData] = useLocalStorage([], "token");
+	
+	
 
   const items: MenuProps["items"] = [];
 
@@ -68,7 +71,7 @@ export const DynamicMenu = ({}: indexProps): JSX.Element => {
 
   useEffect(() => {
     async function fetchData() {
-      const data = await fetchMenu();
+      const data = await fetchMenu(tokenData.access);
       setMenu(data);
     }
     fetchData();
