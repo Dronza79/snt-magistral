@@ -9,10 +9,13 @@ import { useZustandAuth, useZustandContent, useZustandMenu } from "../../store";
 import type { MenuProps } from "antd";
 import { Dropdown } from "antd";
 import nextId from "react-id-generator";
-import { useLocalStorage } from "../../hooks/useLocalStorage";
+//import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 // eslint-disable-next-line no-empty-pattern
 export const Login = ({}: indexProps): JSX.Element => {
+  const setAuth = useZustandAuth((state) => state.setIsAuth);
+ // const [tokenData, setTokenData] = useLocalStorage([], "token");
+
   const items: MenuProps["items"] = [
     {
       label: (
@@ -32,20 +35,16 @@ export const Login = ({}: indexProps): JSX.Element => {
     },
   ];
 
-  const setAuth = useZustandAuth((state) => state.setIsAuth);
-  const [tokenData, setTokenData] = useLocalStorage([], "token");
-
   function handleClickExit() {
-	console.log('сработала');
-	setTokenData([], "token")
-    
-    //setAuth(false);
+    localStorage.clear();
+    //	setTokenData([], "token")
+    setAuth(false);
   }
 
   return (
     <div className={s["wrapper"]}>
       <Dropdown key={3} menu={{ items }}>
-        <Link to={``} rel="noopener noreferrer" >
+        <Link to={``} rel="noopener noreferrer">
           Дом
         </Link>
       </Dropdown>
