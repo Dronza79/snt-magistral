@@ -27,7 +27,7 @@ export async function fetchMenu(token: string) {
   const result = await axios.get(`http://127.0.0.1:8000/api/conf/menu/`, {
 
     headers: {
-      Authorization:`JWT${token}`
+      Authorization:`JWT ${token}`
     },
   });
   return result.data;
