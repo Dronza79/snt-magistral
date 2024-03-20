@@ -22,6 +22,7 @@ import { useZustandAuth } from "../../store";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { NavMenu } from "../../components/NavMenu";
 import { Management } from "../../components/Management";
+import { Login } from "../../components/Login";
 
 //import  logo  from './img/logoM.png'
 //import { Link, NavLink } from 'react-router-dom'
@@ -36,8 +37,6 @@ export const _Header = ({
   const setAuth = useZustandAuth((state) => state.setIsAuth);
   const [tokenData, setTokenData] = useLocalStorage([], "token");
 
-  
-
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 0);
     window.addEventListener("scroll", handleScroll);
@@ -46,10 +45,6 @@ export const _Header = ({
 
   const handleClick = () => {
     setModalActive(true);
-  };
-  const handleClickExit = () => {
-	setTokenData([], "token")
-	setAuth(false)
   };
 
   return (
@@ -64,68 +59,20 @@ export const _Header = ({
         </div>
       </div>
       <div className={cn(s["header-menu"], { [s.menuScrolled]: isScrolled })}>
-			<Management/>
-		<DynamicMenu/>
-		<Link to='Menu/Question' >Вопрос-Ответ</Link> 
-		
+        <Management />
+        <DynamicMenu />
+        <Link to="Menu/Question">Вопрос-Ответ</Link>
+        {isAuth && <Link to={"Menu/Voting"}>Голосование</Link>}
+        {isAuth && <Login />}
 
         <div className={s["auth"]}>
-			{/* {isAuth && <Link to='Menu/Question' className={s['auth-box']}>Вопрос-Ответ</Link> } */}
-          {isAuth && (
-            <Menu menuButton={<MenuButton className={s['home']}>Дом</MenuButton>} transition>
-              <MenuItem>Дом</MenuItem>
-              <MenuItem onClick={handleClickExit}>Выйти</MenuItem>
-           
-            </Menu>
+          {!isAuth && (
+            <p className={s["auth-box"]} onClick={handleClick}>
+              Авторизация
+            </p>
           )}
-          {!isAuth && <p className={s['auth-box']} onClick={handleClick}>Авторизация</p>}
         </div>
       </div>
     </header>
   );
 };
-
-{
-  /* <div className= {s["container"]}>
-<div className={s["header-wrapper"]}>
-  <Link to="/" className={s['logo']}>
-	 <img src={logo} alt="logo magistral" className="logo-img" />
-  </Link>
-  <nav className={s["header-nav"]}>
-	 <ul className={s["header-nav__list"]} >
-		<li className={s["header-nav__item"]}>
-		  <NavLink to="/" className={s["header-nav__link"]}>
-			 Главная страница
-		  </NavLink>
-		</li>
-		<li className={s["header-nav__item"]}>
-		  <NavLink to="News" className={s["header-nav__link"]}>
-			 Объявления и новости
-		  </NavLink>
-		</li>
-		<li className="header-nav__item">
-		  <NavLink to="Documents" className={s["header-nav__link"]}>
-			 Руководящие документы
-		  </NavLink>
-		</li>
-		<li className="header-nav__item">
-		  <NavLink to="Celender" className={s["header-nav__link"]}>
-			 Календарь мероприятий
-		  </NavLink>
-		</li>
-		<li className="header-nav__item">
-		  <NavLink to="Reports" className={s["header-nav__link"]}>
-			 Отчетные документы
-		  </NavLink>
-		</li>
-		<li className="header-nav__item">
-		  <NavLink to="Appeal" className={s["header-nav__link"]}>
-			 Обращение к правлению СНТ
-		  </NavLink>
-		</li>
-	 </ul>
-	 <button className={s["btn"]}>Войти</button>
-  </nav>
-</div>
-</div> */
-}

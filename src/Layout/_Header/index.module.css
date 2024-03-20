@@ -46,6 +46,7 @@ color: red;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	gap: 20px;
 }
 .auth{
 	font-size: 18px;

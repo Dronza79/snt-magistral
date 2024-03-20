@@ -23,6 +23,7 @@ import { DinamicPage } from '../DinamicPage'
 import { DinamicPageDocuments } from '../DinamicPageDocuments'
 import { Requisite } from '../Requisite'
 import { SideBar } from '../../components/SideBar'
+import { Voting } from '../Voting'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 // const arr = [
@@ -64,6 +65,7 @@ export const Menu = ({  }:indexProps): JSX.Element => {
 								<Route path="Reports" element={<Reports />} />
 								<Route path="Management" element={<Management />} />
 								<Route path="Question" element={<Question />} />
+								<Route path="Voting" element={<Voting />} />
 								</Routes>
 							</div>
 				</div>

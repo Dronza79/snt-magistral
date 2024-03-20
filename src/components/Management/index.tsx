@@ -47,9 +47,7 @@ const items: MenuProps["items"] = [
         ),
         key: nextId(),
       },
-    
-  
- 
+
 ];
 
 // eslint-disable-next-line no-empty-pattern

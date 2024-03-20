@@ -43,7 +43,6 @@ export const Question = ({}: indexProps): JSX.Element => {
   return (
     <div className={s["wrapper"]}>
       <h1>Вопрос-ответ</h1>
-    
     </div>
   );
 };
