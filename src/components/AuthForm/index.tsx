@@ -8,10 +8,10 @@ import { jwtDecode } from "jwt-decode";
 import { Input } from "../Input";
 import { indexProps } from "./index.props";
 import { Button } from "../Button";
-import { fetchLogin } from "../../Api/Api";
+import { fetchLogin, fetchMenu } from "../../Api/Api";
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useZustandAuth } from "../../store";
+import { useZustandAuth, useZustandMenu } from "../../store";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 const initialState = {
@@ -21,6 +21,7 @@ const initialState = {
 export const AuthContext = createContext(null);
 
 export const AuthForm = ({ setModalActive }: indexProps): JSX.Element => {
+	const setMenu = useZustandMenu((state: any) => state.isUpdatemenu);
   const setAuth = useZustandAuth((state) => state.setIsAuth);
   const [tokenData, setTokenData] = useLocalStorage([], "token");
   const [state, setState] = useState(initialState);
@@ -46,6 +47,8 @@ export const AuthForm = ({ setModalActive }: indexProps): JSX.Element => {
     e.preventDefault();
     try {
       const data = await fetchLogin(state);
+		const newMenu = await fetchMenu(data.access)
+		setMenu(newMenu)
       setTokenData(data);
       setAuth(true);
       navigate("/");

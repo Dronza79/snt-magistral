@@ -9,12 +9,15 @@ import { useZustandAuth, useZustandContent, useZustandMenu } from "../../store";
 import type { MenuProps } from "antd";
 import { Dropdown } from "antd";
 import nextId from "react-id-generator";
-//import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { fetchMenu } from "../../Api/Api";
+
 
 // eslint-disable-next-line no-empty-pattern
 export const Login = ({}: indexProps): JSX.Element => {
+	const setMenu = useZustandMenu((state: any) => state.isUpdatemenu);
   const setAuth = useZustandAuth((state) => state.setIsAuth);
- // const [tokenData, setTokenData] = useLocalStorage([], "token");
+ const [tokenData, setTokenData] = useLocalStorage([], "token");
 
   const items: MenuProps["items"] = [
     {
@@ -35,11 +38,13 @@ export const Login = ({}: indexProps): JSX.Element => {
     },
   ];
 
-  function handleClickExit() {
-    localStorage.clear();
-    //	setTokenData([], "token")
-    setAuth(false);
-  }
+async function handleClickExit() {
+  localStorage.clear();
+  //	setTokenData([], "token")
+  const data = await fetchMenu(tokenData.access);
+  setMenu(data);
+  setAuth(false);
+}
 
   return (
     <div className={s["wrapper"]}>
